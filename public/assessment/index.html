@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>B2B Marketing Assessment - Das 4R-System | Brixon</title>
-    <meta name="description" content="Evaluieren Sie Ihren Marketing-Status mit dem Brixon 4R-System. 8-12 Minuten für Ihre personalisierte Analyse.">
+    <meta name="description" content="Finden Sie heraus, wo Ihr Marketing steht - ehrlich, ohne Schnickschnack. 8-12 Minuten für Ihre personalisierte Analyse.">
     
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -327,6 +327,11 @@
             color: var(--color-gray-400);
         }
         
+        .text-area {
+            min-height: 100px;
+            resize: vertical;
+        }
+        
         /* Buttons */
         .btn {
             display: inline-flex;
@@ -646,360 +651,598 @@
     
     <script>
         const CONFIG = {
-            webhookUrl: 'YOUR_WEBHOOK_URL_HERE', // Replace with your webhook URL
+            webhookUrl: 'YOUR_WEBHOOK_URL_HERE',
             questions: [
-                // Context Questions (No points)
+                // CONTEXT SECTION
                 {
                     id: 'q_001',
                     section: 'context',
+                    sectionTitle: 'Wo stehen Sie?',
                     text: 'Wie viele Mitarbeiter hat Ihr Unternehmen?',
                     type: 'single',
                     options: [
-                        { value: '1-10', label: '1-10 Mitarbeiter', score: 0 },
-                        { value: '11-50', label: '11-50 Mitarbeiter', score: 0 },
-                        { value: '51-200', label: '51-200 Mitarbeiter', score: 0 },
-                        { value: '201-500', label: '201-500 Mitarbeiter', score: 0 },
-                        { value: '500+', label: 'Über 500 Mitarbeiter', score: 0 }
+                        { value: '1-10', label: '1-10 Mitarbeiter' },
+                        { value: '11-25', label: '11-25 Mitarbeiter' },
+                        { value: '26-50', label: '26-50 Mitarbeiter' },
+                        { value: '51-100', label: '51-100 Mitarbeiter' },
+                        { value: '101-250', label: '101-250 Mitarbeiter' },
+                        { value: '250+', label: 'Über 250 Mitarbeiter' }
                     ]
                 },
                 {
                     id: 'q_002',
                     section: 'context',
-                    text: 'Wie viele qualifizierte Leads generieren Sie monatlich?',
+                    text: 'Wie viele qualifizierte Leads generieren Sie aktuell pro Monat?',
+                    hint: 'Mit "qualifiziert" meinen wir: Menschen, die ernsthaft an Ihrer Lösung interessiert sind und potenziell kaufen könnten.',
                     type: 'single',
                     options: [
-                        { value: '0-10', label: '0-10 Leads', score: 0 },
-                        { value: '11-50', label: '11-50 Leads', score: 0 },
-                        { value: '51-100', label: '51-100 Leads', score: 0 },
-                        { value: '100-500', label: '100-500 Leads', score: 0 },
-                        { value: '500+', label: 'Über 500 Leads', score: 0 }
+                        { value: '0-5', label: '0-5 Leads' },
+                        { value: '6-15', label: '6-15 Leads' },
+                        { value: '16-30', label: '16-30 Leads' },
+                        { value: '31-50', label: '31-50 Leads' },
+                        { value: '51-100', label: '51-100 Leads' },
+                        { value: '100+', label: 'Über 100 Leads' },
+                        { value: 'unknown', label: 'Ehrlich gesagt: Keine Ahnung' }
                     ]
                 },
                 {
                     id: 'q_003',
                     section: 'context',
-                    text: 'Was sind Ihre größten Herausforderungen im B2B Marketing?',
-                    hint: 'Wählen Sie alle zutreffenden Optionen',
-                    type: 'multiple',
+                    text: 'Wer ist hauptsächlich für Marketing verantwortlich?',
+                    type: 'single',
                     options: [
-                        { value: 'leadgen', label: 'Lead-Generierung', score: 0 },
-                        { value: 'qualify', label: 'Lead-Qualifizierung', score: 0 },
-                        { value: 'content', label: 'Content-Produktion', score: 0 },
-                        { value: 'channels', label: 'Kanal-Auswahl', score: 0 },
-                        { value: 'measurement', label: 'Performance-Messung', score: 0 },
-                        { value: 'budget', label: 'Budget-Optimierung', score: 0 }
+                        { value: 'founder', label: 'Geschäftsführung macht es nebenbei' },
+                        { value: 'employee_parttime', label: 'Ein Mitarbeiter, der es neben anderen Aufgaben macht' },
+                        { value: 'employee_fulltime', label: 'Eine dedizierte Marketing-Person' },
+                        { value: 'team', label: 'Ein kleines Marketing-Team' },
+                        { value: 'agency', label: 'Hauptsächlich eine externe Agentur' },
+                        { value: 'nobody', label: 'Ehrlich? Niemand so richtig' }
                     ]
                 },
                 
-                // REACH Phase (35 points total)
+                // REACH SECTION
                 {
                     id: 'q_101',
                     section: 'reach',
-                    text: 'Haben Sie definierte Buyer Personas für Ihre Zielgruppe?',
+                    sectionTitle: 'Phase 1: Reach - Werden Sie überhaupt gefunden?',
+                    text: 'Wie aktiv sind Sie oder Ihre Führungskräfte persönlich auf LinkedIn?',
+                    hint: 'Wichtig: Wir meinen persönliche Profile, nicht die Unternehmensseite. Menschen folgen Menschen, nicht Unternehmen.',
                     type: 'single',
                     options: [
-                        { value: 'none', label: 'Nein, noch nicht definiert', score: 0 },
-                        { value: 'basic', label: 'Ja, grundlegende Personas', score: 2 },
-                        { value: 'detailed', label: 'Ja, detaillierte Personas mit Research', score: 5 }
+                        { value: '0', label: 'LinkedIn? Haben wir nicht oder nutzen wir nicht', score: 0 },
+                        { value: '1', label: 'Profil existiert, aber wir posten nie', score: 1 },
+                        { value: '2', label: 'Ab und zu posten wir was (1-2x im Monat)', score: 2 },
+                        { value: '3', label: 'Regelmäßig aktiv (mehrmals pro Woche)', score: 3 },
+                        { value: '4', label: 'Sehr aktiv mit strategischem Content', score: 4 },
+                        { value: '5', label: 'Täglich präsent, Engagement messbar steigend', score: 5 }
                     ]
                 },
                 {
                     id: 'q_102',
                     section: 'reach',
-                    text: 'Nutzen Sie bezahlte Werbung (Google Ads, LinkedIn Ads, etc.)?',
+                    text: 'Worüber schreiben Sie hauptsächlich, wenn Sie Content erstellen?',
                     type: 'single',
                     options: [
-                        { value: 'none', label: 'Nein', score: 0 },
-                        { value: 'testing', label: 'Ja, vereinzelt im Testing', score: 2 },
-                        { value: 'active', label: 'Ja, aktive Kampagnen mit Tracking', score: 4 },
-                        { value: 'optimized', label: 'Ja, kontinuierlich optimiert', score: 5 }
+                        { value: 'products', label: 'Über unsere Produkte und Leistungen', score: 1 },
+                        { value: 'company', label: 'Über unser Unternehmen und Erfolge', score: 1 },
+                        { value: 'industry', label: 'Über allgemeine Branchen-News', score: 2 },
+                        { value: 'problems', label: 'Über konkrete Probleme unserer Zielgruppe', score: 5 },
+                        { value: 'experience', label: 'Über unsere praktischen Erfahrungen aus echten Projekten', score: 5 },
+                        { value: 'none', label: 'Wir erstellen aktuell keinen Content', score: 0 }
                     ]
                 },
                 {
                     id: 'q_103',
                     section: 'reach',
-                    text: 'Wie präsent ist Ihr Unternehmen in relevanten Online-Kanälen?',
+                    text: 'Haben Sie Lead-Magneten, für die Menschen Ihnen ihre E-Mail-Adresse geben?',
+                    hint: 'Gemeint sind Dinge wie: E-Books, Checklisten, Kalkulatoren, Templates - nicht "Kostenloses Beratungsgespräch".',
                     type: 'single',
                     options: [
-                        { value: 'minimal', label: 'Kaum präsent', score: 0 },
-                        { value: 'selective', label: 'In ausgewählten Kanälen', score: 3 },
-                        { value: 'active', label: 'Aktiv in mehreren Kanälen', score: 5 }
+                        { value: '0', label: 'Nein, haben wir nicht', score: 0 },
+                        { value: '1', label: 'Ja, aber die werden kaum heruntergeladen', score: 1 },
+                        { value: '3', label: 'Ja, wir haben 1-2 die ganz gut funktionieren', score: 3 },
+                        { value: '5', label: 'Ja, mehrere die regelmäßig Leads bringen', score: 5 }
                     ]
                 },
                 {
                     id: 'q_104',
                     section: 'reach',
-                    text: 'Haben Sie eine SEO-Strategie für organische Reichweite?',
+                    text: 'Wenn jemand auf Ihre Website kommt: Was passiert dann?',
                     type: 'single',
                     options: [
-                        { value: 'none', label: 'Nein', score: 0 },
-                        { value: 'basic', label: 'Grundlegende Optimierung', score: 2 },
-                        { value: 'strategic', label: 'Strategische SEO mit Content-Plan', score: 5 }
+                        { value: '1', label: 'Er liest ein bisschen und verschwindet wieder', score: 1 },
+                        { value: '2', label: 'Es gibt ein Kontaktformular, mehr nicht', score: 2 },
+                        { value: '3', label: 'Es gibt mehrere Möglichkeiten, uns zu erreichen', score: 3 },
+                        { value: '4', label: 'Es gibt konkrete Angebote zum Download', score: 4 },
+                        { value: '5', label: 'Die Website ist systematisch darauf ausgelegt, Leads zu generieren', score: 5 }
                     ]
                 },
                 {
                     id: 'q_105',
                     section: 'reach',
-                    text: 'Nutzen Sie Account-Based Marketing (ABM) Ansätze?',
+                    text: 'Investieren Sie Geld in bezahlte Werbung (LinkedIn Ads, Google Ads, etc.)?',
                     type: 'single',
                     options: [
-                        { value: 'none', label: 'Nein', score: 0 },
-                        { value: 'planned', label: 'In Planung', score: 2 },
-                        { value: 'active', label: 'Ja, aktiv im Einsatz', score: 5 }
+                        { value: '0', label: 'Nein, aktuell nicht', score: 0 },
+                        { value: '1', label: 'Haben wir mal probiert, hat nicht funktioniert', score: 1 },
+                        { value: '2', label: 'Ja, aber ohne wirkliche Strategie', score: 2 },
+                        { value: '4', label: 'Ja, gezielt und mit messbarem Ergebnis', score: 4 },
+                        { value: '5', label: 'Ja, systematisch - verstärkt unser organisches Marketing', score: 5 }
                     ]
                 },
                 {
                     id: 'q_106',
                     section: 'reach',
-                    text: 'Wie messen Sie die Reichweite Ihrer Marketing-Aktivitäten?',
+                    text: 'Wie viele Menschen besuchen Ihre Website durchschnittlich pro Monat?',
                     type: 'single',
                     options: [
-                        { value: 'none', label: 'Gar nicht', score: 0 },
-                        { value: 'basic', label: 'Basis-Metriken (Traffic, Impressions)', score: 2 },
-                        { value: 'advanced', label: 'Multi-Touch Attribution & ROI-Tracking', score: 5 }
+                        { value: '0-500', label: 'Unter 500 Besucher' },
+                        { value: '501-1000', label: '500-1.000 Besucher' },
+                        { value: '1001-2500', label: '1.000-2.500 Besucher' },
+                        { value: '2501-5000', label: '2.500-5.000 Besucher' },
+                        { value: '5001-10000', label: '5.000-10.000 Besucher' },
+                        { value: '10000+', label: 'Über 10.000 Besucher' },
+                        { value: 'unknown', label: 'Keine Ahnung ehrlich gesagt' }
                     ]
                 },
                 {
                     id: 'q_107',
                     section: 'reach',
-                    text: 'Haben Sie Partnerschaften oder Co-Marketing-Aktivitäten?',
+                    text: 'Wissen Sie, woher Ihre Website-Besucher kommen?',
                     type: 'single',
                     options: [
-                        { value: 'none', label: 'Nein', score: 0 },
-                        { value: 'few', label: 'Vereinzelt', score: 3 },
-                        { value: 'strategic', label: 'Strategische Partnerschaften', score: 6 }
+                        { value: 'no', label: 'Nein, tracken wir nicht', score: 0 },
+                        { value: 'basic', label: 'Grob, aber nicht systematisch', score: 2 },
+                        { value: 'advanced', label: 'Ja, detailliert mit durchgängigem Tracking', score: 5 }
+                    ]
+                },
+                {
+                    id: 'q_108',
+                    section: 'reach',
+                    text: 'Wie viel Prozent Ihrer Website-Besucher werden zu Leads?',
+                    hint: 'Also: wie viele hinterlassen eine E-Mail-Adresse oder nehmen Kontakt auf?',
+                    type: 'single',
+                    options: [
+                        { value: 'unknown', label: 'Weiß ich nicht' },
+                        { value: '0-1', label: 'Unter 1%' },
+                        { value: '1-2', label: '1-2%' },
+                        { value: '2-4', label: '2-4%' },
+                        { value: '4-6', label: '4-6%' },
+                        { value: '6+', label: 'Über 6%' }
                     ]
                 },
                 
-                // RELATE Phase (32 points total)
+                // RELATE SECTION
                 {
                     id: 'q_201',
                     section: 'relate',
-                    text: 'Produzieren Sie regelmäßig Content für Ihre Zielgruppe?',
+                    sectionTitle: 'Phase 2: Relate - Bleiben Sie im Gedächtnis?',
+                    text: 'Haben Sie einen E-Mail-Newsletter?',
+                    hint: 'Newsletter erleben ein Revival - sie geben Ihnen einen direkten Draht zu Interessenten, ohne Algorithmen dazwischen.',
                     type: 'single',
                     options: [
-                        { value: 'rarely', label: 'Selten oder unregelmäßig', score: 0 },
-                        { value: 'monthly', label: 'Monatlich', score: 2 },
-                        { value: 'weekly', label: 'Wöchentlich mit Content-Plan', score: 5 }
+                        { value: '0', label: 'Nein', score: 0 },
+                        { value: '2', label: 'Ja, aber sehr unregelmäßig', score: 2 },
+                        { value: '4', label: 'Ja, regelmäßig (mindestens monatlich)', score: 4 },
+                        { value: '5', label: 'Ja, systematisch mit klarer Strategie', score: 5 }
                     ]
                 },
                 {
                     id: 'q_202',
                     section: 'relate',
-                    text: 'Wie personalisiert ist Ihre Kommunikation mit Interessenten?',
+                    text: 'Wie viele Menschen haben Ihren Newsletter abonniert?',
                     type: 'single',
                     options: [
-                        { value: 'generic', label: 'Generische Massenkommunikation', score: 0 },
-                        { value: 'segmented', label: 'Segmentierte Ansprache', score: 3 },
-                        { value: 'personalized', label: 'Personalisiert nach Buyer Journey', score: 5 }
+                        { value: '0', label: 'Haben keinen Newsletter' },
+                        { value: '0-100', label: '0-100 Kontakte' },
+                        { value: '101-500', label: '101-500 Kontakte' },
+                        { value: '501-1000', label: '501-1.000 Kontakte' },
+                        { value: '1001-2500', label: '1.001-2.500 Kontakte' },
+                        { value: '2501-5000', label: '2.501-5.000 Kontakte' },
+                        { value: '5000+', label: 'Über 5.000 Kontakte' }
                     ]
                 },
                 {
                     id: 'q_203',
                     section: 'relate',
-                    text: 'Nutzen Sie Marketing Automation?',
+                    text: 'Was passiert, wenn jemand Ihren Lead-Magneten herunterlädt?',
                     type: 'single',
                     options: [
-                        { value: 'none', label: 'Nein', score: 0 },
-                        { value: 'basic', label: 'Basis-Automation (z.B. Newsletter)', score: 2 },
-                        { value: 'advanced', label: 'Fortgeschrittene Workflows & Nurturing', score: 5 }
+                        { value: '0', label: 'Nichts oder nur sehr verzögert', score: 0 },
+                        { value: '2', label: 'Eine automatische Danke-E-Mail', score: 2 },
+                        { value: '4', label: 'Eine Serie von Follow-up-E-Mails über mehrere Wochen', score: 4 },
+                        { value: '5', label: 'Systematisches Nurturing, abgestimmt auf den heruntergeladenen Content', score: 5 },
+                        { value: 'na', label: 'Haben keine Lead-Magneten', score: 0 }
                     ]
                 },
                 {
                     id: 'q_204',
                     section: 'relate',
-                    text: 'Wie gut kennen Sie die Bedürfnisse Ihrer Zielgruppe?',
+                    text: 'Nutzen Sie ein CRM-System für Ihre Kontakte?',
                     type: 'single',
                     options: [
-                        { value: 'assumptions', label: 'Basierend auf Annahmen', score: 0 },
-                        { value: 'feedback', label: 'Durch Feedback und Analysen', score: 3 },
-                        { value: 'research', label: 'Kontinuierliche Marktforschung', score: 5 }
+                        { value: '0', label: 'Nein - Excel oder gar nichts', score: 0 },
+                        { value: '2', label: 'Ja, aber nutzen es kaum', score: 2 },
+                        { value: '4', label: 'Ja, ist unser zentrales Tool', score: 4 },
+                        { value: '5', label: 'Ja, voll integriert mit E-Mail-Marketing', score: 5 }
                     ]
                 },
                 {
                     id: 'q_205',
                     section: 'relate',
-                    text: 'Welche Content-Formate nutzen Sie?',
-                    hint: 'Wählen Sie alle zutreffenden Optionen',
-                    type: 'multiple',
+                    text: 'Erstellen Sie aus einem Content-Stück mehrere Formate?',
+                    hint: 'Beispiel: Aus einem Webinar entstehen LinkedIn-Posts, ein Blog-Artikel, Video-Clips, E-Mail-Content...',
+                    type: 'single',
                     options: [
-                        { value: 'blog', label: 'Blog-Artikel', score: 1 },
-                        { value: 'video', label: 'Videos', score: 1 },
-                        { value: 'webinar', label: 'Webinare', score: 1 },
-                        { value: 'whitepaper', label: 'Whitepapers/E-Books', score: 1 },
-                        { value: 'case', label: 'Case Studies', score: 1 },
-                        { value: 'podcast', label: 'Podcast', score: 1 }
+                        { value: '0', label: 'Nein, jeder Content wird einmal verwendet', score: 0 },
+                        { value: '3', label: 'Manchmal, wenn wir dran denken', score: 3 },
+                        { value: '5', label: 'Ja, systematisch - "Create once, distribute forever"', score: 5 },
+                        { value: 'na', label: 'Erstellen aktuell kaum Content', score: 0 }
                     ]
                 },
                 {
                     id: 'q_206',
                     section: 'relate',
-                    text: 'Wie oft interagieren Sie mit Ihrer Community (Social Media, Events)?',
-                    type: 'single',
+                    text: 'Haben Sie verschiedene E-Mail-Listen für verschiedene Interessen?',
+                    hint: 'Also: Segmentierung nach Themen, heruntergeladenen Inhalten oder Verhalten?',
+                    type: 'yes_no',
                     options: [
-                        { value: 'rarely', label: 'Selten', score: 0 },
-                        { value: 'monthly', label: 'Monatlich', score: 3 },
-                        { value: 'weekly', label: 'Wöchentlich oder öfter', score: 5 }
+                        { value: 'yes', label: 'Ja' },
+                        { value: 'no', label: 'Nein' }
                     ]
                 },
                 {
                     id: 'q_207',
                     section: 'relate',
-                    text: 'Haben Sie ein CRM-System zur Kontaktverwaltung?',
+                    text: 'Wie oft denken Sie: "Wir müssten mal wieder was posten/schreiben"?',
                     type: 'single',
                     options: [
-                        { value: 'none', label: 'Nein', score: 0 },
-                        { value: 'basic', label: 'Ja, grundlegende Nutzung', score: 2 },
-                        { value: 'integrated', label: 'Ja, vollständig integriert mit Marketing', score: 5 }
+                        { value: 'always', label: 'Ständig - Marketing passiert nur wenn Zeit ist', score: 0 },
+                        { value: 'sometimes', label: 'Manchmal - wir sind nicht konsequent genug', score: 2 },
+                        { value: 'rarely', label: 'Selten - wir haben einen Rhythmus etabliert', score: 4 },
+                        { value: 'never', label: 'Nie - läuft systematisch ohne dass wir dran denken müssen', score: 5 }
                     ]
                 },
                 
-                // RESPOND Phase (27 points total)
+                // RESPOND SECTION
                 {
                     id: 'q_301',
                     section: 'respond',
-                    text: 'Wie schnell reagieren Sie auf eingehende Anfragen?',
+                    sectionTitle: 'Phase 3: Respond - Werden Leads zu Kunden?',
+                    text: 'Wann ist ein Lead für Sie "qualifiziert"?',
                     type: 'single',
                     options: [
-                        { value: 'days', label: 'Mehrere Tage', score: 0 },
-                        { value: '24h', label: 'Innerhalb von 24 Stunden', score: 3 },
-                        { value: 'hours', label: 'Innerhalb weniger Stunden', score: 5 }
+                        { value: '0', label: 'Haben wir nicht definiert', score: 0 },
+                        { value: '2', label: 'Ungefähr definiert, aber nicht klar', score: 2 },
+                        { value: '5', label: 'Klar definiert (Budget, Autorität, Bedarf, Timing)', score: 5 }
                     ]
                 },
                 {
                     id: 'q_302',
                     section: 'respond',
-                    text: 'Haben Sie definierte Prozesse für Lead-Qualifizierung?',
+                    text: 'Wenn Ihr Vertrieb einen Lead kontaktiert: Weiß er, was dieser Lead vorher gemacht hat?',
+                    hint: 'Also: Welchen Content hat er konsumiert? Welche Seiten besucht? Was heruntergeladen?',
                     type: 'single',
                     options: [
-                        { value: 'none', label: 'Nein, keine festen Prozesse', score: 0 },
-                        { value: 'basic', label: 'Grundlegende Qualifizierung', score: 2 },
-                        { value: 'scoring', label: 'Lead Scoring & automatisierte Prozesse', score: 5 }
+                        { value: '0', label: 'Nein, keine Infos verfügbar', score: 0 },
+                        { value: '2', label: 'Manchmal, wenn wir dran denken nachzuschauen', score: 2 },
+                        { value: '5', label: 'Ja, systematisch dokumentiert und sichtbar', score: 5 },
+                        { value: 'na', label: 'Haben keinen dedizierten Vertrieb' }
                     ]
                 },
                 {
                     id: 'q_303',
                     section: 'respond',
-                    text: 'Nutzen Sie Lead Nurturing Kampagnen?',
+                    text: 'Wie schnell reagieren Sie, wenn ein Lead bei Ihnen anfragt?',
                     type: 'single',
                     options: [
-                        { value: 'none', label: 'Nein', score: 0 },
-                        { value: 'basic', label: 'Einfache E-Mail-Sequenzen', score: 3 },
-                        { value: 'advanced', label: 'Multi-Channel Nurturing-Strategie', score: 5 }
+                        { value: '1', label: 'Mehrere Tage', score: 1 },
+                        { value: '2', label: '24-48 Stunden', score: 2 },
+                        { value: '4', label: 'Innerhalb weniger Stunden', score: 4 },
+                        { value: '5', label: 'Sofort oder innerhalb von 1 Stunde', score: 5 }
                     ]
                 },
                 {
                     id: 'q_304',
                     section: 'respond',
-                    text: 'Wie gut ist die Zusammenarbeit zwischen Marketing und Vertrieb?',
+                    text: 'Wie arbeiten Marketing und Vertrieb bei Ihnen zusammen?',
                     type: 'single',
                     options: [
-                        { value: 'siloed', label: 'Getrennte Silos', score: 0 },
-                        { value: 'communication', label: 'Regelmäßige Abstimmung', score: 3 },
-                        { value: 'aligned', label: 'Vollständig abgestimmt (SLA)', score: 6 }
+                        { value: '0', label: 'Arbeiten komplett getrennt', score: 0 },
+                        { value: '2', label: 'Reden gelegentlich miteinander', score: 2 },
+                        { value: '4', label: 'Regelmäßiger Austausch', score: 4 },
+                        { value: '5', label: 'Hand in Hand mit gemeinsamen Zielen', score: 5 },
+                        { value: 'na', label: 'Haben diese Trennung nicht - ist dieselbe Person' }
                     ]
                 },
                 {
                     id: 'q_305',
                     section: 'respond',
-                    text: 'Tracken Sie die Conversion-Rate von Leads zu Kunden?',
+                    text: 'Können Sie nachvollziehen, welche Marketing-Aktivität zu einem Abschluss geführt hat?',
                     type: 'single',
                     options: [
-                        { value: 'no', label: 'Nein', score: 0 },
-                        { value: 'manual', label: 'Ja, manuell', score: 2 },
-                        { value: 'automated', label: 'Ja, automatisiert mit Reporting', score: 5 }
+                        { value: '0', label: 'Nein, wissen wir nicht', score: 0 },
+                        { value: '2', label: 'Grob - wir fragen manchmal nach', score: 2 },
+                        { value: '5', label: 'Ja, systematisch dokumentiert', score: 5 }
                     ]
                 },
                 {
                     id: 'q_306',
                     section: 'respond',
-                    text: 'Optimieren Sie kontinuierlich Ihre Conversion-Funnel?',
+                    text: 'Von 100 Leads, die bei Ihnen ankommen: Wie viele werden zu zahlenden Kunden?',
                     type: 'single',
                     options: [
-                        { value: 'no', label: 'Nein', score: 0 },
-                        { value: 'occasionally', label: 'Gelegentlich', score: 2 },
-                        { value: 'regularly', label: 'Regelmäßig mit A/B-Tests', score: 4 }
+                        { value: 'unknown', label: 'Keine Ahnung' },
+                        { value: '0-5', label: 'Unter 5' },
+                        { value: '5-10', label: '5-10' },
+                        { value: '10-20', label: '10-20' },
+                        { value: '20-30', label: '20-30' },
+                        { value: '30+', label: 'Über 30' }
+                    ]
+                },
+                {
+                    id: 'q_307',
+                    section: 'respond',
+                    text: 'Wie lange dauert es durchschnittlich vom ersten Kontakt bis zum Abschluss?',
+                    type: 'single',
+                    options: [
+                        { value: '0-4', label: 'Unter 4 Wochen' },
+                        { value: '4-8', label: '1-2 Monate' },
+                        { value: '8-12', label: '2-3 Monate' },
+                        { value: '12-24', label: '3-6 Monate' },
+                        { value: '24+', label: 'Über 6 Monate' },
+                        { value: 'unknown', label: 'Weiß ich nicht genau' }
+                    ]
+                },
+                {
+                    id: 'q_308',
+                    section: 'respond',
+                    text: 'Was ist Ihr größtes Problem bei der Umwandlung von Leads zu Kunden?',
+                    type: 'single',
+                    options: [
+                        { value: 'quality', label: 'Die Lead-Qualität stimmt nicht' },
+                        { value: 'timing', label: 'Falsches Timing - noch nicht kaufbereit' },
+                        { value: 'followup', label: 'Wir verlieren den Kontakt im Follow-up' },
+                        { value: 'competition', label: 'Verlieren gegen Konkurrenz' },
+                        { value: 'price', label: 'Preis ist oft ein Thema' },
+                        { value: 'trust', label: 'Vertrauen wird nicht aufgebaut' },
+                        { value: 'none', label: 'Haben damit aktuell kein großes Problem' }
                     ]
                 },
                 
-                // RETAIN Phase (27 points total)
+                // RETAIN SECTION
                 {
                     id: 'q_401',
                     section: 'retain',
-                    text: 'Haben Sie ein Programm für Kundenbindung?',
+                    sectionTitle: 'Phase 4: Retain - Nutzen Sie Ihre Bestandskunden?',
+                    text: 'Behandeln Sie alle Bestandskunden gleich?',
                     type: 'single',
                     options: [
-                        { value: 'none', label: 'Nein', score: 0 },
-                        { value: 'basic', label: 'Grundlegende Maßnahmen', score: 3 },
-                        { value: 'strategic', label: 'Strategisches Retention-Programm', score: 5 }
+                        { value: '0', label: 'Ja, alle gleich', score: 0 },
+                        { value: '2', label: 'Grobe Unterscheidung nach Umsatz', score: 2 },
+                        { value: '5', label: 'Klare Segmentierung nach Wert und Potenzial', score: 5 }
                     ]
                 },
                 {
                     id: 'q_402',
                     section: 'retain',
-                    text: 'Wie oft kommunizieren Sie mit Bestandskunden?',
+                    text: 'Wie aktiv verkaufen Sie zusätzliche Services an Bestandskunden?',
                     type: 'single',
                     options: [
-                        { value: 'rarely', label: 'Selten', score: 0 },
-                        { value: 'quarterly', label: 'Quartalsweise', score: 3 },
-                        { value: 'regular', label: 'Regelmäßig mit Value-Content', score: 5 }
+                        { value: '0', label: 'Gar nicht', score: 0 },
+                        { value: '2', label: 'Wenn es sich ergibt', score: 2 },
+                        { value: '4', label: 'Regelmäßige Gespräche über weitere Möglichkeiten', score: 4 },
+                        { value: '5', label: 'Systematischer Prozess mit klaren Triggern', score: 5 }
                     ]
                 },
                 {
                     id: 'q_403',
                     section: 'retain',
-                    text: 'Messen Sie die Kundenzufriedenheit (NPS, CSAT)?',
+                    text: 'Haben Sie ein System, damit Bestandskunden Sie weiterempfehlen?',
                     type: 'single',
                     options: [
-                        { value: 'no', label: 'Nein', score: 0 },
-                        { value: 'occasionally', label: 'Gelegentlich', score: 2 },
-                        { value: 'regularly', label: 'Regelmäßig mit Follow-up', score: 5 }
+                        { value: '0', label: 'Nein', score: 0 },
+                        { value: '2', label: 'Wir fragen manchmal nach Empfehlungen', score: 2 },
+                        { value: '5', label: 'Ja, systematisches Programm mit Incentives', score: 5 }
                     ]
                 },
                 {
                     id: 'q_404',
                     section: 'retain',
-                    text: 'Haben Sie ein Upselling/Cross-Selling Programm?',
+                    text: 'Wie viele Ihrer Neukunden kommen durch Empfehlungen von Bestandskunden?',
                     type: 'single',
                     options: [
-                        { value: 'none', label: 'Nein', score: 0 },
-                        { value: 'adhoc', label: 'Ad-hoc Ansätze', score: 2 },
-                        { value: 'systematic', label: 'Systematischer Prozess', score: 5 }
+                        { value: '0-10', label: 'Fast keine (0-10%)' },
+                        { value: '11-25', label: 'Einige (11-25%)' },
+                        { value: '26-50', label: 'Etwa die Hälfte (26-50%)' },
+                        { value: '51-75', label: 'Die meisten (51-75%)' },
+                        { value: '75+', label: 'Fast alle (über 75%)' },
+                        { value: 'unknown', label: 'Weiß ich nicht' }
                     ]
                 },
                 {
                     id: 'q_405',
                     section: 'retain',
-                    text: 'Nutzen Sie Kunden als Referenzen oder Testimonials?',
+                    text: 'Messen Sie, wie zufrieden Ihre Bestandskunden sind?',
                     type: 'single',
                     options: [
-                        { value: 'no', label: 'Nein', score: 0 },
-                        { value: 'few', label: 'Vereinzelt', score: 3 },
-                        { value: 'program', label: 'Strukturiertes Advocacy-Programm', score: 5 }
+                        { value: '0', label: 'Nein', score: 0 },
+                        { value: '2', label: 'Informell - wir fragen mal nach', score: 2 },
+                        { value: '4', label: 'Ja, regelmäßige Umfragen', score: 4 },
+                        { value: '5', label: 'Systematisch (z.B. NPS) mit Follow-up bei Problemen', score: 5 }
                     ]
                 },
                 {
                     id: 'q_406',
                     section: 'retain',
-                    text: 'Tracken Sie die Customer Lifetime Value (CLV)?',
+                    text: 'Nutzen Sie Ihre zufriedenen Kunden für Marketing?',
+                    hint: 'Gemeint sind: Case Studies, Testimonials, Referenzen, gemeinsame Webinare...',
                     type: 'single',
                     options: [
-                        { value: 'no', label: 'Nein', score: 0 },
-                        { value: 'estimated', label: 'Geschätzt', score: 2 },
-                        { value: 'tracked', label: 'Präzise gemessen und optimiert', score: 5 }
+                        { value: 'no', label: 'Nein, machen wir nicht', score: 0 },
+                        { value: 'rarely', label: 'Selten, wenn es sich ergibt', score: 3 },
+                        { value: 'yes', label: 'Ja, aktiv und systematisch', score: 5 }
+                    ]
+                },
+                {
+                    id: 'q_407',
+                    section: 'retain',
+                    text: 'Ist Bestandskunden-Marketing ein fester Teil Ihrer Marketing-Strategie?',
+                    type: 'single',
+                    options: [
+                        { value: '0', label: 'Nein, Fokus liegt auf Neukunden', score: 0 },
+                        { value: '3', label: 'Teilweise, aber nicht systematisch', score: 3 },
+                        { value: '5', label: 'Ja, gleichwertig zu Neukundengewinnung', score: 5 }
                     ]
                 },
                 
-                // Final Questions
+                // FINAL SECTION
                 {
-                    id: 'q_701',
+                    id: 'q_501',
                     section: 'final',
-                    text: 'Möchten Sie eine detaillierte Analyse Ihrer Ergebnisse erhalten?',
+                    sectionTitle: 'Zusammenfassung',
+                    text: 'Was nervt Sie am meisten an Ihrem aktuellen Marketing?',
                     type: 'single',
                     options: [
-                        { value: 'yes', label: 'Ja, ich möchte eine detaillierte Analyse', score: 0 },
-                        { value: 'no', label: 'Nein, nur die Ergebnisse ansehen', score: 0 }
+                        { value: 'visibility', label: 'Niemand kennt uns / wir sind unsichtbar' },
+                        { value: 'quantity', label: 'Zu wenige Leads' },
+                        { value: 'quality', label: 'Falsche Leads - passen nicht zu uns' },
+                        { value: 'conversion', label: 'Leads kaufen nicht' },
+                        { value: 'time', label: 'Keine Zeit dafür' },
+                        { value: 'knowhow', label: 'Wissen nicht, was wir tun sollen' },
+                        { value: 'chaos', label: 'Alles ist unsystematisch und chaotisch' },
+                        { value: 'measurement', label: 'Können nicht messen, was funktioniert' }
                     ]
+                },
+                {
+                    id: 'q_502',
+                    section: 'final',
+                    text: 'Was investieren Sie aktuell monatlich in Marketing (Zeit UND Geld)?',
+                    hint: 'Gemeint ist: Budget für Tools, Ads, externe Hilfe PLUS der Gegenwert der Zeit, die Sie investieren.',
+                    type: 'single',
+                    options: [
+                        { value: '0-1000', label: 'Unter 1.000€' },
+                        { value: '1000-3000', label: '1.000-3.000€' },
+                        { value: '3000-5000', label: '3.000-5.000€' },
+                        { value: '5000-10000', label: '5.000-10.000€' },
+                        { value: '10000-20000', label: '10.000-20.000€' },
+                        { value: '20000+', label: 'Über 20.000€' }
+                    ]
+                },
+                {
+                    id: 'q_503',
+                    section: 'final',
+                    text: 'Was ist Ihr realistisches Ziel für die nächsten 6 Monate?',
+                    type: 'single',
+                    options: [
+                        { value: 'double', label: 'Lead-Anzahl verdoppeln' },
+                        { value: 'quality', label: 'Lead-Qualität massiv verbessern' },
+                        { value: 'system', label: 'Endlich ein System aufbauen, das läuft' },
+                        { value: 'efficiency', label: 'Weniger Zeit reinstecken müssen' },
+                        { value: 'predictable', label: 'Planbare, wiederkehrende Leads haben' },
+                        { value: 'scale', label: 'Von 10 auf 100+ Leads skalieren' }
+                    ]
+                },
+                {
+                    id: 'q_504',
+                    section: 'final',
+                    text: 'Hand aufs Herz: Wie konsequent setzen Sie Marketing um?',
+                    type: 'single',
+                    options: [
+                        { value: 'reactive', label: 'Nur wenn wir zu wenig Aufträge haben' },
+                        { value: 'inconsistent', label: 'Phasenweise, nicht kontinuierlich' },
+                        { value: 'trying', label: 'Versuchen es, aber nicht konsequent genug' },
+                        { value: 'consistent', label: 'Ziemlich konsequent am Ball' },
+                        { value: 'systematic', label: 'Systematisch - läuft wie ein Uhrwerk' }
+                    ]
+                },
+                
+                // OPT-IN SECTION
+                {
+                    id: 'q_600',
+                    section: 'optin',
+                    sectionTitle: 'Ihre Auswertung',
+                    text: 'Was möchten Sie?',
+                    type: 'single',
+                    options: [
+                        { value: 'no', label: 'Nur die Basis-Auswertung zeigen' },
+                        { value: 'yes', label: 'Die ausführliche Analyse per E-Mail (kostenlos)' }
+                    ]
+                },
+                
+                // CONTACT SECTION (shown only if q_600 === 'yes')
+                {
+                    id: 'q_701',
+                    section: 'contact',
+                    text: 'Ihr Vorname',
+                    type: 'text',
+                    required: true,
+                    conditional: true
+                },
+                {
+                    id: 'q_702',
+                    section: 'contact',
+                    text: 'Ihr Nachname',
+                    type: 'text',
+                    required: true,
+                    conditional: true
+                },
+                {
+                    id: 'q_703',
+                    section: 'contact',
+                    text: 'Ihre E-Mail-Adresse',
+                    type: 'email',
+                    required: true,
+                    conditional: true
+                },
+                {
+                    id: 'q_704',
+                    section: 'contact',
+                    text: 'Name Ihres Unternehmens (optional)',
+                    type: 'text',
+                    required: false,
+                    conditional: true
+                },
+                {
+                    id: 'q_705',
+                    section: 'contact',
+                    text: 'Branche (optional, hilft uns bei der Einordnung)',
+                    type: 'text',
+                    required: false,
+                    conditional: true
+                },
+                {
+                    id: 'q_706',
+                    section: 'contact',
+                    text: 'Gibt es noch was Spezifisches über Ihre Situation, das wir wissen sollten?',
+                    type: 'textarea',
+                    placeholder: 'Optional - aber hilft uns, die Analyse noch besser zu machen',
+                    required: false,
+                    conditional: true
+                },
+                {
+                    id: 'q_707',
+                    section: 'contact',
+                    text: 'Möchten Sie nach der Auswertung ein unverbindliches Gespräch über Ihre Situation?',
+                    hint: 'Kein Verkaufsgespräch. Ein ehrliches Gespräch darüber, wie systematisches Marketing in Ihrem Fall aussehen könnte.',
+                    type: 'yes_no',
+                    options: [
+                        { value: 'yes', label: 'Ja' },
+                        { value: 'no', label: 'Nein' }
+                    ],
+                    required: false,
+                    conditional: true
+                },
+                {
+                    id: 'q_708',
+                    section: 'contact',
+                    text: 'Datenschutz',
+                    type: 'checkbox',
+                    options: [
+                        { value: 'agreed', label: 'Ich bin damit einverstanden, dass Brixon Group meine Daten für die Analyse verwendet und mich per E-Mail kontaktiert. Details in der Datenschutzerklärung.' }
+                    ],
+                    required: true,
+                    conditional: true
                 }
             ]
         };
@@ -1016,33 +1259,41 @@
                 total: 0
             },
             showWelcome: true,
-            showResults: false,
-            showContact: false
+            showResults: false
         };
         
         // Utility Functions
-        function getQuestions() {
-            return CONFIG.questions;
+        function getVisibleQuestions() {
+            let questions = CONFIG.questions.filter(q => !q.conditional);
+            
+            // If user opted for detailed analysis, include contact questions
+            if (state.answers['q_600'] === 'yes') {
+                questions = CONFIG.questions;
+            }
+            
+            return questions;
         }
         
         function getCurrentQuestion() {
-            return getQuestions()[state.currentQuestionIndex];
+            return getVisibleQuestions()[state.currentQuestionIndex];
         }
         
         function getSectionLabel(section) {
             const labels = {
                 context: 'Kontext',
-                reach: 'Reach',
-                relate: 'Relate',
-                respond: 'Respond',
-                retain: 'Retain',
-                final: 'Abschluss'
+                reach: 'Phase 1: Reach',
+                relate: 'Phase 2: Relate',
+                respond: 'Phase 3: Respond',
+                retain: 'Phase 4: Retain',
+                final: 'Abschluss',
+                optin: 'Ihre Auswertung',
+                contact: 'Kontaktdaten'
             };
             return labels[section] || section;
         }
         
         function calculateProgress() {
-            const total = getQuestions().length;
+            const total = getVisibleQuestions().length;
             const current = state.currentQuestionIndex + 1;
             return Math.round((current / total) * 100);
         }
@@ -1056,29 +1307,27 @@
                 total: 0
             };
             
+            const scoredSections = ['reach', 'relate', 'respond', 'retain'];
+            
             Object.keys(state.answers).forEach(questionId => {
                 const question = CONFIG.questions.find(q => q.id === questionId);
-                if (!question) return;
+                if (!question || !scoredSections.includes(question.section)) return;
                 
                 const answer = state.answers[questionId];
+                const option = question.options?.find(o => o.value === answer);
                 
-                if (question.type === 'multiple') {
-                    answer.forEach(value => {
-                        const option = question.options.find(o => o.value === value);
-                        if (option && question.section in scores) {
-                            scores[question.section] += option.score || 0;
-                        }
-                    });
-                } else {
-                    const option = question.options.find(o => o.value === answer);
-                    if (option && question.section in scores) {
-                        scores[question.section] += option.score || 0;
-                    }
+                if (option && option.score !== undefined) {
+                    scores[question.section] += option.score;
                 }
             });
             
             scores.total = scores.reach + scores.relate + scores.respond + scores.retain;
             state.scores = scores;
+            
+            // Save to localStorage
+            localStorage.setItem('assessment_scores', JSON.stringify(scores));
+            localStorage.setItem('assessment_answers', JSON.stringify(state.answers));
+            
             return scores;
         }
         
@@ -1086,7 +1335,7 @@
         function renderProgress() {
             const progress = calculateProgress();
             const current = state.currentQuestionIndex + 1;
-            const total = getQuestions().length;
+            const total = getVisibleQuestions().length;
             const currentQuestion = getCurrentQuestion();
             
             return `
@@ -1106,13 +1355,13 @@
             return `
                 <div class="welcome-screen fade-in">
                     <h1>B2B Marketing Assessment</h1>
-                    <p class="welcome-subtitle">Evaluieren Sie Ihren Marketing-Reifegrad mit dem 4R-System</p>
+                    <p class="welcome-subtitle">Finden Sie heraus, wo Ihr Marketing steht - ehrlich, ohne Schnickschnack</p>
                     <div class="welcome-duration">
                         <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                             <circle cx="12" cy="12" r="10"></circle>
                             <polyline points="12 6 12 12 16 14"></polyline>
                         </svg>
-                        ca. 8-10 Minuten
+                        8-12 Minuten
                     </div>
                     <button class="btn btn-primary" onclick="startAssessment()" data-testid="button-start-assessment">
                         Assessment starten
@@ -1123,11 +1372,12 @@
         }
         
         function renderQuestion(question) {
-            const isAnswered = state.answers[question.id] !== undefined;
-            const questionIndex = getQuestions().findIndex(q => q.id === question.id);
+            const isAnswered = state.answers[question.id] !== undefined && state.answers[question.id] !== '';
+            const questionIndex = getVisibleQuestions().findIndex(q => q.id === question.id);
             
             let optionsHtml = '';
-            if (question.type === 'single') {
+            
+            if (question.type === 'single' || question.type === 'yes_no') {
                 optionsHtml = question.options.map(option => {
                     const isSelected = state.answers[question.id] === option.value;
                     return `
@@ -1137,16 +1387,16 @@
                                 name="${question.id}" 
                                 value="${option.value}"
                                 ${isSelected ? 'checked' : ''}
-                                onchange="handleAnswer('${question.id}', '${option.value}', ${option.score})"
+                                onchange="handleAnswer('${question.id}', '${option.value}')"
                             >
                             <div class="option-radio"></div>
                             <span class="option-label">${option.label}</span>
                         </label>
                     `;
                 }).join('');
-            } else if (question.type === 'multiple') {
+            } else if (question.type === 'checkbox') {
                 optionsHtml = question.options.map(option => {
-                    const isSelected = state.answers[question.id]?.includes(option.value);
+                    const isSelected = state.answers[question.id] === option.value;
                     return `
                         <label class="option ${isSelected ? 'selected' : ''}" data-testid="option-${option.value}">
                             <input 
@@ -1154,32 +1404,46 @@
                                 name="${question.id}" 
                                 value="${option.value}"
                                 ${isSelected ? 'checked' : ''}
-                                onchange="handleMultipleAnswer('${question.id}', '${option.value}')"
+                                onchange="handleAnswer('${question.id}', this.checked ? '${option.value}' : '')"
                             >
                             <div class="option-checkbox"></div>
                             <span class="option-label">${option.label}</span>
                         </label>
                     `;
                 }).join('');
-            } else if (question.type === 'text') {
+            } else if (question.type === 'text' || question.type === 'email') {
                 const value = state.answers[question.id] || '';
                 optionsHtml = `
                     <div class="text-input-wrapper">
                         <input 
-                            type="text" 
+                            type="${question.type === 'email' ? 'email' : 'text'}" 
                             class="text-input" 
                             value="${value}"
-                            placeholder="${question.placeholder || 'Ihre Antwort...'}"
-                            onchange="handleAnswer('${question.id}', this.value, 0)"
+                            placeholder="Ihre Antwort..."
+                            oninput="handleAnswer('${question.id}', this.value)"
+                            ${question.required ? 'required' : ''}
                             data-testid="input-${question.id}"
                         >
+                    </div>
+                `;
+            } else if (question.type === 'textarea') {
+                const value = state.answers[question.id] || '';
+                const placeholder = question.placeholder || 'Ihre Antwort...';
+                optionsHtml = `
+                    <div class="text-input-wrapper">
+                        <textarea 
+                            class="text-input text-area" 
+                            placeholder="${placeholder}"
+                            oninput="handleAnswer('${question.id}', this.value)"
+                            data-testid="input-${question.id}"
+                        >${value}</textarea>
                     </div>
                 `;
             }
             
             return `
                 <div class="question-card">
-                    <div class="question-number">Frage ${questionIndex + 1} von ${getQuestions().length}</div>
+                    <div class="question-number">Frage ${questionIndex + 1} von ${getVisibleQuestions().length}</div>
                     <h2 class="question-text">${question.text}</h2>
                     ${question.hint ? `<p class="question-hint">${question.hint}</p>` : ''}
                     <div class="options">
@@ -1194,10 +1458,10 @@
                         <button 
                             class="btn btn-primary" 
                             onclick="nextQuestion()" 
-                            ${!isAnswered ? 'disabled' : ''}
+                            ${!isAnswered && question.required !== false ? 'disabled' : ''}
                             data-testid="button-next"
                         >
-                            ${questionIndex === getQuestions().length - 1 ? 'Ergebnisse anzeigen' : 'Weiter'}
+                            ${questionIndex === getVisibleQuestions().length - 1 ? 'Ergebnisse anzeigen' : 'Weiter'}
                             <span class="arrow">→</span>
                         </button>
                     </div>
@@ -1207,15 +1471,40 @@
         
         function renderResults() {
             const scores = calculateScores();
-            const maxScores = { reach: 35, relate: 32, respond: 27, retain: 27, total: 121 };
+            const maxScores = { 
+                reach: 40, 
+                relate: 32, 
+                respond: 32, 
+                retain: 27, 
+                total: 131 
+            };
             
-            const getInterpretation = (score, max) => {
+            const getInterpretation = (score, max, phase) => {
                 const percentage = (score / max) * 100;
-                if (percentage >= 80) return 'Ausgezeichnet';
-                if (percentage >= 60) return 'Gut entwickelt';
-                if (percentage >= 40) return 'Entwicklungspotenzial';
-                if (percentage >= 20) return 'Grundlagen vorhanden';
-                return 'Ausbaufähig';
+                
+                if (phase === 'reach') {
+                    if (score >= 36) return 'Vorbildlich sichtbar';
+                    if (score >= 25) return 'Auf dem richtigen Weg';
+                    if (score >= 13) return 'Erste Ansätze da';
+                    return 'Praktisch unsichtbar';
+                } else if (phase === 'relate') {
+                    if (score >= 29) return 'Best Practice';
+                    if (score >= 21) return 'Systematisches Nurturing';
+                    if (score >= 11) return 'Basis vorhanden';
+                    return 'Leads verschwinden ins Nichts';
+                } else if (phase === 'respond') {
+                    if (score >= 29) return 'Perfektes Alignment';
+                    if (score >= 21) return 'Gutes Zusammenspiel';
+                    if (score >= 11) return 'Es läuft, aber holprig';
+                    return 'Marketing und Sales getrennt';
+                } else if (phase === 'retain') {
+                    if (score >= 25) return 'Vorbildlich';
+                    if (score >= 18) return 'Systematische Pflege';
+                    if (score >= 9) return 'Erste Ansätze';
+                    return 'Verschenktes Potenzial';
+                }
+                
+                return Math.round(percentage) + '%';
             };
             
             return `
@@ -1236,7 +1525,7 @@
                         <div class="score-bar" style="margin-top: 1rem;">
                             <div class="score-bar-fill" style="width: ${(scores.total/maxScores.total)*100}%"></div>
                         </div>
-                        <div class="score-percentage">${Math.round((scores.total/maxScores.total)*100)}% erreicht</div>
+                        <div class="score-percentage">${Math.round((scores.total/maxScores.total)*100)}%</div>
                     </div>
                     
                     <div class="score-card">
@@ -1250,7 +1539,7 @@
                         <div class="score-bar" style="margin-top: 1rem;">
                             <div class="score-bar-fill" style="width: ${(scores.reach/maxScores.reach)*100}%"></div>
                         </div>
-                        <div class="score-percentage">${getInterpretation(scores.reach, maxScores.reach)}</div>
+                        <div class="score-percentage">${getInterpretation(scores.reach, maxScores.reach, 'reach')}</div>
                     </div>
                     
                     <div class="score-card">
@@ -1264,7 +1553,7 @@
                         <div class="score-bar" style="margin-top: 1rem;">
                             <div class="score-bar-fill" style="width: ${(scores.relate/maxScores.relate)*100}%"></div>
                         </div>
-                        <div class="score-percentage">${getInterpretation(scores.relate, maxScores.relate)}</div>
+                        <div class="score-percentage">${getInterpretation(scores.relate, maxScores.relate, 'relate')}</div>
                     </div>
                     
                     <div class="score-card">
@@ -1278,7 +1567,7 @@
                         <div class="score-bar" style="margin-top: 1rem;">
                             <div class="score-bar-fill" style="width: ${(scores.respond/maxScores.respond)*100}%"></div>
                         </div>
-                        <div class="score-percentage">${getInterpretation(scores.respond, maxScores.respond)}</div>
+                        <div class="score-percentage">${getInterpretation(scores.respond, maxScores.respond, 'respond')}</div>
                     </div>
                     
                     <div class="score-card">
@@ -1292,7 +1581,7 @@
                         <div class="score-bar" style="margin-top: 1rem;">
                             <div class="score-bar-fill" style="width: ${(scores.retain/maxScores.retain)*100}%"></div>
                         </div>
-                        <div class="score-percentage">${getInterpretation(scores.retain, maxScores.retain)}</div>
+                        <div class="score-percentage">${getInterpretation(scores.retain, maxScores.retain, 'retain')}</div>
                     </div>
                 </div>
                 
@@ -1306,17 +1595,10 @@
                 </div>
                 
                 <div class="btn-group fade-in">
-                    ${state.answers['q_701'] === 'yes' ? `
-                        <button class="btn btn-primary" onclick="showContactForm()" data-testid="button-request-analysis">
-                            Detaillierte Analyse anfragen
-                            <span class="arrow">→</span>
-                        </button>
-                    ` : `
-                        <button class="btn btn-primary" onclick="submitResults()" data-testid="button-submit-results">
-                            Ergebnisse einreichen
-                            <span class="arrow">→</span>
-                        </button>
-                    `}
+                    <button class="btn btn-primary" onclick="submitResults()" data-testid="button-submit-results">
+                        Ergebnisse einreichen
+                        <span class="arrow">→</span>
+                    </button>
                     <button class="btn btn-secondary" onclick="location.reload()" data-testid="button-restart">
                         Neues Assessment
                     </button>
@@ -1327,38 +1609,38 @@
         function getRecommendations(scores, maxScores) {
             const recommendations = [];
             
-            if (scores.reach / maxScores.reach < 0.6) {
+            if (scores.reach < 25) {
                 recommendations.push({
                     title: 'Reach optimieren',
-                    text: 'Investieren Sie in Ihre Reichweite durch bezahlte Werbung, SEO und strategische Partnerschaften.'
+                    text: 'Ihre Sichtbarkeit ist die größte Baustelle. Starten Sie mit regelmäßigem LinkedIn-Content und Lead-Magneten.'
                 });
             }
             
-            if (scores.relate / maxScores.relate < 0.6) {
+            if (scores.relate < 21) {
                 recommendations.push({
-                    title: 'Content-Strategie ausbauen',
-                    text: 'Entwickeln Sie eine konsistente Content-Strategie mit personalisierten Inhalten für Ihre Buyer Journey.'
+                    title: 'Systematisches Nurturing aufbauen',
+                    text: 'Sie verlieren Leads, weil Sie nicht am Ball bleiben. Newsletter und automatisierte Follow-ups sind der nächste Schritt.'
                 });
             }
             
-            if (scores.respond / maxScores.respond < 0.6) {
+            if (scores.respond < 21) {
                 recommendations.push({
-                    title: 'Lead-Management verbessern',
-                    text: 'Implementieren Sie Lead Scoring und automatisierte Nurturing-Prozesse für bessere Conversion-Raten.'
+                    title: 'Marketing und Sales verzahnen',
+                    text: 'Ihre Leads versanden im Verkaufsprozess. Marketing und Sales müssen als ein System arbeiten.'
                 });
             }
             
-            if (scores.retain / maxScores.retain < 0.6) {
+            if (scores.retain < 18) {
                 recommendations.push({
-                    title: 'Kundenbindung stärken',
-                    text: 'Etablieren Sie ein strukturiertes Retention-Programm mit regelmäßiger Kommunikation und Upselling.'
+                    title: 'Bestandskunden systematisch nutzen',
+                    text: 'Sie lassen massiv Potenzial liegen. Upselling und Empfehlungen von zufriedenen Kunden sind Ihr schnellster Hebel.'
                 });
             }
             
             if (recommendations.length === 0) {
                 recommendations.push({
-                    title: 'Hervorragend!',
-                    text: 'Ihre Marketing-Aktivitäten sind gut aufgestellt. Fokussieren Sie sich auf kontinuierliche Optimierung.'
+                    title: 'Starke Basis - jetzt konsequent bleiben',
+                    text: 'Sie gehören zu den wenigen, die Marketing systematisch angehen. Bleiben Sie am Ball und optimieren Sie kontinuierlich.'
                 });
             }
             
@@ -1380,7 +1662,7 @@
             const radius = Math.min(centerX, centerY) - 60;
             
             const scores = state.scores;
-            const maxScores = { reach: 35, relate: 32, respond: 27, retain: 27 };
+            const maxScores = { reach: 40, relate: 32, respond: 32, retain: 27 };
             const labels = ['Reach', 'Relate', 'Respond', 'Retain'];
             const values = [
                 scores.reach / maxScores.reach,
@@ -1451,254 +1733,64 @@
             }
         }
         
-        function renderContactForm() {
+        function renderSuccess() {
             return `
-                <div class="contact-form fade-in">
-                    <h3 style="margin-bottom: 1.5rem;">Detaillierte Analyse anfordern</h3>
-                    <form onsubmit="submitResults(); return false;">
-                        <div class="form-group">
-                            <label class="form-label" for="name">Name *</label>
-                            <input 
-                                type="text" 
-                                id="name" 
-                                class="form-input" 
-                                required
-                                onchange="state.answers['q_702'] = this.value"
-                                data-testid="input-name"
-                            >
-                        </div>
-                        <div class="form-group">
-                            <label class="form-label" for="email">E-Mail *</label>
-                            <input 
-                                type="email" 
-                                id="email" 
-                                class="form-input" 
-                                required
-                                onchange="state.answers['q_703'] = this.value"
-                                data-testid="input-email"
-                            >
-                        </div>
-                        <div class="form-group">
-                            <label class="form-label" for="company">Unternehmen *</label>
-                            <input 
-                                type="text" 
-                                id="company" 
-                                class="form-input" 
-                                required
-                                onchange="state.answers['q_704'] = this.value"
-                                data-testid="input-company"
-                            >
-                        </div>
-                        <div class="form-group">
-                            <label class="form-label" for="industry">Branche</label>
-                            <input 
-                                type="text" 
-                                id="industry" 
-                                class="form-input"
-                                onchange="state.answers['q_705'] = this.value"
-                                data-testid="input-industry"
-                            >
-                        </div>
-                        <div class="form-group">
-                            <label class="form-label" for="notes">Anmerkungen</label>
-                            <textarea 
-                                id="notes" 
-                                class="form-input form-textarea"
-                                onchange="state.answers['q_706'] = this.value"
-                                data-testid="input-notes"
-                            ></textarea>
-                        </div>
-                        <div class="form-group">
-                            <div class="checkbox-wrapper">
-                                <input 
-                                    type="checkbox" 
-                                    id="consultation" 
-                                    class="checkbox-input"
-                                    onchange="state.answers['q_707'] = this.checked ? 'yes' : 'no'"
-                                    data-testid="checkbox-consultation"
-                                >
-                                <label class="checkbox-label" for="consultation">
-                                    Ich möchte ein unverbindliches Beratungsgespräch
-                                </label>
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <div class="checkbox-wrapper">
-                                <input 
-                                    type="checkbox" 
-                                    id="consent" 
-                                    class="checkbox-input" 
-                                    required
-                                    onchange="state.answers['q_708'] = this.checked ? 'agreed' : 'not-agreed'"
-                                    data-testid="checkbox-consent"
-                                >
-                                <label class="checkbox-label" for="consent">
-                                    Ich stimme der Verarbeitung meiner Daten gemäß der Datenschutzerklärung zu *
-                                </label>
-                            </div>
-                        </div>
-                        <button type="submit" class="btn btn-primary" data-testid="button-submit-contact">
-                            Analyse anfordern
-                            <span class="arrow">→</span>
-                        </button>
-                    </form>
-                </div>
-            `;
-        }
-        
-        async function submitResults() {
-            const submitButton = event?.target || document.querySelector('[data-testid="button-submit-contact"]') || document.querySelector('[data-testid="button-submit-results"]');
-            if (!submitButton) return;
-            
-            const originalText = submitButton.innerHTML;
-            submitButton.disabled = true;
-            submitButton.innerHTML = 'Wird gesendet...';
-            
-            const scores = calculateScores();
-            const submitData = {
-                timestamp: new Date().toISOString(),
-                scores: scores,
-                answers: state.answers,
-                contact: state.showContact ? {
-                    name: state.answers.q_702,
-                    email: state.answers.q_703,
-                    company: state.answers.q_704,
-                    industry: state.answers.q_705,
-                    notes: state.answers.q_706,
-                    wantsConsultation: state.answers.q_707 === 'yes',
-                    consentGiven: state.answers.q_708 === 'agreed'
-                } : null
-            };
-            
-            // Save to localStorage
-            try {
-                localStorage.setItem('assessment_backup_' + Date.now(), JSON.stringify(submitData));
-                console.log('✅ Assessment Data gespeichert:', submitData);
-            } catch (e) {
-                console.error('Could not save to localStorage:', e);
-            }
-            
-            // Send to webhook if configured
-            if (CONFIG.webhookUrl && CONFIG.webhookUrl !== 'YOUR_WEBHOOK_URL_HERE') {
-                try {
-                    const response = await fetch(CONFIG.webhookUrl, {
-                        method: 'POST',
-                        headers: {
-                            'Content-Type': 'application/json'
-                        },
-                        body: JSON.stringify(submitData)
-                    });
-                    
-                    if (response.ok) {
-                        console.log('✅ Daten erfolgreich an Webhook gesendet');
-                    } else {
-                        console.warn('⚠️ Webhook Error:', response.status);
-                    }
-                } catch (error) {
-                    console.warn('⚠️ Webhook nicht erreichbar:', error.message);
-                }
-            } else {
-                console.log('ℹ️ Kein Webhook konfiguriert - Daten in localStorage und Console verfügbar');
-            }
-            
-            // Always show success
-            showSuccessMessage();
-            
-            // Restore button
-            submitButton.disabled = false;
-            submitButton.innerHTML = originalText;
-        }
-        
-        function showSuccessMessage() {
-            const container = document.getElementById('appContainer');
-            container.innerHTML = `
                 <div class="success-container fade-in">
                     <div class="success-icon">
-                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                             <polyline points="20 6 9 17 4 12"></polyline>
                         </svg>
                     </div>
                     <h2 class="success-title">Vielen Dank!</h2>
-                    <p class="success-text">
-                        Ihre Ergebnisse wurden erfolgreich gespeichert.
-                        ${state.showContact ? '<br>Sie erhalten Ihre detaillierte Analyse in Kürze per E-Mail.' : ''}
-                    </p>
+                    <p class="success-text">Ihre Ergebnisse wurden übermittelt.${state.answers['q_600'] === 'yes' ? ' Sie erhalten in Kürze Ihre ausführliche Analyse per E-Mail.' : ''}</p>
                     <button class="btn btn-primary" onclick="location.reload()" data-testid="button-new-assessment">
-                        Neues Assessment starten
-                        <span class="arrow">→</span>
+                        Neues Assessment
                     </button>
                 </div>
             `;
         }
-
+        
         // Event Handlers
+        function handleAnswer(questionId, value) {
+            state.answers[questionId] = value;
+            render();
+        }
+        
         function startAssessment() {
             state.showWelcome = false;
             state.currentQuestionIndex = 0;
             render();
         }
-
-        function handleAnswer(questionId, value, score) {
-            state.answers[questionId] = value;
-            
-            // Update button state
-            const button = document.querySelector('.btn-primary');
-            if (button) button.disabled = false;
-            
-            // Update option styling
-            document.querySelectorAll(`input[name="${questionId}"]`).forEach(input => {
-                const option = input.closest('.option');
-                if (input.checked) {
-                    option.classList.add('selected');
-                } else {
-                    option.classList.remove('selected');
-                }
-            });
-        }
-
-        function handleMultipleAnswer(questionId, value) {
-            if (!state.answers[questionId]) {
-                state.answers[questionId] = [];
-            }
-            
-            const index = state.answers[questionId].indexOf(value);
-            if (index > -1) {
-                state.answers[questionId].splice(index, 1);
-            } else {
-                state.answers[questionId].push(value);
-            }
-            
-            // Update button state
-            const button = document.querySelector('.btn-primary');
-            if (button) button.disabled = state.answers[questionId].length === 0;
-            
-            // Update option styling
-            document.querySelectorAll(`input[name="${questionId}"]`).forEach(input => {
-                const option = input.closest('.option');
-                if (input.checked) {
-                    option.classList.add('selected');
-                } else {
-                    option.classList.remove('selected');
-                }
-            });
-        }
-
+        
         function nextQuestion() {
-            if (state.currentQuestionIndex < getQuestions().length - 1) {
+            const currentQ = getCurrentQuestion();
+            if (!currentQ) return;
+            
+            const isAnswered = state.answers[currentQ.id] !== undefined && state.answers[currentQ.id] !== '';
+            if (!isAnswered && currentQ.required !== false) return;
+            
+            // If this was q_600 and they selected 'yes', we need to reload visible questions
+            if (currentQ.id === 'q_600') {
+                render();
+            }
+            
+            if (state.currentQuestionIndex < getVisibleQuestions().length - 1) {
                 state.currentQuestionIndex++;
                 render();
+                window.scrollTo(0, 0);
             } else {
                 showResults();
             }
         }
-
+        
         function previousQuestion() {
             if (state.currentQuestionIndex > 0) {
                 state.currentQuestionIndex--;
                 render();
+                window.scrollTo(0, 0);
             }
         }
-
+        
         function showResults() {
             state.showResults = true;
             render();
@@ -1706,37 +1798,52 @@
                 drawRadarChart();
             }, 100);
         }
-
-        function showContactForm() {
-            state.showContact = true;
-            render();
-            setTimeout(() => {
-                drawRadarChart();
-            }, 100);
+        
+        async function submitResults() {
+            const payload = {
+                answers: state.answers,
+                scores: state.scores,
+                timestamp: new Date().toISOString()
+            };
+            
+            // Try to send to webhook
+            if (CONFIG.webhookUrl && CONFIG.webhookUrl !== 'YOUR_WEBHOOK_URL_HERE') {
+                try {
+                    await fetch(CONFIG.webhookUrl, {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify(payload)
+                    });
+                } catch (error) {
+                    console.error('Error sending to webhook:', error);
+                }
+            }
+            
+            // Show success message
+            document.getElementById('app').innerHTML = `
+                <div class="container">
+                    ${renderSuccess()}
+                </div>
+            `;
         }
-
+        
+        // Main Render Function
         function render() {
-            const container = document.getElementById('appContainer');
-            const progressWrapper = document.getElementById('progressWrapper');
+            const app = document.getElementById('app');
             
             if (state.showWelcome) {
-                progressWrapper.classList.add('hidden');
-                container.innerHTML = renderWelcome();
+                document.getElementById('progress').classList.add('hidden');
+                app.innerHTML = `<div class="container">${renderWelcome()}</div>`;
             } else if (state.showResults) {
-                progressWrapper.classList.add('hidden');
-                const resultsHtml = renderResults();
-                const contactHtml = state.showContact ? renderContactForm() : '';
-                container.innerHTML = resultsHtml + contactHtml;
-                setTimeout(() => {
-                    drawRadarChart();
-                }, 100);
+                document.getElementById('progress').classList.add('hidden');
+                app.innerHTML = `<div class="container-wide">${renderResults()}</div>`;
             } else {
-                progressWrapper.classList.remove('hidden');
-                progressWrapper.innerHTML = renderProgress();
-                container.innerHTML = renderQuestion(getCurrentQuestion());
+                document.getElementById('progress').classList.remove('hidden');
+                document.getElementById('progress').innerHTML = renderProgress();
+                app.innerHTML = `<div class="container">${renderQuestion(getCurrentQuestion())}</div>`;
             }
         }
-
+        
         // Initialize
         document.addEventListener('DOMContentLoaded', () => {
             render();
@@ -1744,12 +1851,7 @@
     </script>
 </head>
 <body>
-    <div id="progressWrapper" class="progress-wrapper hidden"></div>
-    
-    <main class="main-content">
-        <div class="container">
-            <div id="appContainer"></div>
-        </div>
-    </main>
+    <div class="progress-wrapper hidden" id="progress"></div>
+    <div class="main-content" id="app"></div>
 </body>
 </html>
