@@ -611,14 +611,51 @@
         }
         
         /* Responsive */
+        @media (max-width: 1024px) {
+            .container-wide {
+                max-width: 100%;
+                padding: 2rem 1.5rem;
+            }
+            
+            .chart-container {
+                padding: 1.5rem;
+            }
+            
+            #radarChart {
+                max-width: 400px;
+            }
+        }
+        
         @media (max-width: 640px) {
             .container,
+            .container-wide,
             .progress-container {
                 padding: 0 1rem;
             }
             
             .question-card {
-                padding: 2rem 1.5rem;
+                padding: 1.5rem 1.25rem;
+            }
+            
+            .question-text {
+                font-size: 1.125rem;
+            }
+            
+            .option {
+                padding: 1rem 0.875rem;
+                min-height: 52px;
+            }
+            
+            .option-label {
+                font-size: 1rem;
+                line-height: 1.4;
+            }
+            
+            .option-radio,
+            .option-checkbox {
+                width: 20px;
+                height: 20px;
+                margin-right: 0.875rem;
             }
             
             .btn-group {
@@ -627,10 +664,78 @@
             
             .btn {
                 width: 100%;
+                padding: 0.875rem 1.5rem;
             }
             
             .results-grid {
                 grid-template-columns: 1fr;
+                gap: 0.75rem;
+            }
+            
+            .score-card {
+                padding: 1.25rem;
+            }
+            
+            .overall-score {
+                padding: 2rem 1.5rem;
+            }
+            
+            .overall-score-value {
+                font-size: 2.5rem;
+            }
+            
+            .overall-score-max {
+                font-size: 1rem;
+            }
+            
+            .chart-container {
+                padding: 1.5rem 1rem;
+            }
+            
+            #radarChart {
+                max-width: 100%;
+                width: 100%;
+                height: auto;
+            }
+            
+            .recommendations {
+                padding: 1.5rem;
+            }
+            
+            .cta-section {
+                padding: 2rem 1.5rem;
+            }
+            
+            .cta-heading {
+                font-size: 1.25rem;
+            }
+            
+            .btn-cta {
+                width: 100%;
+                padding: 1rem 1.5rem;
+                font-size: 0.9375rem;
+            }
+        }
+        
+        @media (max-width: 375px) {
+            .welcome-screen {
+                padding: 4rem 0 3rem;
+            }
+            
+            .question-card {
+                padding: 1.25rem 1rem;
+            }
+            
+            .question-text {
+                font-size: 1rem;
+            }
+            
+            .option {
+                padding: 0.875rem 0.75rem;
+            }
+            
+            .overall-score-value {
+                font-size: 2rem;
             }
         }
         
@@ -646,6 +751,96 @@
         @keyframes fadeIn {
             from { opacity: 0; }
             to { opacity: 1; }
+        }
+        
+        .fade-out {
+            animation: fadeOut 0.3s ease forwards;
+        }
+        
+        @keyframes fadeOut {
+            from { opacity: 1; }
+            to { opacity: 0; }
+        }
+        
+        /* CTA Section */
+        .cta-section {
+            background: var(--color-gray-50);
+            border: var(--border);
+            border-radius: var(--radius);
+            padding: 3rem 2rem;
+            margin: 3rem 0 2rem;
+            text-align: center;
+        }
+        
+        .cta-heading {
+            font-size: 1.5rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+            color: var(--color-black);
+        }
+        
+        .cta-text {
+            font-size: 1rem;
+            color: var(--color-gray-600);
+            margin-bottom: 2rem;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+            line-height: 1.6;
+        }
+        
+        .btn-cta {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+            padding: 1rem 2rem;
+            font-size: 1rem;
+            font-weight: 500;
+            font-family: var(--font-base);
+            background: var(--color-black);
+            color: var(--color-white);
+            border: none;
+            border-radius: var(--radius);
+            cursor: pointer;
+            transition: all 0.15s ease;
+            text-decoration: none;
+        }
+        
+        .btn-cta:hover {
+            background: var(--color-gray-800);
+            transform: translateY(-1px);
+        }
+        
+        /* Overall Score Display */
+        .overall-score {
+            text-align: center;
+            background: var(--color-white);
+            border: var(--border);
+            border-radius: var(--radius);
+            padding: 2.5rem 2rem;
+            margin-bottom: 2rem;
+        }
+        
+        .overall-score-label {
+            font-size: 0.875rem;
+            font-weight: 500;
+            color: var(--color-gray-500);
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            margin-bottom: 0.75rem;
+        }
+        
+        .overall-score-value {
+            font-size: 3rem;
+            font-weight: 600;
+            color: var(--color-black);
+            margin-bottom: 0.5rem;
+        }
+        
+        .overall-score-max {
+            font-size: 1.25rem;
+            color: var(--color-gray-400);
         }
     </style>
     
@@ -1155,94 +1350,6 @@
                         { value: 'consistent', label: 'Ziemlich konsequent am Ball' },
                         { value: 'systematic', label: 'Systematisch - läuft wie ein Uhrwerk' }
                     ]
-                },
-                
-                // OPT-IN SECTION
-                {
-                    id: 'q_600',
-                    section: 'optin',
-                    sectionTitle: 'Ihre Auswertung',
-                    text: 'Was möchten Sie?',
-                    type: 'single',
-                    options: [
-                        { value: 'no', label: 'Nur die Basis-Auswertung zeigen' },
-                        { value: 'yes', label: 'Die ausführliche Analyse per E-Mail (kostenlos)' }
-                    ]
-                },
-                
-                // CONTACT SECTION (shown only if q_600 === 'yes')
-                {
-                    id: 'q_701',
-                    section: 'contact',
-                    text: 'Ihr Vorname',
-                    type: 'text',
-                    required: true,
-                    conditional: true
-                },
-                {
-                    id: 'q_702',
-                    section: 'contact',
-                    text: 'Ihr Nachname',
-                    type: 'text',
-                    required: true,
-                    conditional: true
-                },
-                {
-                    id: 'q_703',
-                    section: 'contact',
-                    text: 'Ihre E-Mail-Adresse',
-                    type: 'email',
-                    required: true,
-                    conditional: true
-                },
-                {
-                    id: 'q_704',
-                    section: 'contact',
-                    text: 'Name Ihres Unternehmens (optional)',
-                    type: 'text',
-                    required: false,
-                    conditional: true
-                },
-                {
-                    id: 'q_705',
-                    section: 'contact',
-                    text: 'Branche (optional, hilft uns bei der Einordnung)',
-                    type: 'text',
-                    required: false,
-                    conditional: true
-                },
-                {
-                    id: 'q_706',
-                    section: 'contact',
-                    text: 'Gibt es noch was Spezifisches über Ihre Situation, das wir wissen sollten?',
-                    type: 'textarea',
-                    placeholder: 'Optional - aber hilft uns, die Analyse noch besser zu machen',
-                    required: false,
-                    conditional: true
-                },
-                {
-                    id: 'q_707',
-                    section: 'contact',
-                    text: 'Möchten Sie nach der Auswertung ein unverbindliches Gespräch über Ihre Situation?',
-                    hint: 'Kein Verkaufsgespräch. Ein ehrliches Gespräch darüber, wie systematisches Marketing in Ihrem Fall aussehen könnte.',
-                    type: 'yes_no',
-                    options: [
-                        { value: 'yes', label: 'Ja' },
-                        { value: 'no', label: 'Nein' }
-                    ],
-                    required: false,
-                    conditional: true
-                },
-                {
-                    id: 'q_708',
-                    section: 'contact',
-                    text: 'Datenschutz',
-                    type: 'checkbox',
-                    options: [
-                        { value: 'agreed', label: 'Ich bin damit einverstanden, dass Brixon Group meine Daten für die Analyse verwendet und mich per E-Mail kontaktiert. Details in der Datenschutzerklärung.' }
-                    ],
-                    required: true,
-                    conditional: true
                 }
             ]
         };
@@ -1264,14 +1371,7 @@
         
         // Utility Functions
         function getVisibleQuestions() {
-            let questions = CONFIG.questions.filter(q => !q.conditional);
-            
-            // If user opted for detailed analysis, include contact questions
-            if (state.answers['q_600'] === 'yes') {
-                questions = CONFIG.questions;
-            }
-            
-            return questions;
+            return CONFIG.questions;
         }
         
         function getCurrentQuestion() {
@@ -1285,9 +1385,7 @@
                 relate: 'Phase 2: Relate',
                 respond: 'Phase 3: Respond',
                 retain: 'Phase 4: Retain',
-                final: 'Abschluss',
-                optin: 'Ihre Auswertung',
-                contact: 'Kontaktdaten'
+                final: 'Abschluss'
             };
             return labels[section] || section;
         }
@@ -1449,22 +1547,13 @@
                     <div class="options">
                         ${optionsHtml}
                     </div>
-                    <div class="btn-group">
-                        ${questionIndex > 0 ? `
+                    ${questionIndex > 0 ? `
+                        <div class="btn-group">
                             <button class="btn btn-secondary" onclick="previousQuestion()" data-testid="button-previous">
                                 ← Zurück
                             </button>
-                        ` : ''}
-                        <button 
-                            class="btn btn-primary" 
-                            onclick="nextQuestion()" 
-                            ${!isAnswered && question.required !== false ? 'disabled' : ''}
-                            data-testid="button-next"
-                        >
-                            ${questionIndex === getVisibleQuestions().length - 1 ? 'Ergebnisse anzeigen' : 'Weiter'}
-                            <span class="arrow">→</span>
-                        </button>
-                    </div>
+                        </div>
+                    ` : ''}
                 </div>
             `;
         }
@@ -1513,24 +1602,18 @@
                     <p class="results-subtitle">Basierend auf Ihren Angaben</p>
                 </div>
                 
+                <div class="overall-score fade-in">
+                    <div class="overall-score-label">Gesamtscore</div>
+                    <div class="overall-score-value">${scores.total} <span class="overall-score-max">von ${maxScores.total} Punkten</span></div>
+                    <div class="score-bar" style="max-width: 400px; margin: 1.5rem auto 0;">
+                        <div class="score-bar-fill" style="width: ${(scores.total/maxScores.total)*100}%"></div>
+                    </div>
+                </div>
+                
                 <div class="results-grid fade-in">
                     <div class="score-card">
                         <div class="score-card-header">
-                            <div class="score-card-title">Gesamtscore</div>
-                        </div>
-                        <div>
-                            <span class="score-value">${scores.total}</span>
-                            <span class="score-max">/ ${maxScores.total}</span>
-                        </div>
-                        <div class="score-bar" style="margin-top: 1rem;">
-                            <div class="score-bar-fill" style="width: ${(scores.total/maxScores.total)*100}%"></div>
-                        </div>
-                        <div class="score-percentage">${Math.round((scores.total/maxScores.total)*100)}%</div>
-                    </div>
-                    
-                    <div class="score-card">
-                        <div class="score-card-header">
-                            <div class="score-card-title">Reach</div>
+                            <div class="score-card-title">Phase 1: Reach</div>
                         </div>
                         <div>
                             <span class="score-value">${scores.reach}</span>
@@ -1544,7 +1627,7 @@
                     
                     <div class="score-card">
                         <div class="score-card-header">
-                            <div class="score-card-title">Relate</div>
+                            <div class="score-card-title">Phase 2: Relate</div>
                         </div>
                         <div>
                             <span class="score-value">${scores.relate}</span>
@@ -1558,7 +1641,7 @@
                     
                     <div class="score-card">
                         <div class="score-card-header">
-                            <div class="score-card-title">Respond</div>
+                            <div class="score-card-title">Phase 3: Respond</div>
                         </div>
                         <div>
                             <span class="score-value">${scores.respond}</span>
@@ -1572,7 +1655,7 @@
                     
                     <div class="score-card">
                         <div class="score-card-header">
-                            <div class="score-card-title">Retain</div>
+                            <div class="score-card-title">Phase 4: Retain</div>
                         </div>
                         <div>
                             <span class="score-value">${scores.retain}</span>
@@ -1586,22 +1669,21 @@
                 </div>
                 
                 <div class="chart-container fade-in">
-                    <canvas id="radarChart" width="400" height="400"></canvas>
+                    <canvas id="radarChart"></canvas>
                 </div>
                 
                 <div class="recommendations fade-in">
-                    <h3>Empfehlungen</h3>
+                    <h3>Ihre wichtigsten Handlungsempfehlungen</h3>
                     ${getRecommendations(scores, maxScores)}
                 </div>
                 
-                <div class="btn-group fade-in">
-                    <button class="btn btn-primary" onclick="submitResults()" data-testid="button-submit-results">
-                        Ergebnisse einreichen
+                <div class="cta-section fade-in">
+                    <h2 class="cta-heading">Möchten Sie Ihre Ergebnisse mit einem Experten besprechen?</h2>
+                    <p class="cta-text">Buchen Sie ein kostenloses 30-minütiges Strategiegespräch. Wir analysieren Ihre Ergebnisse im Detail und zeigen Ihnen konkrete nächste Schritte – ohne Verkaufsdruck, versprochen.</p>
+                    <a href="YOUR_CALENDLY_URL_HERE" target="_blank" class="btn-cta" data-testid="button-calendly-cta">
+                        Jetzt Assessment vom Experten kostenlos analysieren lassen und Fragen stellen
                         <span class="arrow">→</span>
-                    </button>
-                    <button class="btn btn-secondary" onclick="location.reload()" data-testid="button-restart">
-                        Neues Assessment
-                    </button>
+                    </a>
                 </div>
             `;
         }
@@ -1657,6 +1739,13 @@
             if (!canvas) return;
             
             const ctx = canvas.getContext('2d');
+            
+            // Make canvas responsive
+            const container = canvas.parentElement;
+            const size = Math.min(container.clientWidth - 40, 500);
+            canvas.width = size;
+            canvas.height = size;
+            
             const centerX = canvas.width / 2;
             const centerY = canvas.height / 2;
             const radius = Math.min(centerX, centerY) - 60;
@@ -1742,7 +1831,7 @@
                         </svg>
                     </div>
                     <h2 class="success-title">Vielen Dank!</h2>
-                    <p class="success-text">Ihre Ergebnisse wurden übermittelt.${state.answers['q_600'] === 'yes' ? ' Sie erhalten in Kürze Ihre ausführliche Analyse per E-Mail.' : ''}</p>
+                    <p class="success-text">Ihre Ergebnisse wurden gespeichert.</p>
                     <button class="btn btn-primary" onclick="location.reload()" data-testid="button-new-assessment">
                         Neues Assessment
                     </button>
@@ -1753,7 +1842,31 @@
         // Event Handlers
         function handleAnswer(questionId, value) {
             state.answers[questionId] = value;
+            
+            // Get the current question type to determine if we should auto-advance
+            const currentQuestion = getCurrentQuestion();
+            const shouldAutoAdvance = currentQuestion.type === 'single' || currentQuestion.type === 'yes_no';
+            
+            // Update visual state immediately
             render();
+            
+            // Auto-advance for single-choice questions
+            if (shouldAutoAdvance) {
+                const questionCard = document.querySelector('.question-card');
+                if (questionCard) {
+                    questionCard.classList.add('fade-out');
+                }
+                
+                setTimeout(() => {
+                    if (state.currentQuestionIndex < getVisibleQuestions().length - 1) {
+                        state.currentQuestionIndex++;
+                        render();
+                        window.scrollTo(0, 0);
+                    } else {
+                        showResults();
+                    }
+                }, 300);
+            }
         }
         
         function startAssessment() {
@@ -1768,11 +1881,6 @@
             
             const isAnswered = state.answers[currentQ.id] !== undefined && state.answers[currentQ.id] !== '';
             if (!isAnswered && currentQ.required !== false) return;
-            
-            // If this was q_600 and they selected 'yes', we need to reload visible questions
-            if (currentQ.id === 'q_600') {
-                render();
-            }
             
             if (state.currentQuestionIndex < getVisibleQuestions().length - 1) {
                 state.currentQuestionIndex++;
@@ -1796,6 +1904,15 @@
             render();
             setTimeout(() => {
                 drawRadarChart();
+                
+                // Add resize handler for responsive chart
+                let resizeTimeout;
+                window.addEventListener('resize', () => {
+                    clearTimeout(resizeTimeout);
+                    resizeTimeout = setTimeout(() => {
+                        drawRadarChart();
+                    }, 250);
+                });
             }, 100);
         }
         
