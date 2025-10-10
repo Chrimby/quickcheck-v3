@@ -8,34 +8,29 @@
     
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <!-- Fallback Font - Ersetzen Sie mit Ihren area Fonts -->
-    <link href="https://fonts.googleapis.com/css2?family=Work+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
     
     <style>
         /* CSS Custom Properties */
         :root {
-            --color-black: #000000;
-            --color-white: #FFFFFF;
-            --color-yellow: #f7e74f;
+            --color-black: #0a0a0a;
+            --color-white: #ffffff;
+            --color-accent: #f7e74f;
+            --color-gray-50: #fafafa;
             --color-gray-100: #f5f5f5;
             --color-gray-200: #e5e5e5;
             --color-gray-300: #d4d4d4;
+            --color-gray-400: #a3a3a3;
+            --color-gray-500: #737373;
+            --color-gray-600: #525252;
             --color-gray-700: #404040;
             --color-gray-800: #262626;
             --color-gray-900: #171717;
             
-            --font-normal: 'Work Sans', -apple-system, BlinkMacSystemFont, sans-serif;
-            --font-extended: 'Work Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+            --font-base: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
             
-            --radius-sm: 12px;
-            --radius-md: 20px;
-            --radius-lg: 32px;
-            --radius-xl: 48px;
-            --radius-full: 9999px;
-            
-            --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.08);
-            --shadow-md: 0 4px 16px rgba(0, 0, 0, 0.12);
-            --shadow-lg: 0 8px 32px rgba(0, 0, 0, 0.16);
+            --radius: 8px;
+            --border: 1px solid var(--color-gray-200);
         }
         
         /* Reset & Base */
@@ -46,42 +41,43 @@
         }
         
         body {
-            font-family: var(--font-normal);
+            font-family: var(--font-base);
             background: var(--color-white);
             color: var(--color-black);
             line-height: 1.6;
             overflow-x: hidden;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
         }
         
         /* Typography */
         h1, h2, h3 {
-            font-family: var(--font-extended);
-            font-weight: 800;
+            font-weight: 600;
             line-height: 1.2;
-            letter-spacing: -0.02em;
+            letter-spacing: -0.025em;
         }
         
         h1 {
-            font-size: clamp(2rem, 5vw, 3.5rem);
+            font-size: clamp(2rem, 4vw, 2.5rem);
         }
         
         h2 {
-            font-size: clamp(1.75rem, 4vw, 2.5rem);
+            font-size: clamp(1.5rem, 3vw, 2rem);
         }
         
         h3 {
-            font-size: clamp(1.25rem, 3vw, 1.75rem);
+            font-size: clamp(1.125rem, 2vw, 1.5rem);
         }
         
         /* Container */
         .container {
-            max-width: 800px;
+            max-width: 680px;
             margin: 0 auto;
             padding: 2rem 1.5rem;
         }
         
         .container-wide {
-            max-width: 1200px;
+            max-width: 1000px;
             margin: 0 auto;
             padding: 2rem 1.5rem;
         }
@@ -93,29 +89,27 @@
             left: 0;
             right: 0;
             background: var(--color-white);
-            border-bottom: 2px solid var(--color-gray-200);
+            border-bottom: var(--border);
             z-index: 100;
             padding: 1rem 0;
         }
         
         .progress-container {
-            max-width: 800px;
+            max-width: 680px;
             margin: 0 auto;
             padding: 0 1.5rem;
         }
         
         .progress-bar {
-            height: 8px;
+            height: 2px;
             background: var(--color-gray-200);
-            border-radius: var(--radius-full);
             overflow: hidden;
             margin-bottom: 0.75rem;
         }
         
         .progress-fill {
             height: 100%;
-            background: var(--color-yellow);
-            border-radius: var(--radius-full);
+            background: var(--color-black);
             transition: width 0.4s cubic-bezier(0.4, 0, 0.2, 1);
         }
         
@@ -123,83 +117,66 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
-            font-size: 0.875rem;
-            color: var(--color-gray-700);
+            font-size: 0.8125rem;
+            color: var(--color-gray-500);
         }
         
-        .progress-steps {
-            display: flex;
-            gap: 0.5rem;
-            flex-wrap: wrap;
-        }
-        
-        .progress-step {
-            font-size: 0.75rem;
-            padding: 0.25rem 0.75rem;
-            border-radius: var(--radius-full);
-            background: var(--color-gray-200);
-            transition: all 0.3s ease;
-        }
-        
-        .progress-step.active {
-            background: var(--color-yellow);
+        .progress-label {
+            font-weight: 500;
             color: var(--color-black);
-            font-weight: 600;
-        }
-        
-        .progress-step.completed {
-            background: var(--color-black);
-            color: var(--color-white);
         }
         
         /* Main Content */
         .main-content {
-            margin-top: 120px;
+            margin-top: 100px;
             min-height: calc(100vh - 200px);
         }
         
         /* Welcome Screen */
         .welcome-screen {
             text-align: center;
-            padding: 4rem 0;
+            padding: 6rem 0 4rem;
         }
         
         .welcome-screen h1 {
-            margin-bottom: 1.5rem;
+            margin-bottom: 1rem;
         }
         
         .welcome-subtitle {
-            font-size: 1.25rem;
-            color: var(--color-gray-700);
-            margin-bottom: 1rem;
+            font-size: 1rem;
+            color: var(--color-gray-600);
+            margin-bottom: 0.5rem;
+            font-weight: 400;
         }
         
         .welcome-duration {
             display: inline-flex;
             align-items: center;
-            gap: 0.5rem;
-            padding: 0.5rem 1.5rem;
-            background: var(--color-gray-100);
-            border-radius: var(--radius-full);
-            font-size: 0.875rem;
+            gap: 0.375rem;
+            padding: 0.375rem 0.875rem;
+            background: var(--color-gray-50);
+            border: var(--border);
+            border-radius: var(--radius);
+            font-size: 0.8125rem;
+            color: var(--color-gray-600);
             margin-bottom: 3rem;
         }
         
         /* Question Card */
         .question-card {
             background: var(--color-white);
-            border: 2px solid var(--color-gray-200);
-            border-radius: var(--radius-lg);
-            padding: 3rem 2.5rem;
-            margin-bottom: 2rem;
+            border: var(--border);
+            border-radius: var(--radius);
+            padding: 2.5rem 2rem;
+            margin-bottom: 1.5rem;
             opacity: 0;
-            animation: fadeInUp 0.5s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+            animation: fadeInUp 0.4s cubic-bezier(0.4, 0, 0.2, 1) forwards;
         }
         
         @keyframes fadeInUp {
             from {
                 opacity: 0;
-                transform: translateY(20px);
+                transform: translateY(12px);
             }
             to {
                 opacity: 1;
@@ -209,127 +186,145 @@
         
         .question-number {
             display: inline-block;
-            font-size: 0.875rem;
-            font-weight: 600;
-            color: var(--color-gray-700);
-            margin-bottom: 1rem;
+            font-size: 0.8125rem;
+            font-weight: 500;
+            color: var(--color-gray-500);
+            margin-bottom: 0.75rem;
         }
         
         .question-text {
-            font-family: var(--font-extended);
-            font-size: 1.5rem;
-            font-weight: 700;
-            margin-bottom: 2rem;
+            font-size: 1.25rem;
+            font-weight: 500;
+            margin-bottom: 1.5rem;
             color: var(--color-black);
+            line-height: 1.4;
         }
         
         .question-hint {
             font-size: 0.875rem;
-            color: var(--color-gray-700);
-            margin-top: -1rem;
-            margin-bottom: 1.5rem;
+            color: var(--color-gray-500);
+            margin-top: -0.75rem;
+            margin-bottom: 1.25rem;
         }
         
         /* Options */
         .options {
             display: flex;
             flex-direction: column;
-            gap: 1rem;
+            gap: 0.5rem;
         }
         
         .option {
             position: relative;
             display: flex;
             align-items: center;
-            padding: 1.25rem 1.5rem;
-            background: var(--color-gray-100);
-            border: 2px solid transparent;
-            border-radius: var(--radius-md);
+            padding: 0.875rem 1rem;
+            background: var(--color-white);
+            border: var(--border);
+            border-radius: var(--radius);
             cursor: pointer;
-            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            transition: all 0.15s ease;
         }
         
         .option:hover {
-            background: var(--color-gray-200);
-            transform: translateX(4px);
+            background: var(--color-gray-50);
+            border-color: var(--color-gray-300);
+        }
+        
+        .option.selected {
+            background: var(--color-gray-50);
+            border-color: var(--color-black);
         }
         
         .option input[type="radio"],
         .option input[type="checkbox"] {
             position: absolute;
             opacity: 0;
+            cursor: pointer;
         }
         
-        .option input:checked + .option-content {
-            font-weight: 600;
-        }
-        
-        .option input:checked ~ .option-indicator {
-            background: var(--color-yellow);
-            border-color: var(--color-yellow);
-        }
-        
-        .option input:checked ~ .option-indicator::after {
-            opacity: 1;
-            transform: scale(1);
-        }
-        
-        .option.selected {
-            background: var(--color-yellow);
-            border-color: var(--color-black);
-        }
-        
-        .option-indicator {
-            width: 24px;
-            height: 24px;
-            border: 2px solid var(--color-gray-300);
+        .option-radio,
+        .option-checkbox {
+            width: 18px;
+            height: 18px;
+            border: var(--border);
             border-radius: 50%;
-            margin-right: 1rem;
-            position: relative;
-            transition: all 0.3s ease;
+            margin-right: 0.75rem;
             flex-shrink: 0;
+            transition: all 0.15s ease;
         }
         
-        .option-indicator::after {
+        .option-checkbox {
+            border-radius: 4px;
+        }
+        
+        .option:hover .option-radio,
+        .option:hover .option-checkbox {
+            border-color: var(--color-gray-400);
+        }
+        
+        .option.selected .option-radio,
+        .option.selected .option-checkbox {
+            border-color: var(--color-black);
+            background: var(--color-black);
+            position: relative;
+        }
+        
+        .option.selected .option-radio::after {
             content: '';
             position: absolute;
             top: 50%;
             left: 50%;
-            width: 10px;
-            height: 10px;
-            background: var(--color-black);
+            transform: translate(-50%, -50%);
+            width: 6px;
+            height: 6px;
+            background: var(--color-white);
             border-radius: 50%;
-            transform: translate(-50%, -50%) scale(0);
-            opacity: 0;
-            transition: all 0.3s ease;
         }
         
-        .option-content {
-            flex: 1;
-            font-size: 1rem;
+        .option.selected .option-checkbox::after {
+            content: '✓';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            color: var(--color-white);
+            font-size: 12px;
+            line-height: 1;
+        }
+        
+        .option-label {
+            font-size: 0.9375rem;
+            color: var(--color-black);
+            font-weight: 400;
+        }
+        
+        .option.selected .option-label {
+            font-weight: 500;
         }
         
         /* Text Input */
+        .text-input-wrapper {
+            margin-top: 0.5rem;
+        }
+        
         .text-input {
             width: 100%;
-            padding: 1rem 1.5rem;
-            font-size: 1rem;
-            font-family: var(--font-normal);
-            background: var(--color-gray-100);
-            border: 2px solid transparent;
-            border-radius: var(--radius-md);
-            transition: all 0.3s ease;
+            padding: 0.75rem 1rem;
+            font-size: 0.9375rem;
+            font-family: var(--font-base);
+            border: var(--border);
+            border-radius: var(--radius);
+            outline: none;
+            transition: border-color 0.15s ease;
         }
         
         .text-input:focus {
-            outline: none;
-            background: var(--color-white);
-            border-color: var(--color-yellow);
+            border-color: var(--color-gray-400);
         }
         
-        textarea.text-input {
-            min-height: 120px;
-            resize: vertical;
+        .text-input::placeholder {
+            color: var(--color-gray-400);
         }
         
         /* Buttons */
@@ -337,393 +332,680 @@
             display: inline-flex;
             align-items: center;
             justify-content: center;
-            gap: 1rem;
-            padding: 1.25rem 3rem;
-            font-family: var(--font-normal);
-            font-size: 1.125rem;
-            font-weight: 600;
+            gap: 0.5rem;
+            padding: 0.75rem 1.5rem;
+            font-size: 0.9375rem;
+            font-weight: 500;
+            font-family: var(--font-base);
             border: none;
-            border-radius: var(--radius-full);
+            border-radius: var(--radius);
             cursor: pointer;
-            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            transition: all 0.15s ease;
             text-decoration: none;
         }
         
         .btn-primary {
             background: var(--color-black);
             color: var(--color-white);
-            position: relative;
-            overflow: hidden;
         }
         
-        .btn-primary::before {
-            content: '';
-            position: absolute;
-            right: 1.5rem;
-            top: 50%;
-            transform: translateY(-50%);
-            width: 40px;
-            height: 40px;
-            background: var(--color-yellow);
-            border-radius: 50%;
-            transition: all 0.3s ease;
+        .btn-primary:hover:not(:disabled) {
+            background: var(--color-gray-800);
         }
         
-        .btn-primary .arrow {
-            position: relative;
-            z-index: 1;
-            margin-left: auto;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            width: 24px;
-            height: 24px;
-        }
-        
-        .btn-primary:hover {
-            transform: translateY(-2px);
-            box-shadow: var(--shadow-md);
-        }
-        
-        .btn-primary:hover::before {
-            width: 100%;
-            right: 0;
-            border-radius: var(--radius-full);
+        .btn-primary:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
         }
         
         .btn-secondary {
-            background: transparent;
+            background: var(--color-white);
             color: var(--color-black);
-            border: 2px solid var(--color-gray-300);
+            border: var(--border);
         }
         
         .btn-secondary:hover {
-            border-color: var(--color-black);
-            transform: translateX(-4px);
+            background: var(--color-gray-50);
         }
         
         .btn-group {
             display: flex;
-            gap: 1rem;
-            margin-top: 2rem;
+            gap: 0.75rem;
+            margin-top: 1.5rem;
         }
         
-        .btn:disabled {
-            opacity: 0.5;
-            cursor: not-allowed;
-            transform: none !important;
+        .arrow {
+            font-size: 1rem;
+            transition: transform 0.15s ease;
         }
         
-        /* Results Page */
-        .results-screen {
-            padding: 2rem 0;
+        .btn:hover .arrow {
+            transform: translateX(2px);
         }
         
-        .results-hero {
+        /* Results */
+        .results-header {
             text-align: center;
-            padding: 4rem 2rem;
-            background: var(--color-black);
-            color: var(--color-white);
-            border-radius: var(--radius-xl);
-            margin-bottom: 3rem;
-            position: relative;
-            overflow: hidden;
-        }
-        
-        .results-hero::before {
-            content: '';
-            position: absolute;
-            top: -50%;
-            right: -10%;
-            width: 400px;
-            height: 400px;
-            background: var(--color-yellow);
-            border-radius: 50%;
-            opacity: 0.1;
-        }
-        
-        .score-circle {
-            width: 200px;
-            height: 200px;
-            margin: 0 auto 2rem;
-            position: relative;
-        }
-        
-        .score-number {
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            font-family: var(--font-extended);
-            font-size: 4rem;
-            font-weight: 800;
-        }
-        
-        .score-label {
-            font-size: 1.25rem;
-            color: var(--color-gray-300);
-            margin-bottom: 1rem;
-        }
-        
-        .score-interpretation {
-            font-size: 1.5rem;
-            font-weight: 700;
-            color: var(--color-yellow);
-        }
-        
-        /* Phase Scores */
-        .phase-scores {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 1.5rem;
             margin-bottom: 3rem;
         }
         
-        .phase-card {
-            background: var(--color-white);
-            border: 2px solid var(--color-gray-200);
-            border-radius: var(--radius-lg);
-            padding: 2rem;
-            transition: all 0.3s ease;
-        }
-        
-        .phase-card:hover {
-            border-color: var(--color-yellow);
-            transform: translateY(-4px);
-            box-shadow: var(--shadow-md);
-        }
-        
-        .phase-name {
-            font-size: 0.875rem;
-            font-weight: 600;
-            text-transform: uppercase;
-            letter-spacing: 0.05em;
-            color: var(--color-gray-700);
+        .results-header h1 {
             margin-bottom: 0.5rem;
         }
         
-        .phase-score {
-            font-family: var(--font-extended);
-            font-size: 2.5rem;
-            font-weight: 800;
+        .results-subtitle {
+            font-size: 1rem;
+            color: var(--color-gray-600);
+        }
+        
+        .results-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 1rem;
+            margin-bottom: 2rem;
+        }
+        
+        .score-card {
+            background: var(--color-white);
+            border: var(--border);
+            border-radius: var(--radius);
+            padding: 1.5rem;
+        }
+        
+        .score-card-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: start;
+            margin-bottom: 1rem;
+        }
+        
+        .score-card-title {
+            font-size: 0.875rem;
+            font-weight: 500;
+            color: var(--color-gray-600);
+        }
+        
+        .score-value {
+            font-size: 1.75rem;
+            font-weight: 600;
+            color: var(--color-black);
+        }
+        
+        .score-max {
+            font-size: 1rem;
+            color: var(--color-gray-400);
+            font-weight: 400;
+        }
+        
+        .score-bar {
+            height: 4px;
+            background: var(--color-gray-200);
+            border-radius: 2px;
+            overflow: hidden;
+            margin-bottom: 0.5rem;
+        }
+        
+        .score-bar-fill {
+            height: 100%;
+            background: var(--color-black);
+            transition: width 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        
+        .score-percentage {
+            font-size: 0.8125rem;
+            color: var(--color-gray-500);
+        }
+        
+        /* Chart */
+        .chart-container {
+            background: var(--color-white);
+            border: var(--border);
+            border-radius: var(--radius);
+            padding: 2rem;
+            margin-bottom: 2rem;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        
+        #radarChart {
+            max-width: 100%;
+            height: auto;
+        }
+        
+        /* Recommendations */
+        .recommendations {
+            background: var(--color-gray-50);
+            border: var(--border);
+            border-radius: var(--radius);
+            padding: 2rem;
+            margin-bottom: 2rem;
+        }
+        
+        .recommendations h3 {
+            font-size: 1.125rem;
+            margin-bottom: 1rem;
+        }
+        
+        .recommendation-item {
+            padding: 1rem 0;
+            border-bottom: var(--border);
+        }
+        
+        .recommendation-item:last-child {
+            border-bottom: none;
+        }
+        
+        .recommendation-title {
+            font-weight: 500;
+            margin-bottom: 0.25rem;
+            color: var(--color-black);
+        }
+        
+        .recommendation-text {
+            font-size: 0.9375rem;
+            color: var(--color-gray-600);
+            line-height: 1.5;
+        }
+        
+        /* Contact Form */
+        .contact-form {
+            background: var(--color-white);
+            border: var(--border);
+            border-radius: var(--radius);
+            padding: 2rem;
+            margin-bottom: 2rem;
+        }
+        
+        .form-group {
+            margin-bottom: 1.25rem;
+        }
+        
+        .form-label {
+            display: block;
+            font-size: 0.875rem;
+            font-weight: 500;
             color: var(--color-black);
             margin-bottom: 0.5rem;
         }
         
-        .phase-bar {
-            height: 8px;
-            background: var(--color-gray-200);
-            border-radius: var(--radius-full);
-            overflow: hidden;
-            margin-bottom: 0.5rem;
+        .form-input {
+            width: 100%;
+            padding: 0.75rem 1rem;
+            font-size: 0.9375rem;
+            font-family: var(--font-base);
+            border: var(--border);
+            border-radius: var(--radius);
+            outline: none;
+            transition: border-color 0.15s ease;
         }
         
-        .phase-bar-fill {
-            height: 100%;
-            background: var(--color-yellow);
-            border-radius: var(--radius-full);
-            transition: width 1s cubic-bezier(0.4, 0, 0.2, 1);
+        .form-input:focus {
+            border-color: var(--color-gray-400);
         }
         
-        .phase-interpretation {
-            font-size: 0.875rem;
-            color: var(--color-gray-700);
+        .form-textarea {
+            min-height: 100px;
+            resize: vertical;
         }
         
-        /* Insights */
-        .insights-section {
-            margin-bottom: 3rem;
-        }
-        
-        .insights-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 2rem;
-        }
-        
-        .insight-card {
-            background: var(--color-gray-100);
-            border-radius: var(--radius-lg);
-            padding: 2rem;
-        }
-        
-        .insight-card h3 {
-            margin-bottom: 1rem;
+        .checkbox-wrapper {
             display: flex;
-            align-items: center;
+            align-items: start;
             gap: 0.75rem;
         }
         
-        .insight-icon {
-            width: 32px;
-            height: 32px;
-            background: var(--color-yellow);
-            border-radius: var(--radius-sm);
+        .checkbox-input {
+            width: 18px;
+            height: 18px;
+            border: var(--border);
+            border-radius: 4px;
+            cursor: pointer;
+            flex-shrink: 0;
+            margin-top: 2px;
+        }
+        
+        .checkbox-label {
+            font-size: 0.875rem;
+            color: var(--color-gray-600);
+            line-height: 1.5;
+        }
+        
+        /* Success Message */
+        .success-container {
+            text-align: center;
+            padding: 6rem 0;
+        }
+        
+        .success-icon {
+            width: 64px;
+            height: 64px;
+            background: var(--color-gray-50);
+            border: var(--border);
+            border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-weight: 800;
+            margin: 0 auto 1.5rem;
         }
         
-        .insight-list {
-            list-style: none;
+        .success-icon svg {
+            width: 32px;
+            height: 32px;
+            stroke: var(--color-black);
         }
         
-        .insight-list li {
-            padding: 0.75rem 0;
-            padding-left: 1.5rem;
-            position: relative;
+        .success-title {
+            margin-bottom: 0.75rem;
         }
         
-        .insight-list li::before {
-            content: '';
-            position: absolute;
-            left: 0;
-            top: 1.25rem;
-            width: 6px;
-            height: 6px;
-            background: var(--color-yellow);
-            border-radius: 50%;
-        }
-        
-        /* Decorative Shapes */
-        .shape {
-            position: absolute;
-            opacity: 0.15;
-            z-index: 0;
-            pointer-events: none;
-        }
-        
-        .shape-circle {
-            border-radius: 50%;
-            background: var(--color-yellow);
-        }
-        
-        .shape-square {
-            background: var(--color-yellow);
-            transform: rotate(45deg);
-        }
-        
-        .shape-blob {
-            background: var(--color-yellow);
-            border-radius: 30% 70% 70% 30% / 30% 30% 70% 70%;
-            animation: blobMove 8s ease-in-out infinite;
-        }
-        
-        @keyframes blobMove {
-            0%, 100% { border-radius: 30% 70% 70% 30% / 30% 30% 70% 70%; }
-            25% { border-radius: 58% 42% 75% 25% / 76% 46% 54% 24%; }
-            50% { border-radius: 50% 50% 33% 67% / 55% 27% 73% 45%; }
-            75% { border-radius: 33% 67% 58% 42% / 63% 68% 32% 37%; }
-        }
-        
-        .shapes-container {
-            position: fixed;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            overflow: hidden;
-            pointer-events: none;
-            z-index: 0;
-        }
-        
-        .main-content {
-            position: relative;
-            z-index: 1;
-        }
-        
-        /* Loading */
-        .loading {
-            text-align: center;
-            padding: 3rem;
-        }
-        
-        .spinner {
-            width: 50px;
-            height: 50px;
-            border: 4px solid var(--color-gray-200);
-            border-top-color: var(--color-yellow);
-            border-radius: 50%;
-            animation: spin 1s linear infinite;
-            margin: 0 auto 1rem;
-        }
-        
-        @keyframes spin {
-            to { transform: rotate(360deg); }
-        }
-        
-        /* Hidden */
-        .hidden {
-            display: none !important;
+        .success-text {
+            font-size: 1rem;
+            color: var(--color-gray-600);
+            margin-bottom: 2rem;
         }
         
         /* Responsive */
         @media (max-width: 640px) {
+            .container,
+            .progress-container {
+                padding: 0 1rem;
+            }
+            
+            .question-card {
+                padding: 2rem 1.5rem;
+            }
+            
             .btn-group {
-                flex-direction: column-reverse;
+                flex-direction: column;
             }
             
             .btn {
                 width: 100%;
             }
             
-            .progress-steps {
-                display: none;
-            }
-            
-            .phase-scores {
+            .results-grid {
                 grid-template-columns: 1fr;
             }
         }
+        
+        /* Utilities */
+        .hidden {
+            display: none;
+        }
+        
+        .fade-in {
+            animation: fadeIn 0.4s ease;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
     </style>
-</head>
-<body>
-    <!-- Decorative Shapes -->
-    <div class="shapes-container">
-        <div class="shape shape-circle" style="width: 300px; height: 300px; top: -150px; right: -100px;"></div>
-        <div class="shape shape-blob" style="width: 200px; height: 200px; bottom: 10%; left: 5%;"></div>
-        <div class="shape shape-square" style="width: 150px; height: 150px; top: 40%; right: 10%;"></div>
-        <div class="shape shape-circle" style="width: 100px; height: 100px; bottom: 30%; right: 20%;"></div>
-    </div>
-
-    <!-- Progress Bar -->
-    <div class="progress-wrapper">
-        <div class="progress-container">
-            <div class="progress-bar">
-                <div class="progress-fill" id="progressFill"></div>
-            </div>
-            <div class="progress-text">
-                <span id="progressPercentage">0%</span>
-                <div class="progress-steps" id="progressSteps"></div>
-            </div>
-        </div>
-    </div>
-
-    <!-- Main Content -->
-    <div class="main-content">
-        <div class="container" id="appContainer">
-            <!-- Content will be dynamically inserted here -->
-        </div>
-    </div>
-
+    
     <script>
-        // Configuration
         const CONFIG = {
             webhookUrl: 'YOUR_WEBHOOK_URL_HERE', // Replace with your webhook URL
-            sections: [
-                { id: 'context', title: 'Kontext', phase: null },
-                { id: 'reach', title: 'Reach', phase: 'Phase 1' },
-                { id: 'relate', title: 'Relate', phase: 'Phase 2' },
-                { id: 'respond', title: 'Respond', phase: 'Phase 3' },
-                { id: 'retain', title: 'Retain', phase: 'Phase 4' },
-                { id: 'final', title: 'Abschluss', phase: null },
-                { id: 'optin', title: 'Analyse', phase: null },
+            questions: [
+                // Context Questions (No points)
+                {
+                    id: 'q_001',
+                    section: 'context',
+                    text: 'Wie viele Mitarbeiter hat Ihr Unternehmen?',
+                    type: 'single',
+                    options: [
+                        { value: '1-10', label: '1-10 Mitarbeiter', score: 0 },
+                        { value: '11-50', label: '11-50 Mitarbeiter', score: 0 },
+                        { value: '51-200', label: '51-200 Mitarbeiter', score: 0 },
+                        { value: '201-500', label: '201-500 Mitarbeiter', score: 0 },
+                        { value: '500+', label: 'Über 500 Mitarbeiter', score: 0 }
+                    ]
+                },
+                {
+                    id: 'q_002',
+                    section: 'context',
+                    text: 'Wie viele qualifizierte Leads generieren Sie monatlich?',
+                    type: 'single',
+                    options: [
+                        { value: '0-10', label: '0-10 Leads', score: 0 },
+                        { value: '11-50', label: '11-50 Leads', score: 0 },
+                        { value: '51-100', label: '51-100 Leads', score: 0 },
+                        { value: '100-500', label: '100-500 Leads', score: 0 },
+                        { value: '500+', label: 'Über 500 Leads', score: 0 }
+                    ]
+                },
+                {
+                    id: 'q_003',
+                    section: 'context',
+                    text: 'Was sind Ihre größten Herausforderungen im B2B Marketing?',
+                    hint: 'Wählen Sie alle zutreffenden Optionen',
+                    type: 'multiple',
+                    options: [
+                        { value: 'leadgen', label: 'Lead-Generierung', score: 0 },
+                        { value: 'qualify', label: 'Lead-Qualifizierung', score: 0 },
+                        { value: 'content', label: 'Content-Produktion', score: 0 },
+                        { value: 'channels', label: 'Kanal-Auswahl', score: 0 },
+                        { value: 'measurement', label: 'Performance-Messung', score: 0 },
+                        { value: 'budget', label: 'Budget-Optimierung', score: 0 }
+                    ]
+                },
+                
+                // REACH Phase (35 points total)
+                {
+                    id: 'q_101',
+                    section: 'reach',
+                    text: 'Haben Sie definierte Buyer Personas für Ihre Zielgruppe?',
+                    type: 'single',
+                    options: [
+                        { value: 'none', label: 'Nein, noch nicht definiert', score: 0 },
+                        { value: 'basic', label: 'Ja, grundlegende Personas', score: 2 },
+                        { value: 'detailed', label: 'Ja, detaillierte Personas mit Research', score: 5 }
+                    ]
+                },
+                {
+                    id: 'q_102',
+                    section: 'reach',
+                    text: 'Nutzen Sie bezahlte Werbung (Google Ads, LinkedIn Ads, etc.)?',
+                    type: 'single',
+                    options: [
+                        { value: 'none', label: 'Nein', score: 0 },
+                        { value: 'testing', label: 'Ja, vereinzelt im Testing', score: 2 },
+                        { value: 'active', label: 'Ja, aktive Kampagnen mit Tracking', score: 4 },
+                        { value: 'optimized', label: 'Ja, kontinuierlich optimiert', score: 5 }
+                    ]
+                },
+                {
+                    id: 'q_103',
+                    section: 'reach',
+                    text: 'Wie präsent ist Ihr Unternehmen in relevanten Online-Kanälen?',
+                    type: 'single',
+                    options: [
+                        { value: 'minimal', label: 'Kaum präsent', score: 0 },
+                        { value: 'selective', label: 'In ausgewählten Kanälen', score: 3 },
+                        { value: 'active', label: 'Aktiv in mehreren Kanälen', score: 5 }
+                    ]
+                },
+                {
+                    id: 'q_104',
+                    section: 'reach',
+                    text: 'Haben Sie eine SEO-Strategie für organische Reichweite?',
+                    type: 'single',
+                    options: [
+                        { value: 'none', label: 'Nein', score: 0 },
+                        { value: 'basic', label: 'Grundlegende Optimierung', score: 2 },
+                        { value: 'strategic', label: 'Strategische SEO mit Content-Plan', score: 5 }
+                    ]
+                },
+                {
+                    id: 'q_105',
+                    section: 'reach',
+                    text: 'Nutzen Sie Account-Based Marketing (ABM) Ansätze?',
+                    type: 'single',
+                    options: [
+                        { value: 'none', label: 'Nein', score: 0 },
+                        { value: 'planned', label: 'In Planung', score: 2 },
+                        { value: 'active', label: 'Ja, aktiv im Einsatz', score: 5 }
+                    ]
+                },
+                {
+                    id: 'q_106',
+                    section: 'reach',
+                    text: 'Wie messen Sie die Reichweite Ihrer Marketing-Aktivitäten?',
+                    type: 'single',
+                    options: [
+                        { value: 'none', label: 'Gar nicht', score: 0 },
+                        { value: 'basic', label: 'Basis-Metriken (Traffic, Impressions)', score: 2 },
+                        { value: 'advanced', label: 'Multi-Touch Attribution & ROI-Tracking', score: 5 }
+                    ]
+                },
+                {
+                    id: 'q_107',
+                    section: 'reach',
+                    text: 'Haben Sie Partnerschaften oder Co-Marketing-Aktivitäten?',
+                    type: 'single',
+                    options: [
+                        { value: 'none', label: 'Nein', score: 0 },
+                        { value: 'few', label: 'Vereinzelt', score: 3 },
+                        { value: 'strategic', label: 'Strategische Partnerschaften', score: 6 }
+                    ]
+                },
+                
+                // RELATE Phase (32 points total)
+                {
+                    id: 'q_201',
+                    section: 'relate',
+                    text: 'Produzieren Sie regelmäßig Content für Ihre Zielgruppe?',
+                    type: 'single',
+                    options: [
+                        { value: 'rarely', label: 'Selten oder unregelmäßig', score: 0 },
+                        { value: 'monthly', label: 'Monatlich', score: 2 },
+                        { value: 'weekly', label: 'Wöchentlich mit Content-Plan', score: 5 }
+                    ]
+                },
+                {
+                    id: 'q_202',
+                    section: 'relate',
+                    text: 'Wie personalisiert ist Ihre Kommunikation mit Interessenten?',
+                    type: 'single',
+                    options: [
+                        { value: 'generic', label: 'Generische Massenkommunikation', score: 0 },
+                        { value: 'segmented', label: 'Segmentierte Ansprache', score: 3 },
+                        { value: 'personalized', label: 'Personalisiert nach Buyer Journey', score: 5 }
+                    ]
+                },
+                {
+                    id: 'q_203',
+                    section: 'relate',
+                    text: 'Nutzen Sie Marketing Automation?',
+                    type: 'single',
+                    options: [
+                        { value: 'none', label: 'Nein', score: 0 },
+                        { value: 'basic', label: 'Basis-Automation (z.B. Newsletter)', score: 2 },
+                        { value: 'advanced', label: 'Fortgeschrittene Workflows & Nurturing', score: 5 }
+                    ]
+                },
+                {
+                    id: 'q_204',
+                    section: 'relate',
+                    text: 'Wie gut kennen Sie die Bedürfnisse Ihrer Zielgruppe?',
+                    type: 'single',
+                    options: [
+                        { value: 'assumptions', label: 'Basierend auf Annahmen', score: 0 },
+                        { value: 'feedback', label: 'Durch Feedback und Analysen', score: 3 },
+                        { value: 'research', label: 'Kontinuierliche Marktforschung', score: 5 }
+                    ]
+                },
+                {
+                    id: 'q_205',
+                    section: 'relate',
+                    text: 'Welche Content-Formate nutzen Sie?',
+                    hint: 'Wählen Sie alle zutreffenden Optionen',
+                    type: 'multiple',
+                    options: [
+                        { value: 'blog', label: 'Blog-Artikel', score: 1 },
+                        { value: 'video', label: 'Videos', score: 1 },
+                        { value: 'webinar', label: 'Webinare', score: 1 },
+                        { value: 'whitepaper', label: 'Whitepapers/E-Books', score: 1 },
+                        { value: 'case', label: 'Case Studies', score: 1 },
+                        { value: 'podcast', label: 'Podcast', score: 1 }
+                    ]
+                },
+                {
+                    id: 'q_206',
+                    section: 'relate',
+                    text: 'Wie oft interagieren Sie mit Ihrer Community (Social Media, Events)?',
+                    type: 'single',
+                    options: [
+                        { value: 'rarely', label: 'Selten', score: 0 },
+                        { value: 'monthly', label: 'Monatlich', score: 3 },
+                        { value: 'weekly', label: 'Wöchentlich oder öfter', score: 5 }
+                    ]
+                },
+                {
+                    id: 'q_207',
+                    section: 'relate',
+                    text: 'Haben Sie ein CRM-System zur Kontaktverwaltung?',
+                    type: 'single',
+                    options: [
+                        { value: 'none', label: 'Nein', score: 0 },
+                        { value: 'basic', label: 'Ja, grundlegende Nutzung', score: 2 },
+                        { value: 'integrated', label: 'Ja, vollständig integriert mit Marketing', score: 5 }
+                    ]
+                },
+                
+                // RESPOND Phase (27 points total)
+                {
+                    id: 'q_301',
+                    section: 'respond',
+                    text: 'Wie schnell reagieren Sie auf eingehende Anfragen?',
+                    type: 'single',
+                    options: [
+                        { value: 'days', label: 'Mehrere Tage', score: 0 },
+                        { value: '24h', label: 'Innerhalb von 24 Stunden', score: 3 },
+                        { value: 'hours', label: 'Innerhalb weniger Stunden', score: 5 }
+                    ]
+                },
+                {
+                    id: 'q_302',
+                    section: 'respond',
+                    text: 'Haben Sie definierte Prozesse für Lead-Qualifizierung?',
+                    type: 'single',
+                    options: [
+                        { value: 'none', label: 'Nein, keine festen Prozesse', score: 0 },
+                        { value: 'basic', label: 'Grundlegende Qualifizierung', score: 2 },
+                        { value: 'scoring', label: 'Lead Scoring & automatisierte Prozesse', score: 5 }
+                    ]
+                },
+                {
+                    id: 'q_303',
+                    section: 'respond',
+                    text: 'Nutzen Sie Lead Nurturing Kampagnen?',
+                    type: 'single',
+                    options: [
+                        { value: 'none', label: 'Nein', score: 0 },
+                        { value: 'basic', label: 'Einfache E-Mail-Sequenzen', score: 3 },
+                        { value: 'advanced', label: 'Multi-Channel Nurturing-Strategie', score: 5 }
+                    ]
+                },
+                {
+                    id: 'q_304',
+                    section: 'respond',
+                    text: 'Wie gut ist die Zusammenarbeit zwischen Marketing und Vertrieb?',
+                    type: 'single',
+                    options: [
+                        { value: 'siloed', label: 'Getrennte Silos', score: 0 },
+                        { value: 'communication', label: 'Regelmäßige Abstimmung', score: 3 },
+                        { value: 'aligned', label: 'Vollständig abgestimmt (SLA)', score: 6 }
+                    ]
+                },
+                {
+                    id: 'q_305',
+                    section: 'respond',
+                    text: 'Tracken Sie die Conversion-Rate von Leads zu Kunden?',
+                    type: 'single',
+                    options: [
+                        { value: 'no', label: 'Nein', score: 0 },
+                        { value: 'manual', label: 'Ja, manuell', score: 2 },
+                        { value: 'automated', label: 'Ja, automatisiert mit Reporting', score: 5 }
+                    ]
+                },
+                {
+                    id: 'q_306',
+                    section: 'respond',
+                    text: 'Optimieren Sie kontinuierlich Ihre Conversion-Funnel?',
+                    type: 'single',
+                    options: [
+                        { value: 'no', label: 'Nein', score: 0 },
+                        { value: 'occasionally', label: 'Gelegentlich', score: 2 },
+                        { value: 'regularly', label: 'Regelmäßig mit A/B-Tests', score: 4 }
+                    ]
+                },
+                
+                // RETAIN Phase (27 points total)
+                {
+                    id: 'q_401',
+                    section: 'retain',
+                    text: 'Haben Sie ein Programm für Kundenbindung?',
+                    type: 'single',
+                    options: [
+                        { value: 'none', label: 'Nein', score: 0 },
+                        { value: 'basic', label: 'Grundlegende Maßnahmen', score: 3 },
+                        { value: 'strategic', label: 'Strategisches Retention-Programm', score: 5 }
+                    ]
+                },
+                {
+                    id: 'q_402',
+                    section: 'retain',
+                    text: 'Wie oft kommunizieren Sie mit Bestandskunden?',
+                    type: 'single',
+                    options: [
+                        { value: 'rarely', label: 'Selten', score: 0 },
+                        { value: 'quarterly', label: 'Quartalsweise', score: 3 },
+                        { value: 'regular', label: 'Regelmäßig mit Value-Content', score: 5 }
+                    ]
+                },
+                {
+                    id: 'q_403',
+                    section: 'retain',
+                    text: 'Messen Sie die Kundenzufriedenheit (NPS, CSAT)?',
+                    type: 'single',
+                    options: [
+                        { value: 'no', label: 'Nein', score: 0 },
+                        { value: 'occasionally', label: 'Gelegentlich', score: 2 },
+                        { value: 'regularly', label: 'Regelmäßig mit Follow-up', score: 5 }
+                    ]
+                },
+                {
+                    id: 'q_404',
+                    section: 'retain',
+                    text: 'Haben Sie ein Upselling/Cross-Selling Programm?',
+                    type: 'single',
+                    options: [
+                        { value: 'none', label: 'Nein', score: 0 },
+                        { value: 'adhoc', label: 'Ad-hoc Ansätze', score: 2 },
+                        { value: 'systematic', label: 'Systematischer Prozess', score: 5 }
+                    ]
+                },
+                {
+                    id: 'q_405',
+                    section: 'retain',
+                    text: 'Nutzen Sie Kunden als Referenzen oder Testimonials?',
+                    type: 'single',
+                    options: [
+                        { value: 'no', label: 'Nein', score: 0 },
+                        { value: 'few', label: 'Vereinzelt', score: 3 },
+                        { value: 'program', label: 'Strukturiertes Advocacy-Programm', score: 5 }
+                    ]
+                },
+                {
+                    id: 'q_406',
+                    section: 'retain',
+                    text: 'Tracken Sie die Customer Lifetime Value (CLV)?',
+                    type: 'single',
+                    options: [
+                        { value: 'no', label: 'Nein', score: 0 },
+                        { value: 'estimated', label: 'Geschätzt', score: 2 },
+                        { value: 'tracked', label: 'Präzise gemessen und optimiert', score: 5 }
+                    ]
+                },
+                
+                // Final Questions
+                {
+                    id: 'q_701',
+                    section: 'final',
+                    text: 'Möchten Sie eine detaillierte Analyse Ihrer Ergebnisse erhalten?',
+                    type: 'single',
+                    options: [
+                        { value: 'yes', label: 'Ja, ich möchte eine detaillierte Analyse', score: 0 },
+                        { value: 'no', label: 'Nein, nur die Ergebnisse ansehen', score: 0 }
+                    ]
+                }
             ]
         };
-
-        // Application State
-        const state = {
+        
+        // State Management
+        window.state = {
             currentQuestionIndex: 0,
             answers: {},
             scores: {
@@ -734,699 +1016,39 @@
                 total: 0
             },
             showWelcome: true,
+            showResults: false,
             showContact: false
         };
-
-        // Questions Data (converted from XML)
-        const questions = [
-            // Context
-            {
-                id: 'q_001',
-                section: 'context',
-                type: 'single_choice',
-                text: 'Wie viele Mitarbeiter hat Ihr Unternehmen?',
-                options: [
-                    { value: '1-10', label: '1-10 Mitarbeiter' },
-                    { value: '11-25', label: '11-25 Mitarbeiter' },
-                    { value: '26-50', label: '26-50 Mitarbeiter' },
-                    { value: '51-100', label: '51-100 Mitarbeiter' },
-                    { value: '101-250', label: '101-250 Mitarbeiter' },
-                    { value: '250+', label: 'Über 250 Mitarbeiter' }
-                ]
-            },
-            {
-                id: 'q_002',
-                section: 'context',
-                type: 'single_choice',
-                text: 'Wie viele qualifizierte Leads generieren Sie aktuell pro Monat?',
-                options: [
-                    { value: '0-5', label: '0-5 Leads' },
-                    { value: '6-15', label: '6-15 Leads' },
-                    { value: '16-30', label: '16-30 Leads' },
-                    { value: '31-50', label: '31-50 Leads' },
-                    { value: '51-100', label: '51-100 Leads' },
-                    { value: '100+', label: 'Über 100 Leads' },
-                    { value: 'unknown', label: 'Ich weiß es nicht genau' }
-                ]
-            },
-            // Reach
-            {
-                id: 'q_101',
-                section: 'reach',
-                type: 'single_choice',
-                text: 'Wie aktiv sind Sie oder Ihre Führungskräfte auf LinkedIn?',
-                scoringQuestion: true,
-                options: [
-                    { value: '0', label: 'Wir haben kein aktives LinkedIn-Profil', score: 0 },
-                    { value: '1', label: 'Wir haben Profile, posten aber nie', score: 1 },
-                    { value: '2', label: 'Wir posten gelegentlich (1-2x pro Monat)', score: 2 },
-                    { value: '3', label: 'Wir posten regelmäßig (1-2x pro Woche)', score: 3 },
-                    { value: '4', label: 'Wir posten mehrmals pro Woche mit Strategie', score: 4 },
-                    { value: '5', label: 'Täglich strategischer Content mit messbarem Engagement', score: 5 }
-                ]
-            },
-            {
-                id: 'q_102',
-                section: 'reach',
-                type: 'multiple_choice',
-                text: 'Welche Content-Formate produzieren Sie aktuell?',
-                hint: 'Mehrfachauswahl möglich',
-                options: [
-                    { value: 'blog', label: 'Blog-Artikel' },
-                    { value: 'linkedin', label: 'LinkedIn-Posts' },
-                    { value: 'video', label: 'Video-Content' },
-                    { value: 'podcast', label: 'Podcast' },
-                    { value: 'webinar', label: 'Webinare' },
-                    { value: 'ebook', label: 'E-Books/Whitepapers' },
-                    { value: 'case_studies', label: 'Case Studies' },
-                    { value: 'newsletter', label: 'Newsletter' },
-                    { value: 'none', label: 'Keines davon' }
-                ]
-            },
-            {
-                id: 'q_103',
-                section: 'reach',
-                type: 'single_choice',
-                text: 'Haben Sie aktive Lead-Magneten (E-Books, Checklisten, Kalkulatoren, etc.)?',
-                scoringQuestion: true,
-                options: [
-                    { value: '0', label: 'Nein, haben wir nicht', score: 0 },
-                    { value: '2', label: 'Ja, aber sie werden kaum heruntergeladen', score: 2 },
-                    { value: '4', label: 'Ja, wir haben 1-2 funktionierende Lead-Magneten', score: 4 },
-                    { value: '5', label: 'Ja, wir haben mehrere Lead-Magneten die regelmäßig konvertieren', score: 5 }
-                ]
-            },
-            {
-                id: 'q_104',
-                section: 'reach',
-                type: 'single_choice',
-                text: 'Wie würden Sie die Qualität Ihrer Website als Lead-Generierungs-Tool bewerten?',
-                scoringQuestion: true,
-                options: [
-                    { value: '1', label: 'Veraltet, konvertiert nicht', score: 1 },
-                    { value: '2', label: 'Okay, aber nicht auf Lead-Generierung optimiert', score: 2 },
-                    { value: '3', label: 'Gut, mit einigen Conversion-Elementen', score: 3 },
-                    { value: '4', label: 'Sehr gut, strategisch auf Lead-Gen ausgerichtet', score: 4 },
-                    { value: '5', label: 'Exzellent, systematische Lead-Generierungs-Maschine', score: 5 }
-                ]
-            },
-            {
-                id: 'q_105',
-                section: 'reach',
-                type: 'single_choice',
-                text: 'Nutzen Sie bezahlte Werbung (LinkedIn Ads, Google Ads, etc.)?',
-                scoringQuestion: true,
-                options: [
-                    { value: '0', label: 'Nein, gar nicht', score: 0 },
-                    { value: '1', label: 'Haben wir probiert, aber ohne Erfolg', score: 1 },
-                    { value: '3', label: 'Ja, gelegentlich für einzelne Kampagnen', score: 3 },
-                    { value: '4', label: 'Ja, regelmäßig mit messbarem ROI', score: 4 },
-                    { value: '5', label: 'Ja, systematisch als Teil unseres Gesamt-Systems', score: 5 }
-                ]
-            },
-            {
-                id: 'q_106',
-                section: 'reach',
-                type: 'single_choice',
-                text: 'Wie viele Website-Besucher haben Sie durchschnittlich pro Monat?',
-                options: [
-                    { value: '0-500', label: '0-500 Besucher' },
-                    { value: '501-1000', label: '501-1.000 Besucher' },
-                    { value: '1001-2500', label: '1.001-2.500 Besucher' },
-                    { value: '2501-5000', label: '2.501-5.000 Besucher' },
-                    { value: '5001-10000', label: '5.001-10.000 Besucher' },
-                    { value: '10000+', label: 'Über 10.000 Besucher' },
-                    { value: 'unknown', label: 'Weiß ich nicht' }
-                ]
-            },
-            {
-                id: 'q_107',
-                section: 'reach',
-                type: 'single_choice',
-                text: 'Verfolgen Sie systematisch, woher Ihre Website-Besucher kommen?',
-                scoringQuestion: true,
-                options: [
-                    { value: 'no', label: 'Nein, wir tracken das nicht', score: 0 },
-                    { value: 'basic', label: 'Ja, aber nur grundlegendes Google Analytics', score: 2 },
-                    { value: 'advanced', label: 'Ja, mit UTM-Parametern und detailliertem Tracking', score: 5 }
-                ]
-            },
-            // Relate
-            {
-                id: 'q_201',
-                section: 'relate',
-                type: 'single_choice',
-                text: 'Haben Sie einen aktiven E-Mail-Newsletter?',
-                scoringQuestion: true,
-                options: [
-                    { value: '0', label: 'Nein', score: 0 },
-                    { value: '2', label: 'Ja, aber unregelmäßig (weniger als monatlich)', score: 2 },
-                    { value: '4', label: 'Ja, regelmäßig (monatlich oder häufiger)', score: 4 },
-                    { value: '5', label: 'Ja, systematisch mit Segmentierung und Strategie', score: 5 }
-                ]
-            },
-            {
-                id: 'q_202',
-                section: 'relate',
-                type: 'single_choice',
-                text: 'Wie groß ist Ihre E-Mail-Liste?',
-                options: [
-                    { value: '0-100', label: '0-100 Kontakte' },
-                    { value: '101-500', label: '101-500 Kontakte' },
-                    { value: '501-1000', label: '501-1.000 Kontakte' },
-                    { value: '1001-2500', label: '1.001-2.500 Kontakte' },
-                    { value: '2501-5000', label: '2.501-5.000 Kontakte' },
-                    { value: '5000+', label: 'Über 5.000 Kontakte' }
-                ]
-            },
-            {
-                id: 'q_203',
-                section: 'relate',
-                type: 'single_choice',
-                text: 'Haben Sie automatisierte E-Mail-Sequenzen für neue Leads eingerichtet?',
-                scoringQuestion: true,
-                options: [
-                    { value: '0', label: 'Nein, jede E-Mail wird manuell versendet', score: 0 },
-                    { value: '2', label: 'Wir haben eine einfache Willkommens-E-Mail', score: 2 },
-                    { value: '4', label: 'Ja, wir haben mehrstufige Nurturing-Sequenzen', score: 4 },
-                    { value: '5', label: 'Ja, systematische Sequenzen basierend auf Verhalten und Interessen', score: 5 }
-                ]
-            },
-            {
-                id: 'q_204',
-                section: 'relate',
-                type: 'single_choice',
-                text: 'Nutzen Sie ein CRM-System?',
-                scoringQuestion: true,
-                options: [
-                    { value: '0', label: 'Nein, nur Excel oder gar nichts', score: 0 },
-                    { value: '2', label: 'Ja, aber wir nutzen es kaum', score: 2 },
-                    { value: '4', label: 'Ja, es ist unser zentrales Tool für Lead-Management', score: 4 },
-                    { value: '5', label: 'Ja, vollständig integriert mit Marketing-Automation', score: 5 }
-                ]
-            },
-            {
-                id: 'q_205',
-                section: 'relate',
-                type: 'single_choice',
-                text: 'Recyceln Sie systematisch Content (z.B. aus Webinaren mehrere Formate erstellen)?',
-                scoringQuestion: true,
-                options: [
-                    { value: '0', label: 'Nein, jeder Content wird einmalig verwendet', score: 0 },
-                    { value: '3', label: 'Gelegentlich, wenn Zeit ist', score: 3 },
-                    { value: '5', label: 'Ja, systematisch - aus jedem Asset werden mehrere Formate', score: 5 }
-                ]
-            },
-            {
-                id: 'q_206',
-                section: 'relate',
-                type: 'single_choice',
-                text: 'Wie reagieren Sie auf Lead-Magnet-Downloads?',
-                scoringQuestion: true,
-                options: [
-                    { value: '0', label: 'Gar nicht, oder sehr verzögert', score: 0 },
-                    { value: '2', label: 'Mit einer automatischen Dankes-E-Mail', score: 2 },
-                    { value: '4', label: 'Mit einer E-Mail-Serie über mehrere Wochen', score: 4 },
-                    { value: '5', label: 'Systematisches Nurturing basierend auf heruntergeladenem Content', score: 5 }
-                ]
-            },
-            {
-                id: 'q_207',
-                section: 'relate',
-                type: 'yes_no',
-                text: 'Segmentieren Sie Ihre E-Mail-Liste nach Interessen oder Verhalten?'
-            },
-            // Respond
-            {
-                id: 'q_301',
-                section: 'respond',
-                type: 'single_choice',
-                text: 'Wie definieren Sie einen "qualifizierten Lead"?',
-                scoringQuestion: true,
-                options: [
-                    { value: '0', label: 'Haben wir nicht klar definiert', score: 0 },
-                    { value: '3', label: 'Grobe Definition vorhanden', score: 3 },
-                    { value: '5', label: 'Klare Kriterien (Budget, Autorität, Bedarf, Timing)', score: 5 }
-                ]
-            },
-            {
-                id: 'q_302',
-                section: 'respond',
-                type: 'single_choice',
-                text: 'Wissen Ihre Vertriebler, welchen Content ein Lead konsumiert hat, bevor sie ihn kontaktieren?',
-                scoringQuestion: true,
-                options: [
-                    { value: '0', label: 'Nein, keine Informationen verfügbar', score: 0 },
-                    { value: '2', label: 'Teilweise, wenn wir dran denken nachzuschauen', score: 2 },
-                    { value: '5', label: 'Ja, systematisch in unserem CRM dokumentiert', score: 5 }
-                ]
-            },
-            {
-                id: 'q_303',
-                section: 'respond',
-                type: 'single_choice',
-                text: 'Wie schnell reagieren Sie auf eingehende Leads?',
-                scoringQuestion: true,
-                options: [
-                    { value: '1', label: 'Innerhalb von mehreren Tagen', score: 1 },
-                    { value: '2', label: 'Innerhalb von 24-48 Stunden', score: 2 },
-                    { value: '4', label: 'Innerhalb weniger Stunden', score: 4 },
-                    { value: '5', label: 'Sofort oder innerhalb von 1 Stunde', score: 5 }
-                ]
-            },
-            {
-                id: 'q_304',
-                section: 'respond',
-                type: 'single_choice',
-                text: 'Wie ist die Zusammenarbeit zwischen Marketing und Vertrieb organisiert?',
-                scoringQuestion: true,
-                options: [
-                    { value: '0', label: 'Arbeiten komplett getrennt', score: 0 },
-                    { value: '2', label: 'Gelegentlicher Austausch', score: 2 },
-                    { value: '4', label: 'Regelmäßige Abstimmung', score: 4 },
-                    { value: '5', label: 'Systematisches Alignment mit gemeinsamen KPIs', score: 5 }
-                ]
-            },
-            {
-                id: 'q_305',
-                section: 'respond',
-                type: 'single_choice',
-                text: 'Tracken Sie, welche Marketing-Aktivitäten zu Abschlüssen führen?',
-                scoringQuestion: true,
-                options: [
-                    { value: '0', label: 'Nein, wir wissen nicht, woher unsere Kunden kommen', score: 0 },
-                    { value: '2', label: 'Teilweise, wir fragen manchmal nach', score: 2 },
-                    { value: '5', label: 'Ja, systematisch im CRM dokumentiert', score: 5 }
-                ]
-            },
-            {
-                id: 'q_306',
-                section: 'respond',
-                type: 'single_choice',
-                text: 'Wie hoch ist Ihre Lead-to-Customer Conversion Rate?',
-                options: [
-                    { value: 'unknown', label: 'Weiß ich nicht' },
-                    { value: '0-5', label: 'Unter 5%' },
-                    { value: '5-10', label: '5-10%' },
-                    { value: '10-20', label: '10-20%' },
-                    { value: '20-30', label: '20-30%' },
-                    { value: '30+', label: 'Über 30%' }
-                ]
-            },
-            {
-                id: 'q_307',
-                section: 'respond',
-                type: 'single_choice',
-                text: 'Wie lange dauert Ihr durchschnittlicher Sales Cycle?',
-                options: [
-                    { value: '0-4', label: 'Unter 4 Wochen' },
-                    { value: '4-8', label: '4-8 Wochen' },
-                    { value: '8-12', label: '8-12 Wochen' },
-                    { value: '12-24', label: '3-6 Monate' },
-                    { value: '24+', label: 'Über 6 Monate' },
-                    { value: 'unknown', label: 'Weiß ich nicht' }
-                ]
-            },
-            // Retain
-            {
-                id: 'q_401',
-                section: 'retain',
-                type: 'single_choice',
-                text: 'Segmentieren Sie Ihre Bestandskunden systematisch?',
-                scoringQuestion: true,
-                options: [
-                    { value: '0', label: 'Nein, alle Kunden werden gleich behandelt', score: 0 },
-                    { value: '2', label: 'Grobe Einteilung nach Umsatz', score: 2 },
-                    { value: '5', label: 'Systematische Segmentierung nach Wert und Potenzial', score: 5 }
-                ]
-            },
-            {
-                id: 'q_402',
-                section: 'retain',
-                type: 'single_choice',
-                text: 'Wie aktiv betreiben Sie Cross-Selling bei Bestandskunden?',
-                scoringQuestion: true,
-                options: [
-                    { value: '0', label: 'Gar nicht systematisch', score: 0 },
-                    { value: '2', label: 'Gelegentlich, wenn es sich ergibt', score: 2 },
-                    { value: '4', label: 'Regelmäßige Account-Reviews mit Cross-Sell-Fokus', score: 4 },
-                    { value: '5', label: 'Systematischer Prozess mit definierten Triggern', score: 5 }
-                ]
-            },
-            {
-                id: 'q_403',
-                section: 'retain',
-                type: 'single_choice',
-                text: 'Haben Sie ein Referral- oder Empfehlungsprogramm?',
-                scoringQuestion: true,
-                options: [
-                    { value: '0', label: 'Nein', score: 0 },
-                    { value: '2', label: 'Informell - wir fragen manchmal nach Empfehlungen', score: 2 },
-                    { value: '5', label: 'Ja, systematisches Programm mit Incentives', score: 5 }
-                ]
-            },
-            {
-                id: 'q_404',
-                section: 'retain',
-                type: 'single_choice',
-                text: 'Wie viel Prozent Ihrer Neukunden kommen durch Empfehlungen von Bestandskunden?',
-                options: [
-                    { value: '0-10', label: '0-10%' },
-                    { value: '11-25', label: '11-25%' },
-                    { value: '26-50', label: '26-50%' },
-                    { value: '51-75', label: '51-75%' },
-                    { value: '75+', label: 'Über 75%' },
-                    { value: 'unknown', label: 'Weiß ich nicht' }
-                ]
-            },
-            {
-                id: 'q_405',
-                section: 'retain',
-                type: 'single_choice',
-                text: 'Messen Sie systematisch die Zufriedenheit Ihrer Bestandskunden?',
-                scoringQuestion: true,
-                options: [
-                    { value: '0', label: 'Nein', score: 0 },
-                    { value: '2', label: 'Gelegentlich informelle Nachfragen', score: 2 },
-                    { value: '4', label: 'Ja, regelmäßige Zufriedenheitsbefragungen', score: 4 },
-                    { value: '5', label: 'Systematisches NPS-Tracking mit Follow-up-Prozessen', score: 5 }
-                ]
-            },
-            {
-                id: 'q_406',
-                section: 'retain',
-                type: 'yes_no',
-                text: 'Nutzen Sie Ihre zufriedenen Kunden aktiv für Case Studies oder Testimonials?'
-            },
-            {
-                id: 'q_407',
-                section: 'retain',
-                type: 'single_choice',
-                text: 'Haben Sie einen definierten Prozess für Bestandskunden-Marketing?',
-                scoringQuestion: true,
-                options: [
-                    { value: '0', label: 'Nein, Fokus liegt komplett auf Neukundengewinnung', score: 0 },
-                    { value: '3', label: 'Teilweise, aber nicht systematisch', score: 3 },
-                    { value: '5', label: 'Ja, Bestandskunden sind fester Teil unserer Marketing-Strategie', score: 5 }
-                ]
-            },
-            // Final
-            {
-                id: 'q_501',
-                section: 'final',
-                type: 'single_choice',
-                text: 'Was ist Ihr größtes Marketing-Problem aktuell?',
-                options: [
-                    { value: 'visibility', label: 'Zu wenig Sichtbarkeit / Niemand kennt uns' },
-                    { value: 'leads', label: 'Zu wenige Leads' },
-                    { value: 'quality', label: 'Leads haben zu geringe Qualität' },
-                    { value: 'conversion', label: 'Leads konvertieren nicht zu Kunden' },
-                    { value: 'time', label: 'Keine Zeit für systematisches Marketing' },
-                    { value: 'knowhow', label: 'Fehlendes Know-how' },
-                    { value: 'strategy', label: 'Keine klare Strategie' },
-                    { value: 'measurement', label: 'Können Erfolg nicht messen' }
-                ]
-            },
-            {
-                id: 'q_502',
-                section: 'final',
-                type: 'single_choice',
-                text: 'Wie viel investieren Sie aktuell monatlich in Marketing (Zeit + Geld)?',
-                options: [
-                    { value: '0-1000', label: 'Unter 1.000€' },
-                    { value: '1000-3000', label: '1.000-3.000€' },
-                    { value: '3000-5000', label: '3.000-5.000€' },
-                    { value: '5000-10000', label: '5.000-10.000€' },
-                    { value: '10000+', label: 'Über 10.000€' }
-                ]
-            },
-            {
-                id: 'q_503',
-                section: 'final',
-                type: 'single_choice',
-                text: 'Was ist Ihr Ziel für die nächsten 6 Monate?',
-                options: [
-                    { value: 'double_leads', label: 'Anzahl der Leads verdoppeln' },
-                    { value: 'improve_quality', label: 'Lead-Qualität verbessern' },
-                    { value: 'build_system', label: 'Ein systematisches Marketing aufbauen' },
-                    { value: 'reduce_time', label: 'Weniger Zeit für Marketing aufwenden' },
-                    { value: 'predictable', label: 'Planbare, wiederkehrende Leads' },
-                    { value: 'scale', label: 'Von 10 auf 100+ Leads pro Monat skalieren' }
-                ]
-            },
-            // Opt-in
-            {
-                id: 'q_600',
-                section: 'optin',
-                type: 'single_choice',
-                text: 'Möchten Sie eine ausführliche, personalisierte Analyse erhalten?',
-                intro: 'Sie können jetzt Ihre Basis-Auswertung sehen, oder Sie können eine ausführliche, personalisierte Analyse mit konkreten Handlungsempfehlungen erhalten.',
-                options: [
-                    { value: 'no', label: 'Nein, zeig mir nur die Basis-Auswertung' },
-                    { value: 'yes', label: 'Ja, ich möchte die ausführliche Analyse per E-Mail' }
-                ]
-            },
-            // Contact (conditional)
-            {
-                id: 'q_701',
-                section: 'contact',
-                type: 'text',
-                text: 'Ihr Vorname',
-                conditional: true
-            },
-            {
-                id: 'q_702',
-                section: 'contact',
-                type: 'text',
-                text: 'Ihr Nachname',
-                conditional: true
-            },
-            {
-                id: 'q_703',
-                section: 'contact',
-                type: 'email',
-                text: 'Ihre E-Mail-Adresse',
-                conditional: true
-            },
-            {
-                id: 'q_704',
-                section: 'contact',
-                type: 'text',
-                text: 'Name Ihres Unternehmens (optional)',
-                conditional: true,
-                required: false
-            },
-            {
-                id: 'q_705',
-                section: 'contact',
-                type: 'text',
-                text: 'In welcher Branche sind Sie tätig? (optional)',
-                conditional: true,
-                required: false
-            },
-            {
-                id: 'q_706',
-                section: 'contact',
-                type: 'textarea',
-                text: 'Gibt es noch etwas Spezifisches, das wir über Ihre Marketing-Situation wissen sollten?',
-                conditional: true,
-                required: false
-            },
-            {
-                id: 'q_707',
-                section: 'contact',
-                type: 'yes_no',
-                text: 'Möchten Sie nach der Auswertung ein unverbindliches Gespräch über Ihre spezifische Situation?',
-                conditional: true,
-                required: false
-            },
-            {
-                id: 'q_708',
-                section: 'contact',
-                type: 'checkbox',
-                text: 'Ich stimme zu, dass Brixon Group meine Daten zur Erstellung der personalisierten Analyse verwendet und mich kontaktieren darf.',
-                conditional: true,
-                options: [
-                    { value: 'agreed', label: 'Ja, ich stimme der Datenschutzerklärung zu' }
-                ]
-            }
-        ];
-
-        // Helper Functions
+        
+        // Utility Functions
+        function getQuestions() {
+            return CONFIG.questions;
+        }
+        
         function getCurrentQuestion() {
-            if (state.currentQuestionIndex >= questions.length) {
-                return null;
-            }
-            const question = questions[state.currentQuestionIndex];
-            
-            // Skip contact questions if user didn't opt in
-            if (question.conditional && !state.showContact) {
-                state.currentQuestionIndex++;
-                return getCurrentQuestion();
-            }
-            
-            return question;
+            return getQuestions()[state.currentQuestionIndex];
         }
-
-        function updateProgress() {
-            const totalQuestions = state.showContact ? questions.length : questions.filter(q => !q.conditional).length;
-            const progress = (state.currentQuestionIndex / totalQuestions) * 100;
-            
-            document.getElementById('progressFill').style.width = `${Math.min(progress, 100)}%`;
-            document.getElementById('progressPercentage').textContent = `${Math.round(progress)}%`;
+        
+        function getSectionLabel(section) {
+            const labels = {
+                context: 'Kontext',
+                reach: 'Reach',
+                relate: 'Relate',
+                respond: 'Respond',
+                retain: 'Retain',
+                final: 'Abschluss'
+            };
+            return labels[section] || section;
         }
-
-        function updateProgressSteps() {
-            const stepsContainer = document.getElementById('progressSteps');
-            const currentQuestion = getCurrentQuestion();
-            
-            if (!currentQuestion) return;
-            
-            const currentSection = currentQuestion.section;
-            const steps = CONFIG.sections.filter(s => {
-                if (s.id === 'contact') return state.showContact;
-                return true;
-            });
-            
-            stepsContainer.innerHTML = steps.map(step => {
-                const isActive = step.id === currentSection;
-                const question = questions.find(q => q.section === step.id);
-                const questionIndex = questions.indexOf(question);
-                const isCompleted = questionIndex < state.currentQuestionIndex;
-                
-                return `<span class="progress-step ${isActive ? 'active' : ''} ${isCompleted ? 'completed' : ''}">${step.title}</span>`;
-            }).join('');
+        
+        function calculateProgress() {
+            const total = getQuestions().length;
+            const current = state.currentQuestionIndex + 1;
+            return Math.round((current / total) * 100);
         }
-
-        function renderWelcome() {
-            const container = document.getElementById('appContainer');
-            container.innerHTML = `
-                <div class="welcome-screen">
-                    <h1>B2B Marketing Assessment<br>Das 4R-System</h1>
-                    <p class="welcome-subtitle">Evaluieren Sie Ihren aktuellen Marketing-Status</p>
-                    <div class="welcome-duration">
-                        <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
-                            <circle cx="10" cy="10" r="8" stroke="currentColor" stroke-width="2"/>
-                            <path d="M10 6V10L13 13" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
-                        </svg>
-                        8-12 Minuten
-                    </div>
-                    <button class="btn btn-primary" onclick="startAssessment()">
-                        Assessment starten
-                        <span class="arrow">→</span>
-                    </button>
-                </div>
-            `;
-        }
-
-        function renderQuestion(question) {
-            const container = document.getElementById('appContainer');
-            const questionNum = state.currentQuestionIndex + 1;
-            
-            let optionsHTML = '';
-            
-            if (question.type === 'single_choice') {
-                optionsHTML = question.options.map((opt, index) => `
-                    <label class="option ${state.answers[question.id] === opt.value ? 'selected' : ''}">
-                        <input type="radio" 
-                               name="${question.id}" 
-                               value="${opt.value}" 
-                               ${state.answers[question.id] === opt.value ? 'checked' : ''}
-                               onchange="handleAnswer('${question.id}', '${opt.value}', ${opt.score || 0})">
-                        <span class="option-content">${opt.label}</span>
-                        <span class="option-indicator"></span>
-                    </label>
-                `).join('');
-            } else if (question.type === 'multiple_choice') {
-                const selectedValues = state.answers[question.id] || [];
-                optionsHTML = question.options.map((opt, index) => `
-                    <label class="option ${selectedValues.includes(opt.value) ? 'selected' : ''}">
-                        <input type="checkbox" 
-                               name="${question.id}" 
-                               value="${opt.value}"
-                               ${selectedValues.includes(opt.value) ? 'checked' : ''}
-                               onchange="handleMultipleAnswer('${question.id}', '${opt.value}')">
-                        <span class="option-content">${opt.label}</span>
-                        <span class="option-indicator"></span>
-                    </label>
-                `).join('');
-            } else if (question.type === 'yes_no') {
-                optionsHTML = `
-                    <label class="option ${state.answers[question.id] === 'yes' ? 'selected' : ''}">
-                        <input type="radio" 
-                               name="${question.id}" 
-                               value="yes"
-                               ${state.answers[question.id] === 'yes' ? 'checked' : ''}
-                               onchange="handleAnswer('${question.id}', 'yes', 0)">
-                        <span class="option-content">Ja</span>
-                        <span class="option-indicator"></span>
-                    </label>
-                    <label class="option ${state.answers[question.id] === 'no' ? 'selected' : ''}">
-                        <input type="radio" 
-                               name="${question.id}" 
-                               value="no"
-                               ${state.answers[question.id] === 'no' ? 'checked' : ''}
-                               onchange="handleAnswer('${question.id}', 'no', 0)">
-                        <span class="option-content">Nein</span>
-                        <span class="option-indicator"></span>
-                    </label>
-                `;
-            } else if (question.type === 'text' || question.type === 'email') {
-                optionsHTML = `
-                    <input type="${question.type === 'email' ? 'email' : 'text'}" 
-                           class="text-input" 
-                           value="${state.answers[question.id] || ''}"
-                           placeholder="Ihre Antwort..."
-                           oninput="handleTextAnswer('${question.id}', this.value)">
-                `;
-            } else if (question.type === 'textarea') {
-                optionsHTML = `
-                    <textarea class="text-input" 
-                              placeholder="Ihre Antwort..."
-                              oninput="handleTextAnswer('${question.id}', this.value)">${state.answers[question.id] || ''}</textarea>
-                `;
-            } else if (question.type === 'checkbox') {
-                optionsHTML = question.options.map(opt => `
-                    <label class="option ${state.answers[question.id] === opt.value ? 'selected' : ''}">
-                        <input type="checkbox" 
-                               name="${question.id}" 
-                               value="${opt.value}"
-                               ${state.answers[question.id] === opt.value ? 'checked' : ''}
-                               onchange="handleAnswer('${question.id}', '${opt.value}', 0)">
-                        <span class="option-content">${opt.label}</span>
-                        <span class="option-indicator"></span>
-                    </label>
-                `).join('');
-            }
-            
-            const introHTML = question.intro ? `<p class="question-hint">${question.intro}</p>` : '';
-            const hintHTML = question.hint ? `<p class="question-hint">${question.hint}</p>` : '';
-            
-            container.innerHTML = `
-                <div class="question-card">
-                    <span class="question-number">Frage ${questionNum} von ${questions.filter(q => !q.conditional || state.showContact).length}</span>
-                    ${introHTML}
-                    <h2 class="question-text">${question.text}</h2>
-                    ${hintHTML}
-                    <div class="options">
-                        ${optionsHTML}
-                    </div>
-                    <div class="btn-group">
-                        ${state.currentQuestionIndex > 0 ? '<button class="btn btn-secondary" onclick="previousQuestion()">← Zurück</button>' : ''}
-                        <button class="btn btn-primary" onclick="nextQuestion()" ${!state.answers[question.id] && question.required !== false ? 'disabled' : ''}>
-                            Weiter
-                            <span class="arrow">→</span>
-                        </button>
-                    </div>
-                </div>
-            `;
-            
-            updateProgress();
-            updateProgressSteps();
-        }
-
+        
         function calculateScores() {
-            state.scores = {
+            const scores = {
                 reach: 0,
                 relate: 0,
                 respond: 0,
@@ -1434,274 +1056,511 @@
                 total: 0
             };
             
-            questions.forEach(q => {
-                if (q.scoringQuestion && state.answers[q.id]) {
-                    const selectedOption = q.options.find(opt => opt.value === state.answers[q.id]);
-                    if (selectedOption && selectedOption.score !== undefined) {
-                        state.scores[q.section] += selectedOption.score;
-                        state.scores.total += selectedOption.score;
+            Object.keys(state.answers).forEach(questionId => {
+                const question = CONFIG.questions.find(q => q.id === questionId);
+                if (!question) return;
+                
+                const answer = state.answers[questionId];
+                
+                if (question.type === 'multiple') {
+                    answer.forEach(value => {
+                        const option = question.options.find(o => o.value === value);
+                        if (option && question.section in scores) {
+                            scores[question.section] += option.score || 0;
+                        }
+                    });
+                } else {
+                    const option = question.options.find(o => o.value === answer);
+                    if (option && question.section in scores) {
+                        scores[question.section] += option.score || 0;
                     }
                 }
             });
+            
+            scores.total = scores.reach + scores.relate + scores.respond + scores.retain;
+            state.scores = scores;
+            return scores;
         }
-
-        function getInterpretation(score, max, phase) {
-            const percentage = (score / max) * 100;
+        
+        // Rendering Functions
+        function renderProgress() {
+            const progress = calculateProgress();
+            const current = state.currentQuestionIndex + 1;
+            const total = getQuestions().length;
+            const currentQuestion = getCurrentQuestion();
             
-            if (phase === 'total') {
-                if (score <= 30) return 'Ihr Marketing steht noch am Anfang. Höchste Zeit für ein System.';
-                if (score <= 60) return 'Grundlagen vorhanden, aber noch sehr viel Potenzial.';
-                if (score <= 90) return 'Solide Basis - mit gezielten Optimierungen zum Durchbruch.';
-                return 'Exzellent - Sie gehören zu den Top 10% im B2B-Marketing.';
-            }
-            
-            if (phase === 'reach') {
-                if (score <= 10) return 'Sie starten gerade erst mit systematischer Sichtbarkeit.';
-                if (score <= 20) return 'Grundlagen sind da, aber viel Potenzial für Optimierung.';
-                if (score <= 30) return 'Solide Basis, vereinzelt noch Lücken.';
-                return 'Exzellente Sichtbarkeit - Sie sind vorbildlich unterwegs.';
-            }
-            
-            if (phase === 'relate') {
-                if (score <= 10) return 'Lead-Nurturing ist noch nicht systematisch aufgebaut.';
-                if (score <= 20) return 'Basis vorhanden, aber noch nicht optimal vernetzt.';
-                if (score <= 28) return 'Gutes System, mit kleineren Optimierungsmöglichkeiten.';
-                return 'Vorbildliches Lead-Nurturing-System.';
-            }
-            
-            if (phase === 'respond') {
-                if (score <= 8) return 'Marketing und Sales arbeiten noch zu getrennt.';
-                if (score <= 17) return 'Grundlegende Prozesse vorhanden, aber verbesserbar.';
-                if (score <= 24) return 'Gute Verzahnung zwischen Marketing und Sales.';
-                return 'Exzellentes Marketing-Sales-Alignment.';
-            }
-            
-            if (phase === 'retain') {
-                if (score <= 8) return 'Bestandskunden-Marketing wird vernachlässigt.';
-                if (score <= 17) return 'Erste Ansätze vorhanden, aber nicht systematisch.';
-                if (score <= 24) return 'Solides Bestandskunden-Management.';
-                return 'Vorbildlich - Bestandskunden als echter Wachstumsmotor.';
-            }
+            return `
+                <div class="progress-container">
+                    <div class="progress-bar">
+                        <div class="progress-fill" style="width: ${progress}%"></div>
+                    </div>
+                    <div class="progress-text">
+                        <span class="progress-label">${getSectionLabel(currentQuestion.section)}</span>
+                        <span>Frage ${current} von ${total}</span>
+                    </div>
+                </div>
+            `;
         }
-
-        function renderResults() {
-            calculateScores();
-            const container = document.getElementById('appContainer');
-            container.className = 'container-wide';
+        
+        function renderWelcome() {
+            return `
+                <div class="welcome-screen fade-in">
+                    <h1>B2B Marketing Assessment</h1>
+                    <p class="welcome-subtitle">Evaluieren Sie Ihren Marketing-Reifegrad mit dem 4R-System</p>
+                    <div class="welcome-duration">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <circle cx="12" cy="12" r="10"></circle>
+                            <polyline points="12 6 12 12 16 14"></polyline>
+                        </svg>
+                        ca. 8-10 Minuten
+                    </div>
+                    <button class="btn btn-primary" onclick="startAssessment()" data-testid="button-start-assessment">
+                        Assessment starten
+                        <span class="arrow">→</span>
+                    </button>
+                </div>
+            `;
+        }
+        
+        function renderQuestion(question) {
+            const isAnswered = state.answers[question.id] !== undefined;
+            const questionIndex = getQuestions().findIndex(q => q.id === question.id);
             
-            const totalScore = state.scores.total;
-            const maxScore = 121;
-            const interpretation = getInterpretation(totalScore, maxScore, 'total');
+            let optionsHtml = '';
+            if (question.type === 'single') {
+                optionsHtml = question.options.map(option => {
+                    const isSelected = state.answers[question.id] === option.value;
+                    return `
+                        <label class="option ${isSelected ? 'selected' : ''}" data-testid="option-${option.value}">
+                            <input 
+                                type="radio" 
+                                name="${question.id}" 
+                                value="${option.value}"
+                                ${isSelected ? 'checked' : ''}
+                                onchange="handleAnswer('${question.id}', '${option.value}', ${option.score})"
+                            >
+                            <div class="option-radio"></div>
+                            <span class="option-label">${option.label}</span>
+                        </label>
+                    `;
+                }).join('');
+            } else if (question.type === 'multiple') {
+                optionsHtml = question.options.map(option => {
+                    const isSelected = state.answers[question.id]?.includes(option.value);
+                    return `
+                        <label class="option ${isSelected ? 'selected' : ''}" data-testid="option-${option.value}">
+                            <input 
+                                type="checkbox" 
+                                name="${question.id}" 
+                                value="${option.value}"
+                                ${isSelected ? 'checked' : ''}
+                                onchange="handleMultipleAnswer('${question.id}', '${option.value}')"
+                            >
+                            <div class="option-checkbox"></div>
+                            <span class="option-label">${option.label}</span>
+                        </label>
+                    `;
+                }).join('');
+            } else if (question.type === 'text') {
+                const value = state.answers[question.id] || '';
+                optionsHtml = `
+                    <div class="text-input-wrapper">
+                        <input 
+                            type="text" 
+                            class="text-input" 
+                            value="${value}"
+                            placeholder="${question.placeholder || 'Ihre Antwort...'}"
+                            onchange="handleAnswer('${question.id}', this.value, 0)"
+                            data-testid="input-${question.id}"
+                        >
+                    </div>
+                `;
+            }
             
-            container.innerHTML = `
-                <div class="results-screen">
-                    <div class="results-hero">
-                        <div class="score-circle">
-                            <svg width="200" height="200" viewBox="0 0 200 200">
-                                <circle cx="100" cy="100" r="90" fill="none" stroke="rgba(255,255,255,0.2)" stroke-width="12"/>
-                                <circle cx="100" cy="100" r="90" fill="none" stroke="#f7e74f" stroke-width="12" 
-                                        stroke-dasharray="${(totalScore/maxScore) * 565} 565" 
-                                        stroke-linecap="round" 
-                                        transform="rotate(-90 100 100)"
-                                        style="transition: stroke-dasharray 1.5s ease-out"/>
-                            </svg>
-                            <div class="score-number">${totalScore}</div>
-                        </div>
-                        <p class="score-label">Ihr Gesamtscore</p>
-                        <p class="score-interpretation">${interpretation}</p>
+            return `
+                <div class="question-card">
+                    <div class="question-number">Frage ${questionIndex + 1} von ${getQuestions().length}</div>
+                    <h2 class="question-text">${question.text}</h2>
+                    ${question.hint ? `<p class="question-hint">${question.hint}</p>` : ''}
+                    <div class="options">
+                        ${optionsHtml}
                     </div>
-                    
-                    <h2 style="text-align: center; margin-bottom: 2rem;">Ihre 4R-Phasen im Detail</h2>
-                    
-                    <div style="max-width: 400px; margin: 0 auto 3rem;">
-                        ${renderRadarChart()}
-                    </div>
-                    
-                    <div class="phase-scores">
-                        ${renderPhaseCard('Reach', state.scores.reach, 35, 'reach')}
-                        ${renderPhaseCard('Relate', state.scores.relate, 32, 'relate')}
-                        ${renderPhaseCard('Respond', state.scores.respond, 27, 'respond')}
-                        ${renderPhaseCard('Retain', state.scores.retain, 27, 'retain')}
-                    </div>
-                    
-                    <div class="insights-section">
-                        <h2 style="text-align: center; margin-bottom: 2rem;">Ihre nächsten Schritte</h2>
-                        <div class="insights-grid">
-                            ${renderInsights()}
-                        </div>
-                    </div>
-                    
-                    <div style="text-align: center; margin-top: 3rem;">
-                        <button class="btn btn-primary" onclick="submitResults()">
-                            Ergebnisse absenden
+                    <div class="btn-group">
+                        ${questionIndex > 0 ? `
+                            <button class="btn btn-secondary" onclick="previousQuestion()" data-testid="button-previous">
+                                ← Zurück
+                            </button>
+                        ` : ''}
+                        <button 
+                            class="btn btn-primary" 
+                            onclick="nextQuestion()" 
+                            ${!isAnswered ? 'disabled' : ''}
+                            data-testid="button-next"
+                        >
+                            ${questionIndex === getQuestions().length - 1 ? 'Ergebnisse anzeigen' : 'Weiter'}
                             <span class="arrow">→</span>
                         </button>
                     </div>
                 </div>
             `;
-            
-            // Animate progress bars
-            setTimeout(() => {
-                document.querySelectorAll('.phase-bar-fill').forEach(bar => {
-                    const width = bar.getAttribute('data-width');
-                    bar.style.width = width + '%';
-                });
-            }, 100);
         }
-
-        function renderRadarChart() {
-            const centerX = 200;
-            const centerY = 200;
-            const maxRadius = 150;
+        
+        function renderResults() {
+            const scores = calculateScores();
+            const maxScores = { reach: 35, relate: 32, respond: 27, retain: 27, total: 121 };
             
-            // Calculate percentages for each phase
-            const data = [
-                { label: 'Reach', score: state.scores.reach, max: 35 },
-                { label: 'Relate', score: state.scores.relate, max: 32 },
-                { label: 'Respond', score: state.scores.respond, max: 27 },
-                { label: 'Retain', score: state.scores.retain, max: 27 }
+            const getInterpretation = (score, max) => {
+                const percentage = (score / max) * 100;
+                if (percentage >= 80) return 'Ausgezeichnet';
+                if (percentage >= 60) return 'Gut entwickelt';
+                if (percentage >= 40) return 'Entwicklungspotenzial';
+                if (percentage >= 20) return 'Grundlagen vorhanden';
+                return 'Ausbaufähig';
+            };
+            
+            return `
+                <div class="results-header fade-in">
+                    <h1>Ihre Ergebnisse</h1>
+                    <p class="results-subtitle">Basierend auf Ihren Angaben</p>
+                </div>
+                
+                <div class="results-grid fade-in">
+                    <div class="score-card">
+                        <div class="score-card-header">
+                            <div class="score-card-title">Gesamtscore</div>
+                        </div>
+                        <div>
+                            <span class="score-value">${scores.total}</span>
+                            <span class="score-max">/ ${maxScores.total}</span>
+                        </div>
+                        <div class="score-bar" style="margin-top: 1rem;">
+                            <div class="score-bar-fill" style="width: ${(scores.total/maxScores.total)*100}%"></div>
+                        </div>
+                        <div class="score-percentage">${Math.round((scores.total/maxScores.total)*100)}% erreicht</div>
+                    </div>
+                    
+                    <div class="score-card">
+                        <div class="score-card-header">
+                            <div class="score-card-title">Reach</div>
+                        </div>
+                        <div>
+                            <span class="score-value">${scores.reach}</span>
+                            <span class="score-max">/ ${maxScores.reach}</span>
+                        </div>
+                        <div class="score-bar" style="margin-top: 1rem;">
+                            <div class="score-bar-fill" style="width: ${(scores.reach/maxScores.reach)*100}%"></div>
+                        </div>
+                        <div class="score-percentage">${getInterpretation(scores.reach, maxScores.reach)}</div>
+                    </div>
+                    
+                    <div class="score-card">
+                        <div class="score-card-header">
+                            <div class="score-card-title">Relate</div>
+                        </div>
+                        <div>
+                            <span class="score-value">${scores.relate}</span>
+                            <span class="score-max">/ ${maxScores.relate}</span>
+                        </div>
+                        <div class="score-bar" style="margin-top: 1rem;">
+                            <div class="score-bar-fill" style="width: ${(scores.relate/maxScores.relate)*100}%"></div>
+                        </div>
+                        <div class="score-percentage">${getInterpretation(scores.relate, maxScores.relate)}</div>
+                    </div>
+                    
+                    <div class="score-card">
+                        <div class="score-card-header">
+                            <div class="score-card-title">Respond</div>
+                        </div>
+                        <div>
+                            <span class="score-value">${scores.respond}</span>
+                            <span class="score-max">/ ${maxScores.respond}</span>
+                        </div>
+                        <div class="score-bar" style="margin-top: 1rem;">
+                            <div class="score-bar-fill" style="width: ${(scores.respond/maxScores.respond)*100}%"></div>
+                        </div>
+                        <div class="score-percentage">${getInterpretation(scores.respond, maxScores.respond)}</div>
+                    </div>
+                    
+                    <div class="score-card">
+                        <div class="score-card-header">
+                            <div class="score-card-title">Retain</div>
+                        </div>
+                        <div>
+                            <span class="score-value">${scores.retain}</span>
+                            <span class="score-max">/ ${maxScores.retain}</span>
+                        </div>
+                        <div class="score-bar" style="margin-top: 1rem;">
+                            <div class="score-bar-fill" style="width: ${(scores.retain/maxScores.retain)*100}%"></div>
+                        </div>
+                        <div class="score-percentage">${getInterpretation(scores.retain, maxScores.retain)}</div>
+                    </div>
+                </div>
+                
+                <div class="chart-container fade-in">
+                    <canvas id="radarChart" width="400" height="400"></canvas>
+                </div>
+                
+                <div class="recommendations fade-in">
+                    <h3>Empfehlungen</h3>
+                    ${getRecommendations(scores, maxScores)}
+                </div>
+                
+                <div class="btn-group fade-in">
+                    ${state.answers['q_701'] === 'yes' ? `
+                        <button class="btn btn-primary" onclick="showContactForm()" data-testid="button-request-analysis">
+                            Detaillierte Analyse anfragen
+                            <span class="arrow">→</span>
+                        </button>
+                    ` : `
+                        <button class="btn btn-primary" onclick="submitResults()" data-testid="button-submit-results">
+                            Ergebnisse einreichen
+                            <span class="arrow">→</span>
+                        </button>
+                    `}
+                    <button class="btn btn-secondary" onclick="location.reload()" data-testid="button-restart">
+                        Neues Assessment
+                    </button>
+                </div>
+            `;
+        }
+        
+        function getRecommendations(scores, maxScores) {
+            const recommendations = [];
+            
+            if (scores.reach / maxScores.reach < 0.6) {
+                recommendations.push({
+                    title: 'Reach optimieren',
+                    text: 'Investieren Sie in Ihre Reichweite durch bezahlte Werbung, SEO und strategische Partnerschaften.'
+                });
+            }
+            
+            if (scores.relate / maxScores.relate < 0.6) {
+                recommendations.push({
+                    title: 'Content-Strategie ausbauen',
+                    text: 'Entwickeln Sie eine konsistente Content-Strategie mit personalisierten Inhalten für Ihre Buyer Journey.'
+                });
+            }
+            
+            if (scores.respond / maxScores.respond < 0.6) {
+                recommendations.push({
+                    title: 'Lead-Management verbessern',
+                    text: 'Implementieren Sie Lead Scoring und automatisierte Nurturing-Prozesse für bessere Conversion-Raten.'
+                });
+            }
+            
+            if (scores.retain / maxScores.retain < 0.6) {
+                recommendations.push({
+                    title: 'Kundenbindung stärken',
+                    text: 'Etablieren Sie ein strukturiertes Retention-Programm mit regelmäßiger Kommunikation und Upselling.'
+                });
+            }
+            
+            if (recommendations.length === 0) {
+                recommendations.push({
+                    title: 'Hervorragend!',
+                    text: 'Ihre Marketing-Aktivitäten sind gut aufgestellt. Fokussieren Sie sich auf kontinuierliche Optimierung.'
+                });
+            }
+            
+            return recommendations.map(rec => `
+                <div class="recommendation-item">
+                    <div class="recommendation-title">${rec.title}</div>
+                    <div class="recommendation-text">${rec.text}</div>
+                </div>
+            `).join('');
+        }
+        
+        function drawRadarChart() {
+            const canvas = document.getElementById('radarChart');
+            if (!canvas) return;
+            
+            const ctx = canvas.getContext('2d');
+            const centerX = canvas.width / 2;
+            const centerY = canvas.height / 2;
+            const radius = Math.min(centerX, centerY) - 60;
+            
+            const scores = state.scores;
+            const maxScores = { reach: 35, relate: 32, respond: 27, retain: 27 };
+            const labels = ['Reach', 'Relate', 'Respond', 'Retain'];
+            const values = [
+                scores.reach / maxScores.reach,
+                scores.relate / maxScores.relate,
+                scores.respond / maxScores.respond,
+                scores.retain / maxScores.retain
             ];
             
-            // Calculate points for the polygon
-            const angleStep = (Math.PI * 2) / data.length;
-            const points = data.map((d, i) => {
-                const percentage = d.score / d.max;
-                const radius = maxRadius * percentage;
-                const angle = i * angleStep - Math.PI / 2; // Start from top
-                const x = centerX + radius * Math.cos(angle);
-                const y = centerY + radius * Math.sin(angle);
-                return `${x},${y}`;
-            }).join(' ');
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
             
-            // Background grid circles
-            const gridCircles = [0.25, 0.5, 0.75, 1].map(percent => 
-                `<circle cx="${centerX}" cy="${centerY}" r="${maxRadius * percent}" 
-                         fill="none" stroke="#e5e5e5" stroke-width="1"/>`
-            ).join('');
+            // Draw grid
+            ctx.strokeStyle = '#e5e5e5';
+            ctx.lineWidth = 1;
+            for (let i = 1; i <= 5; i++) {
+                const r = (radius / 5) * i;
+                ctx.beginPath();
+                for (let j = 0; j < 4; j++) {
+                    const angle = (Math.PI * 2 * j) / 4 - Math.PI / 2;
+                    const x = centerX + Math.cos(angle) * r;
+                    const y = centerY + Math.sin(angle) * r;
+                    if (j === 0) ctx.moveTo(x, y);
+                    else ctx.lineTo(x, y);
+                }
+                ctx.closePath();
+                ctx.stroke();
+            }
             
-            // Axis lines
-            const axisLines = data.map((d, i) => {
-                const angle = i * angleStep - Math.PI / 2;
-                const x = centerX + maxRadius * Math.cos(angle);
-                const y = centerY + maxRadius * Math.sin(angle);
-                return `<line x1="${centerX}" y1="${centerY}" x2="${x}" y2="${y}" 
-                              stroke="#e5e5e5" stroke-width="2"/>`;
-            }).join('');
+            // Draw axes
+            ctx.strokeStyle = '#d4d4d4';
+            ctx.lineWidth = 1;
+            for (let i = 0; i < 4; i++) {
+                const angle = (Math.PI * 2 * i) / 4 - Math.PI / 2;
+                const x = centerX + Math.cos(angle) * radius;
+                const y = centerY + Math.sin(angle) * radius;
+                ctx.beginPath();
+                ctx.moveTo(centerX, centerY);
+                ctx.lineTo(x, y);
+                ctx.stroke();
+            }
             
-            // Labels
-            const labels = data.map((d, i) => {
-                const angle = i * angleStep - Math.PI / 2;
-                const labelRadius = maxRadius + 30;
-                const x = centerX + labelRadius * Math.cos(angle);
-                const y = centerY + labelRadius * Math.sin(angle);
-                return `<text x="${x}" y="${y}" text-anchor="middle" 
-                              style="font-family: var(--font-extended); font-weight: 700; font-size: 14px;">${d.label}</text>`;
-            }).join('');
+            // Draw data
+            ctx.fillStyle = 'rgba(10, 10, 10, 0.1)';
+            ctx.strokeStyle = '#0a0a0a';
+            ctx.lineWidth = 2;
+            ctx.beginPath();
+            for (let i = 0; i < values.length; i++) {
+                const angle = (Math.PI * 2 * i) / values.length - Math.PI / 2;
+                const r = radius * values[i];
+                const x = centerX + Math.cos(angle) * r;
+                const y = centerY + Math.sin(angle) * r;
+                if (i === 0) ctx.moveTo(x, y);
+                else ctx.lineTo(x, y);
+            }
+            ctx.closePath();
+            ctx.fill();
+            ctx.stroke();
             
-            return `
-                <svg width="400" height="400" viewBox="0 0 400 400" style="max-width: 100%;">
-                    ${gridCircles}
-                    ${axisLines}
-                    <polygon points="${points}" fill="#f7e74f" fill-opacity="0.3" 
-                             stroke="#f7e74f" stroke-width="3" stroke-linejoin="round"
-                             style="transition: all 1s ease-out;"/>
-                    ${labels}
-                </svg>
-            `;
+            // Draw labels
+            ctx.fillStyle = '#404040';
+            ctx.font = '500 14px Inter, sans-serif';
+            ctx.textAlign = 'center';
+            ctx.textBaseline = 'middle';
+            for (let i = 0; i < labels.length; i++) {
+                const angle = (Math.PI * 2 * i) / labels.length - Math.PI / 2;
+                const x = centerX + Math.cos(angle) * (radius + 35);
+                const y = centerY + Math.sin(angle) * (radius + 35);
+                ctx.fillText(labels[i], x, y);
+            }
         }
-
-        function renderPhaseCard(name, score, max, phase) {
-            const percentage = Math.round((score / max) * 100);
-            const interpretation = getInterpretation(score, max, phase);
-            
+        
+        function renderContactForm() {
             return `
-                <div class="phase-card">
-                    <div class="phase-name">${name}</div>
-                    <div class="phase-score">${score}<span style="font-size: 1.5rem; color: var(--color-gray-700);">/${max}</span></div>
-                    <div class="phase-bar">
-                        <div class="phase-bar-fill" data-width="${percentage}" style="width: 0"></div>
-                    </div>
-                    <div class="phase-interpretation">${interpretation}</div>
+                <div class="contact-form fade-in">
+                    <h3 style="margin-bottom: 1.5rem;">Detaillierte Analyse anfordern</h3>
+                    <form onsubmit="submitResults(); return false;">
+                        <div class="form-group">
+                            <label class="form-label" for="name">Name *</label>
+                            <input 
+                                type="text" 
+                                id="name" 
+                                class="form-input" 
+                                required
+                                onchange="state.answers['q_702'] = this.value"
+                                data-testid="input-name"
+                            >
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label" for="email">E-Mail *</label>
+                            <input 
+                                type="email" 
+                                id="email" 
+                                class="form-input" 
+                                required
+                                onchange="state.answers['q_703'] = this.value"
+                                data-testid="input-email"
+                            >
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label" for="company">Unternehmen *</label>
+                            <input 
+                                type="text" 
+                                id="company" 
+                                class="form-input" 
+                                required
+                                onchange="state.answers['q_704'] = this.value"
+                                data-testid="input-company"
+                            >
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label" for="industry">Branche</label>
+                            <input 
+                                type="text" 
+                                id="industry" 
+                                class="form-input"
+                                onchange="state.answers['q_705'] = this.value"
+                                data-testid="input-industry"
+                            >
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label" for="notes">Anmerkungen</label>
+                            <textarea 
+                                id="notes" 
+                                class="form-input form-textarea"
+                                onchange="state.answers['q_706'] = this.value"
+                                data-testid="input-notes"
+                            ></textarea>
+                        </div>
+                        <div class="form-group">
+                            <div class="checkbox-wrapper">
+                                <input 
+                                    type="checkbox" 
+                                    id="consultation" 
+                                    class="checkbox-input"
+                                    onchange="state.answers['q_707'] = this.checked ? 'yes' : 'no'"
+                                    data-testid="checkbox-consultation"
+                                >
+                                <label class="checkbox-label" for="consultation">
+                                    Ich möchte ein unverbindliches Beratungsgespräch
+                                </label>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="checkbox-wrapper">
+                                <input 
+                                    type="checkbox" 
+                                    id="consent" 
+                                    class="checkbox-input" 
+                                    required
+                                    onchange="state.answers['q_708'] = this.checked ? 'agreed' : 'not-agreed'"
+                                    data-testid="checkbox-consent"
+                                >
+                                <label class="checkbox-label" for="consent">
+                                    Ich stimme der Verarbeitung meiner Daten gemäß der Datenschutzerklärung zu *
+                                </label>
+                            </div>
+                        </div>
+                        <button type="submit" class="btn btn-primary" data-testid="button-submit-contact">
+                            Analyse anfordern
+                            <span class="arrow">→</span>
+                        </button>
+                    </form>
                 </div>
             `;
         }
-
-        function renderInsights() {
-            const scores = state.scores;
-            const weaknesses = [];
-            const strengths = [];
-            
-            if (scores.reach < 20) weaknesses.push({ phase: 'Reach', text: 'Sichtbarkeit systematisch aufbauen' });
-            else if (scores.reach >= 25) strengths.push({ phase: 'Reach', text: 'Starke Präsenz im Markt' });
-            
-            if (scores.relate < 18) weaknesses.push({ phase: 'Relate', text: 'Lead-Nurturing automatisieren' });
-            else if (scores.relate >= 24) strengths.push({ phase: 'Relate', text: 'Effektive Beziehungspflege' });
-            
-            if (scores.respond < 15) weaknesses.push({ phase: 'Respond', text: 'Marketing-Sales-Alignment verbessern' });
-            else if (scores.respond >= 20) strengths.push({ phase: 'Respond', text: 'Gute Vertriebsintegration' });
-            
-            if (scores.retain < 15) weaknesses.push({ phase: 'Retain', text: 'Bestandskunden-Marketing etablieren' });
-            else if (scores.retain >= 20) strengths.push({ phase: 'Retain', text: 'Aktives Bestandskunden-Management' });
-            
-            return `
-                <div class="insight-card">
-                    <h3><span class="insight-icon">+</span> Ihre Stärken</h3>
-                    <ul class="insight-list">
-                        ${strengths.length > 0 ? strengths.map(s => `<li>${s.text}</li>`).join('') : '<li>Noch viel Potenzial zum Aufbau</li>'}
-                    </ul>
-                </div>
-                <div class="insight-card">
-                    <h3><span class="insight-icon">→</span> Optimierungsbereiche</h3>
-                    <ul class="insight-list">
-                        ${weaknesses.length > 0 ? weaknesses.map(w => `<li>${w.text}</li>`).join('') : '<li>Weiter so!</li>'}
-                    </ul>
-                </div>
-            `;
-        }
-
+        
         async function submitResults() {
-            // Show loading state
-            const submitButton = document.querySelector('.btn-primary');
+            const submitButton = event?.target || document.querySelector('[data-testid="button-submit-contact"]') || document.querySelector('[data-testid="button-submit-results"]');
+            if (!submitButton) return;
+            
             const originalText = submitButton.innerHTML;
             submitButton.disabled = true;
-            submitButton.innerHTML = '<div class="spinner" style="width: 20px; height: 20px; margin: 0 auto;"></div>';
+            submitButton.innerHTML = 'Wird gesendet...';
             
+            const scores = calculateScores();
             const submitData = {
                 timestamp: new Date().toISOString(),
+                scores: scores,
                 answers: state.answers,
-                scores: state.scores,
-                phaseScores: {
-                    reach: {
-                        score: state.scores.reach,
-                        max: 35,
-                        percentage: Math.round((state.scores.reach / 35) * 100),
-                        interpretation: getInterpretation(state.scores.reach, 35, 'reach')
-                    },
-                    relate: {
-                        score: state.scores.relate,
-                        max: 32,
-                        percentage: Math.round((state.scores.relate / 32) * 100),
-                        interpretation: getInterpretation(state.scores.relate, 32, 'relate')
-                    },
-                    respond: {
-                        score: state.scores.respond,
-                        max: 27,
-                        percentage: Math.round((state.scores.respond / 27) * 100),
-                        interpretation: getInterpretation(state.scores.respond, 27, 'respond')
-                    },
-                    retain: {
-                        score: state.scores.retain,
-                        max: 27,
-                        percentage: Math.round((state.scores.retain / 27) * 100),
-                        interpretation: getInterpretation(state.scores.retain, 27, 'retain')
-                    }
-                },
-                totalScore: state.scores.total,
-                totalInterpretation: getInterpretation(state.scores.total, 121, 'total'),
-                wantsDetailedAnalysis: state.answers.q_600 === 'yes',
-                contactInfo: state.showContact ? {
-                    firstName: state.answers.q_701,
-                    lastName: state.answers.q_702,
+                contact: state.showContact ? {
+                    name: state.answers.q_702,
                     email: state.answers.q_703,
                     company: state.answers.q_704,
                     industry: state.answers.q_705,
@@ -1753,18 +1612,18 @@
         function showSuccessMessage() {
             const container = document.getElementById('appContainer');
             container.innerHTML = `
-                <div style="text-align: center; padding: 4rem 2rem;">
-                    <div style="width: 80px; height: 80px; background: #f7e74f; border-radius: 50%; margin: 0 auto 2rem; display: flex; align-items: center; justify-content: center;">
-                        <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3">
+                <div class="success-container fade-in">
+                    <div class="success-icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                             <polyline points="20 6 9 17 4 12"></polyline>
                         </svg>
                     </div>
-                    <h2 style="margin-bottom: 1rem;">Vielen Dank!</h2>
-                    <p style="font-size: 1.125rem; color: var(--color-gray-700); margin-bottom: 2rem;">
-                        Ihre Ergebnisse wurden erfolgreich übermittelt.
+                    <h2 class="success-title">Vielen Dank!</h2>
+                    <p class="success-text">
+                        Ihre Ergebnisse wurden erfolgreich gespeichert.
                         ${state.showContact ? '<br>Sie erhalten Ihre detaillierte Analyse in Kürze per E-Mail.' : ''}
                     </p>
-                    <button class="btn btn-primary" onclick="location.reload()">
+                    <button class="btn btn-primary" onclick="location.reload()" data-testid="button-new-assessment">
                         Neues Assessment starten
                         <span class="arrow">→</span>
                     </button>
@@ -1776,7 +1635,7 @@
         function startAssessment() {
             state.showWelcome = false;
             state.currentQuestionIndex = 0;
-            renderQuestion(getCurrentQuestion());
+            render();
         }
 
         function handleAnswer(questionId, value, score) {
@@ -1824,43 +1683,73 @@
             });
         }
 
-        function handleTextAnswer(questionId, value) {
-            state.answers[questionId] = value;
-            
-            // Update button state
-            const button = document.querySelector('.btn-primary');
-            if (button) button.disabled = !value.trim();
-        }
-
         function nextQuestion() {
-            const currentQuestion = getCurrentQuestion();
-            
-            // Check for opt-in question
-            if (currentQuestion.id === 'q_600' && state.answers.q_600 === 'yes') {
-                state.showContact = true;
-            }
-            
-            state.currentQuestionIndex++;
-            
-            const nextQuestion = getCurrentQuestion();
-            if (nextQuestion) {
-                renderQuestion(nextQuestion);
+            if (state.currentQuestionIndex < getQuestions().length - 1) {
+                state.currentQuestionIndex++;
+                render();
             } else {
-                renderResults();
+                showResults();
             }
         }
 
         function previousQuestion() {
-            state.currentQuestionIndex--;
-            const prevQuestion = getCurrentQuestion();
-            if (prevQuestion) {
-                renderQuestion(prevQuestion);
+            if (state.currentQuestionIndex > 0) {
+                state.currentQuestionIndex--;
+                render();
+            }
+        }
+
+        function showResults() {
+            state.showResults = true;
+            render();
+            setTimeout(() => {
+                drawRadarChart();
+            }, 100);
+        }
+
+        function showContactForm() {
+            state.showContact = true;
+            render();
+            setTimeout(() => {
+                drawRadarChart();
+            }, 100);
+        }
+
+        function render() {
+            const container = document.getElementById('appContainer');
+            const progressWrapper = document.getElementById('progressWrapper');
+            
+            if (state.showWelcome) {
+                progressWrapper.classList.add('hidden');
+                container.innerHTML = renderWelcome();
+            } else if (state.showResults) {
+                progressWrapper.classList.add('hidden');
+                const resultsHtml = renderResults();
+                const contactHtml = state.showContact ? renderContactForm() : '';
+                container.innerHTML = resultsHtml + contactHtml;
+                setTimeout(() => {
+                    drawRadarChart();
+                }, 100);
+            } else {
+                progressWrapper.classList.remove('hidden');
+                progressWrapper.innerHTML = renderProgress();
+                container.innerHTML = renderQuestion(getCurrentQuestion());
             }
         }
 
         // Initialize
-        renderWelcome();
-        updateProgress();
+        document.addEventListener('DOMContentLoaded', () => {
+            render();
+        });
     </script>
+</head>
+<body>
+    <div id="progressWrapper" class="progress-wrapper hidden"></div>
+    
+    <main class="main-content">
+        <div class="container">
+            <div id="appContainer"></div>
+        </div>
+    </main>
 </body>
 </html>
