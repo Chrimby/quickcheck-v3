@@ -1,0 +1,94 @@
+{
+  "description": "Beispiel-Payload die an Ihren Webhook gesendet wird",
+  "timestamp": "2025-01-10T10:30:45.123Z",
+  "answers": {
+    "q_001": "26-50",
+    "q_002": "16-30",
+    "q_101": "3",
+    "q_102": ["blog", "linkedin", "newsletter"],
+    "q_103": "4",
+    "q_104": "3",
+    "q_105": "3",
+    "q_106": "1001-2500",
+    "q_107": "basic",
+    "q_201": "4",
+    "q_202": "501-1000",
+    "q_203": "2",
+    "q_204": "4",
+    "q_205": "3",
+    "q_206": "2",
+    "q_207": "yes",
+    "q_301": "3",
+    "q_302": "2",
+    "q_303": "4",
+    "q_304": "4",
+    "q_305": "2",
+    "q_306": "10-20",
+    "q_307": "8-12",
+    "q_401": "2",
+    "q_402": "2",
+    "q_403": "2",
+    "q_404": "11-25",
+    "q_405": "2",
+    "q_406": "no",
+    "q_407": "3",
+    "q_501": "quality",
+    "q_502": "3000-5000",
+    "q_503": "build_system",
+    "q_600": "yes",
+    "q_701": "Max",
+    "q_702": "Mustermann",
+    "q_703": "max@beispiel.de",
+    "q_704": "Muster GmbH",
+    "q_705": "B2B Software",
+    "q_706": "Wir möchten unser Marketing systematisch aufbauen",
+    "q_707": "yes",
+    "q_708": "agreed"
+  },
+  "scores": {
+    "reach": 18,
+    "relate": 15,
+    "respond": 12,
+    "retain": 10,
+    "total": 55
+  },
+  "phaseScores": {
+    "reach": {
+      "score": 18,
+      "max": 35,
+      "percentage": 51,
+      "interpretation": "Grundlagen sind da, aber viel Potenzial für Optimierung."
+    },
+    "relate": {
+      "score": 15,
+      "max": 32,
+      "percentage": 47,
+      "interpretation": "Basis vorhanden, aber noch nicht optimal vernetzt."
+    },
+    "respond": {
+      "score": 12,
+      "max": 27,
+      "percentage": 44,
+      "interpretation": "Grundlegende Prozesse vorhanden, aber verbesserbar."
+    },
+    "retain": {
+      "score": 10,
+      "max": 27,
+      "percentage": 37,
+      "interpretation": "Erste Ansätze vorhanden, aber nicht systematisch."
+    }
+  },
+  "totalScore": 55,
+  "totalInterpretation": "Grundlagen vorhanden, aber noch sehr viel Potenzial.",
+  "wantsDetailedAnalysis": true,
+  "contactInfo": {
+    "firstName": "Max",
+    "lastName": "Mustermann",
+    "email": "max@beispiel.de",
+    "company": "Muster GmbH",
+    "industry": "B2B Software",
+    "notes": "Wir möchten unser Marketing systematisch aufbauen",
+    "wantsConsultation": true,
+    "consentGiven": true
+  }
+}
