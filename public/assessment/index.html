@@ -4329,10 +4329,105 @@
                 return;
             }
 
+            // Calculate interpretations for each phase
+            const interpretations = {};
+            SCORING_SECTIONS.forEach(section => {
+                const max = MAX_SCORES[section] || 0;
+                const value = state.scores[section] || 0;
+                const percentage = max ? Math.round((value / max) * 100) : 0;
+                const table = INTERPRETATION_MAP[section] || [];
+                const match = table.find(entry => percentage >= entry.min) || table[table.length - 1];
+
+                if (match) {
+                    interpretations[section] = {
+                        percentage,
+                        title: match.title,
+                        description: match.description
+                    };
+                }
+            });
+
+            // Add overall interpretation
+            const totalMax = MAX_SCORES.total || 0;
+            const totalPercentage = totalMax ? Math.round((state.scores.total / totalMax) * 100) : 0;
+            const overallMatch = OVERALL_INTERPRETATIONS.find(entry => totalPercentage >= entry.min) ||
+                                OVERALL_INTERPRETATIONS[OVERALL_INTERPRETATIONS.length - 1];
+
+            if (overallMatch) {
+                interpretations.overall = {
+                    percentage: totalPercentage,
+                    title: overallMatch.title,
+                    description: overallMatch.description
+                };
+            }
+
+            // Generate recommendations
+            const recommendationMatrix = {
+                reach: [
+                    { threshold: 45, title: 'Reach neu aufbauen', text: 'LinkedIn-Profile, Website und Magnet-Angebote sichtbarer machen. Starten Sie mit geschärfter Positionierung, Content-Plan und einem klaren Leitfunnel.' },
+                    { threshold: 70, title: 'Content & Magneten ausbauen', text: 'Ihre Präsenz ist spürbar, aber nicht konstant. Planen Sie redaktionelle Routinen, Paid-Experimente und mindestens ein Lead-Magnet-Update pro Quartal.' }
+                ],
+                relate: [
+                    { threshold: 45, title: 'Nurturing-Struktur etablieren', text: 'Leads bleiben ohne Betreuung. Etablieren Sie CRM-Pflege, automatisierte Sequenzen und klare Übergaben vom Download zum Termin.' },
+                    { threshold: 70, title: 'Segmentierung vertiefen', text: 'Segmentieren Sie nach Interesse und Verhalten, repurposen Sie Content und bauen Sie Journeys für jede Buyer-Persona.' }
+                ],
+                respond: [
+                    { threshold: 45, title: 'Sales-Alignment herstellen', text: 'Definieren Sie gemeinsame KPIs, Response-SLAs und Pipeline-Meetings, damit keine Anfragen mehr liegen bleiben.' },
+                    { threshold: 70, title: 'Response-Zeit beschleunigen', text: 'Beschleunigen Sie Feedback-Loops zwischen Marketing und Vertrieb, schärfen Sie Qualifikationskriterien und nutzen Sie Deal-Tracking.' }
+                ],
+                retain: [
+                    { threshold: 45, title: 'Bestandskunden aktivieren', text: 'Starten Sie systematische Kundenprogramme: Zufriedenheit messen, Expansion-Trigger definieren und Referral-Incentives setzen.' },
+                    { threshold: 70, title: 'Customer Marketing systematisieren', text: 'Standardisieren Sie Erfolgsgeschichten, QBRs und Customer-Marketing-Kampagnen, um Bestandskunden planbar zu aktivieren.' }
+                ]
+            };
+
+            const recommendations = [];
+            const phaseMeta = {
+                reach: { badge: 'Phase 1', title: 'Reach' },
+                relate: { badge: 'Phase 2', title: 'Relate' },
+                respond: { badge: 'Phase 3', title: 'Respond' },
+                retain: { badge: 'Phase 4', title: 'Retain' }
+            };
+
+            let priority = 1;
+            SCORING_SECTIONS.forEach(section => {
+                const percentage = interpretations[section]?.percentage || 0;
+                const options = recommendationMatrix[section] || [];
+                const match = options.find(option => percentage < option.threshold);
+
+                if (match) {
+                    const meta = phaseMeta[section] || {};
+                    recommendations.push({
+                        phase: section,
+                        phaseBadge: meta.badge || '',
+                        phaseTitle: meta.title || '',
+                        title: match.title,
+                        text: match.text,
+                        meta: `Aktueller Score: ${percentage}%`,
+                        priority: priority++
+                    });
+                }
+            });
+
+            // If all phases are good, add overall recommendation
+            if (recommendations.length === 0) {
+                recommendations.push({
+                    phase: 'overall',
+                    phaseBadge: 'System',
+                    phaseTitle: 'Gesamtscore',
+                    title: 'Starke Basis - jetzt skalieren',
+                    text: 'Sie steuern Marketing bereits als System. Verdichten Sie KPIs und automatisieren Sie Reportings, damit Wachstum kalkulierbar bleibt.',
+                    meta: `Aktueller Score: ${totalPercentage}%`,
+                    priority: 1
+                });
+            }
+
             const payload = {
                 event: 'assessment_completed',
                 answers: state.answers,
                 scores: state.scores,
+                interpretations,
+                recommendations,
                 assessmentId: state.assessmentId,
                 timestamp: new Date().toISOString()
             };
