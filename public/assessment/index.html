@@ -1,10 +1,24 @@
 <!DOCTYPE html>
-<html lang="de">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>B2B Marketing Assessment - Das 4R-System | Brixon</title>
-    <meta name="description" content="Finden Sie heraus, wo Ihr Marketing steht - ehrlich, ohne Schnickschnack. 8-12 Minuten für Ihre personalisierte Analyse.">
+    <title>B2B Marketing Assessment - The 4R System | Brixon</title>
+    <meta name="description" content="Find out where your marketing stands - honest, no fluff. 8-12 minutes for your personalized analysis.">
+
+    <script>
+        // Set HTML lang and meta tags based on URL
+        (function() {
+            const path = window.location.pathname.toLowerCase();
+            const isDe = path.includes('/de/');
+
+            if (isDe) {
+                document.documentElement.lang = 'de';
+                document.title = 'B2B Marketing Assessment - Das 4R-System | Brixon';
+                document.querySelector('meta[name="description"]').content = 'Finden Sie heraus, wo Ihr Marketing steht - ehrlich, ohne Schnickschnack. 8-12 Minuten für Ihre personalisierte Analyse.';
+            }
+        })();
+    </script>
     
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -1588,6 +1602,16 @@
     </style>
     
     <script>
+        // Language Detection
+        const detectLanguage = () => {
+            const path = window.location.pathname.toLowerCase();
+            if (path.includes('/de/')) return 'de';
+            if (path.includes('/en/')) return 'en';
+            return 'en'; // Default to English
+        };
+
+        const CURRENT_LANG = detectLanguage();
+
         const CONFIG = {
             webhookUrl: 'YOUR_WEBHOOK_URL_HERE',
             calendlyUrl: 'https://calendly.com/sauerborn-brixongroup/10-to-100-leads-system-call',
@@ -1602,8 +1626,12 @@
                     results_viewed: '',
                     cta_clicked: ''
                 }
-            },
-            questions: [
+            }
+        };
+
+        const TRANSLATIONS = {
+            de: {
+                questions: [
                 // REACH SECTION
                 {
                     id: 'q_101',
@@ -2155,8 +2183,643 @@
                         { value: 'fullservice', label: 'Komplette Done-for-you Unterstützung' }
                     ]
                 }
-            ]
+            ],
+                phaseIntros: {
+                    reach: {
+                        eyebrow: 'Phase 1',
+                        title: 'Reach – Sichtbar bei den richtigen Entscheider:innen',
+                        description: 'Systematisch sichtbar werden bei der richtigen Zielgruppe durch strategischen Content, zielgerichtete Lead-Magneten und verstärkende Paid-Kampagnen.'
+                    },
+                    relate: {
+                        eyebrow: 'Phase 2',
+                        title: 'Relate – Beziehungen zu warmen Interessenten aufbauen',
+                        description: 'Kontinuierliche Beziehungen zu warmen Interessenten durch Newsletter, Lead-Nurturing-Sequenzen und systematisches Follow-up aufbauen.'
+                    },
+                    respond: {
+                        eyebrow: 'Phase 3',
+                        title: 'Respond – Kaufsignale konsequent nutzen',
+                        description: 'Kaufsignale erkennen und durch optimierte Marketing-Sales-Übergabe in Abschlüsse verwandeln.'
+                    },
+                    retain: {
+                        eyebrow: 'Phase 4',
+                        title: 'Retain – Bestandskunden als Wachstumsmotor',
+                        description: 'Bestandskunden systematisch entwickeln, zu Referenzen machen und als Wachstumsmotor nutzen.'
+                    },
+                    general: {
+                        eyebrow: 'Allgemein',
+                        title: 'Einordnung & Ziele schärfen',
+                        description: 'Ein paar letzte Fragen helfen uns, Ihre Ausgangslage besser zu verstehen und die Empfehlungen passgenau zu machen.'
+                    }
+                },
+                ui: {
+                    continueButton: 'Weiter zur Phase',
+                    resultsTitle: 'Ihre Ergebnisse',
+                    resultsSubtitle: 'Basierend auf Ihren Angaben',
+                    ctaEyebrow: 'Nächster Schritt',
+                    ctaHeading: 'Termin mit Christoph Sauerborn vereinbaren',
+                    ctaText: 'Gemeinsam übersetzen wir Ihre Ergebnisse in eine klare Wachstums-Roadmap. Im Gespräch erfahren Sie, wo Ihr größter Hebel liegt und wie Sie das 10→100 Leads System in Ihrer Organisation etablieren.',
+                    successTitle: 'Vielen Dank!',
+                    successText: 'Ihre Ergebnisse wurden gespeichert.',
+                    newAssessment: 'Neues Assessment'
+                }
+            },
+            en: {
+                questions: [
+                    // REACH SECTION
+                    {
+                        id: 'q_101',
+                        section: 'reach',
+                        sectionTitle: 'Phase 1: Reach - Are You Even Being Found?',
+                        text: 'How active are you or your leadership team personally on LinkedIn?',
+                        hint: 'Important: We mean personal profiles, not your company page. People follow people, not companies.',
+                        type: 'single',
+                        options: [
+                            { value: '0', label: 'LinkedIn? We don\'t have it or don\'t use it', score: 0 },
+                            { value: '1', label: 'Profile exists, but we never post', score: 1 },
+                            { value: '2', label: 'Occasional posts (1-2x per month)', score: 2 },
+                            { value: '3', label: 'Regular activity (several times per week)', score: 3 },
+                            { value: '4', label: 'Very active with strategic content', score: 4 },
+                            { value: '5', label: 'Daily presence, measurably growing engagement', score: 5 }
+                        ]
+                    },
+                    {
+                        id: 'q_102',
+                        section: 'reach',
+                        text: 'What do you primarily write about when creating content?',
+                        type: 'single',
+                        options: [
+                            { value: 'products', label: 'About our products and services', score: 1 },
+                            { value: 'company', label: 'About our company and achievements', score: 1 },
+                            { value: 'industry', label: 'About general industry news', score: 2 },
+                            { value: 'problems', label: 'About specific problems our audience faces', score: 5 },
+                            { value: 'experience', label: 'About our practical experience from real projects', score: 5 },
+                            { value: 'none', label: 'We don\'t currently create content', score: 0 }
+                        ]
+                    },
+                    {
+                        id: 'q_103',
+                        section: 'reach',
+                        text: 'Do you have lead magnets that people exchange their email for?',
+                        hint: 'We mean things like: E-books, checklists, calculators, templates - not "Free consultation call".',
+                        type: 'single',
+                        options: [
+                            { value: '0', label: 'No, we don\'t have any', score: 0 },
+                            { value: '1', label: 'Yes, but they\'re barely downloaded', score: 1 },
+                            { value: '3', label: 'Yes, 1-2 that work quite well', score: 3 },
+                            { value: '5', label: 'Yes, multiple that regularly bring leads', score: 5 }
+                        ]
+                    },
+                    {
+                        id: 'q_104',
+                        section: 'reach',
+                        text: 'When someone lands on your website: What happens next?',
+                        type: 'single',
+                        options: [
+                            { value: '1', label: 'They read a bit and disappear', score: 1 },
+                            { value: '2', label: 'There\'s a contact form, nothing more', score: 2 },
+                            { value: '3', label: 'Multiple ways to reach us', score: 3 },
+                            { value: '4', label: 'Concrete downloadable offers', score: 4 },
+                            { value: '5', label: 'The website is systematically designed to generate leads', score: 5 }
+                        ]
+                    },
+                    {
+                        id: 'q_105',
+                        section: 'reach',
+                        text: 'Do you invest money in paid advertising (LinkedIn Ads, Google Ads, etc.)?',
+                        type: 'single',
+                        options: [
+                            { value: '0', label: 'No, not currently', score: 0 },
+                            { value: '1', label: 'Tried it once, didn\'t work', score: 1 },
+                            { value: '2', label: 'Yes, but without real strategy', score: 2 },
+                            { value: '4', label: 'Yes, targeted with measurable results', score: 4 },
+                            { value: '5', label: 'Yes, systematically - amplifies our organic marketing', score: 5 }
+                        ]
+                    },
+                    {
+                        id: 'q_106',
+                        section: 'reach',
+                        text: 'How many people visit your website on average per month?',
+                        type: 'single',
+                        options: [
+                            { value: '0-500', label: 'Under 500 visitors' },
+                            { value: '501-1000', label: '500-1,000 visitors' },
+                            { value: '1001-2500', label: '1,000-2,500 visitors' },
+                            { value: '2501-5000', label: '2,500-5,000 visitors' },
+                            { value: '5001-10000', label: '5,000-10,000 visitors' },
+                            { value: '10000+', label: 'Over 10,000 visitors' },
+                            { value: 'unknown', label: 'Honestly, no idea' }
+                        ]
+                    },
+                    {
+                        id: 'q_107',
+                        section: 'reach',
+                        text: 'Do you know where your website visitors come from?',
+                        type: 'single',
+                        options: [
+                            { value: 'no', label: 'No, we don\'t track it', score: 0 },
+                            { value: 'basic', label: 'Roughly, but not systematically', score: 2 },
+                            { value: 'advanced', label: 'Yes, detailed with end-to-end tracking', score: 5 }
+                        ]
+                    },
+                    {
+                        id: 'q_108',
+                        section: 'reach',
+                        text: 'What percentage of your website visitors become leads?',
+                        hint: 'In other words: how many leave an email address or make contact?',
+                        type: 'single',
+                        options: [
+                            { value: 'unknown', label: 'I don\'t know' },
+                            { value: '0-1', label: 'Under 1%' },
+                            { value: '1-2', label: '1-2%' },
+                            { value: '2-4', label: '2-4%' },
+                            { value: '4-6', label: '4-6%' },
+                            { value: '6+', label: 'Over 6%' }
+                        ]
+                    },
+
+                    // RELATE SECTION
+                    {
+                        id: 'q_201',
+                        section: 'relate',
+                        sectionTitle: 'Phase 2: Relate - Do You Stay Top of Mind?',
+                        text: 'Do you have an email newsletter?',
+                        hint: 'Newsletters are experiencing a revival - they give you a direct line to prospects, without algorithms in between.',
+                        type: 'single',
+                        options: [
+                            { value: '0', label: 'No', score: 0 },
+                            { value: '2', label: 'Yes, but very irregularly', score: 2 },
+                            { value: '4', label: 'Yes, regularly (at least monthly)', score: 4 },
+                            { value: '5', label: 'Yes, systematically with a clear strategy', score: 5 }
+                        ]
+                    },
+                    {
+                        id: 'q_202',
+                        section: 'relate',
+                        text: 'How many people have subscribed to your newsletter?',
+                        type: 'single',
+                        options: [
+                            { value: '0', label: 'Don\'t have a newsletter' },
+                            { value: '0-100', label: '0-100 contacts' },
+                            { value: '101-500', label: '101-500 contacts' },
+                            { value: '501-1000', label: '501-1,000 contacts' },
+                            { value: '1001-2500', label: '1,001-2,500 contacts' },
+                            { value: '2501-5000', label: '2,501-5,000 contacts' },
+                            { value: '5000+', label: 'Over 5,000 contacts' }
+                        ]
+                    },
+                    {
+                        id: 'q_203',
+                        section: 'relate',
+                        text: 'What happens when someone downloads your lead magnet?',
+                        type: 'single',
+                        options: [
+                            { value: '0', label: 'Nothing or very delayed response', score: 0 },
+                            { value: '2', label: 'An automated thank-you email', score: 2 },
+                            { value: '4', label: 'A series of follow-up emails over several weeks', score: 4 },
+                            { value: '5', label: 'Systematic nurturing, tailored to the downloaded content', score: 5 },
+                            { value: 'na', label: 'Don\'t have lead magnets', score: 0 }
+                        ]
+                    },
+                    {
+                        id: 'q_204',
+                        section: 'relate',
+                        text: 'Do you use a CRM system for your contacts?',
+                        type: 'single',
+                        options: [
+                            { value: '0', label: 'No - Excel or nothing', score: 0 },
+                            { value: '2', label: 'Yes, but barely use it', score: 2 },
+                            { value: '4', label: 'Yes, it\'s our central tool', score: 4 },
+                            { value: '5', label: 'Yes, fully integrated with email marketing', score: 5 }
+                        ]
+                    },
+                    {
+                        id: 'q_205',
+                        section: 'relate',
+                        text: 'Do you create multiple formats from one piece of content?',
+                        hint: 'Example: From one webinar you create LinkedIn posts, a blog article, video clips, email content...',
+                        type: 'single',
+                        options: [
+                            { value: '0', label: 'No, each content piece is used once', score: 0 },
+                            { value: '3', label: 'Sometimes, when we remember', score: 3 },
+                            { value: '5', label: 'Yes, systematically - "Create once, distribute forever"', score: 5 },
+                            { value: 'na', label: 'Currently create little content', score: 0 }
+                        ]
+                    },
+                    {
+                        id: 'q_206',
+                        section: 'relate',
+                        text: 'Do you have different email lists for different interests?',
+                        hint: 'Meaning: Segmentation by topics, downloaded content, or behavior?',
+                        type: 'yes_no',
+                        options: [
+                            { value: 'yes', label: 'Yes' },
+                            { value: 'no', label: 'No' }
+                        ]
+                    },
+                    {
+                        id: 'q_207',
+                        section: 'relate',
+                        text: 'How often do you think: "We should post/write something again"?',
+                        type: 'single',
+                        options: [
+                            { value: 'always', label: 'Constantly - marketing only happens when there\'s time', score: 0 },
+                            { value: 'sometimes', label: 'Sometimes - we\'re not consistent enough', score: 2 },
+                            { value: 'rarely', label: 'Rarely - we\'ve established a rhythm', score: 4 },
+                            { value: 'never', label: 'Never - runs systematically without us thinking about it', score: 5 }
+                        ]
+                    },
+
+                    // RESPOND SECTION
+                    {
+                        id: 'q_301',
+                        section: 'respond',
+                        sectionTitle: 'Phase 3: Respond - Do Leads Become Customers?',
+                        text: 'When is a lead "qualified" for you?',
+                        type: 'single',
+                        options: [
+                            { value: '0', label: 'We haven\'t defined it', score: 0 },
+                            { value: '2', label: 'Roughly defined, but not clear', score: 2 },
+                            { value: '5', label: 'Clearly defined (Budget, Authority, Need, Timing)', score: 5 }
+                        ]
+                    },
+                    {
+                        id: 'q_302',
+                        section: 'respond',
+                        text: 'When your sales team contacts a lead: Do they know what the lead did before?',
+                        hint: 'Meaning: What content did they consume? Which pages visited? What downloaded?',
+                        type: 'single',
+                        options: [
+                            { value: '0', label: 'No, no info available', score: 0 },
+                            { value: '2', label: 'Sometimes, when we remember to check', score: 2 },
+                            { value: '5', label: 'Yes, systematically documented and visible', score: 5 },
+                            { value: 'na', label: 'Don\'t have dedicated sales team' }
+                        ]
+                    },
+                    {
+                        id: 'q_303',
+                        section: 'respond',
+                        text: 'How quickly do you respond when a lead inquires?',
+                        type: 'single',
+                        options: [
+                            { value: '1', label: 'Several days', score: 1 },
+                            { value: '2', label: '24-48 hours', score: 2 },
+                            { value: '4', label: 'Within a few hours', score: 4 },
+                            { value: '5', label: 'Immediately or within 1 hour', score: 5 }
+                        ]
+                    },
+                    {
+                        id: 'q_304',
+                        section: 'respond',
+                        text: 'How do marketing and sales work together at your company?',
+                        type: 'single',
+                        options: [
+                            { value: '0', label: 'Completely separate', score: 0 },
+                            { value: '2', label: 'Occasional conversation', score: 2 },
+                            { value: '4', label: 'Regular exchange', score: 4 },
+                            { value: '5', label: 'Hand in hand with shared goals', score: 5 },
+                            { value: 'na', label: 'Don\'t have this separation - same person' }
+                        ]
+                    },
+                    {
+                        id: 'q_305',
+                        section: 'respond',
+                        text: 'Can you track which marketing activity led to a deal?',
+                        type: 'single',
+                        options: [
+                            { value: '0', label: 'No, we don\'t know', score: 0 },
+                            { value: '2', label: 'Roughly - we sometimes ask', score: 2 },
+                            { value: '5', label: 'Yes, systematically documented', score: 5 }
+                        ]
+                    },
+                    {
+                        id: 'q_306',
+                        section: 'respond',
+                        text: 'Of 100 leads that come in: How many become paying customers?',
+                        type: 'single',
+                        options: [
+                            { value: 'unknown', label: 'No idea' },
+                            { value: '0-5', label: 'Under 5' },
+                            { value: '5-10', label: '5-10' },
+                            { value: '10-20', label: '10-20' },
+                            { value: '20-30', label: '20-30' },
+                            { value: '30+', label: 'Over 30' }
+                        ]
+                    },
+                    {
+                        id: 'q_307',
+                        section: 'respond',
+                        text: 'How long does it take on average from first contact to closing?',
+                        type: 'single',
+                        options: [
+                            { value: '0-4', label: 'Under 4 weeks' },
+                            { value: '4-8', label: '1-2 months' },
+                            { value: '8-12', label: '2-3 months' },
+                            { value: '12-24', label: '3-6 months' },
+                            { value: '24+', label: 'Over 6 months' },
+                            { value: 'unknown', label: 'Not sure exactly' }
+                        ]
+                    },
+                    {
+                        id: 'q_308',
+                        section: 'respond',
+                        text: 'What\'s your biggest challenge in converting leads to customers?',
+                        type: 'single',
+                        options: [
+                            { value: 'quality', label: 'Lead quality isn\'t right' },
+                            { value: 'timing', label: 'Wrong timing - not ready to buy yet' },
+                            { value: 'followup', label: 'We lose contact in follow-up' },
+                            { value: 'competition', label: 'Losing to competition' },
+                            { value: 'price', label: 'Price is often an issue' },
+                            { value: 'trust', label: 'Trust isn\'t being built' },
+                            { value: 'none', label: 'Don\'t currently have a major problem with this' }
+                        ]
+                    },
+
+                    // RETAIN SECTION
+                    {
+                        id: 'q_401',
+                        section: 'retain',
+                        sectionTitle: 'Phase 4: Retain - Are You Leveraging Existing Customers?',
+                        text: 'Do you treat all existing customers the same?',
+                        type: 'single',
+                        options: [
+                            { value: '0', label: 'Yes, all the same', score: 0 },
+                            { value: '2', label: 'Rough distinction by revenue', score: 2 },
+                            { value: '5', label: 'Clear segmentation by value and potential', score: 5 }
+                        ]
+                    },
+                    {
+                        id: 'q_402',
+                        section: 'retain',
+                        text: 'How actively do you sell additional services to existing customers?',
+                        type: 'single',
+                        options: [
+                            { value: '0', label: 'Not at all', score: 0 },
+                            { value: '2', label: 'When it comes up', score: 2 },
+                            { value: '4', label: 'Regular conversations about further opportunities', score: 4 },
+                            { value: '5', label: 'Systematic process with clear triggers', score: 5 }
+                        ]
+                    },
+                    {
+                        id: 'q_403',
+                        section: 'retain',
+                        text: 'Do you have a system for existing customers to refer you?',
+                        type: 'single',
+                        options: [
+                            { value: '0', label: 'No', score: 0 },
+                            { value: '2', label: 'We sometimes ask for referrals', score: 2 },
+                            { value: '5', label: 'Yes, systematic program with incentives', score: 5 }
+                        ]
+                    },
+                    {
+                        id: 'q_404',
+                        section: 'retain',
+                        text: 'How many of your new customers come through referrals from existing customers?',
+                        type: 'single',
+                        options: [
+                            { value: '0-10', label: 'Almost none (0-10%)' },
+                            { value: '11-25', label: 'Some (11-25%)' },
+                            { value: '26-50', label: 'About half (26-50%)' },
+                            { value: '51-75', label: 'Most (51-75%)' },
+                            { value: '75+', label: 'Nearly all (over 75%)' },
+                            { value: 'unknown', label: 'I don\'t know' }
+                        ]
+                    },
+                    {
+                        id: 'q_405',
+                        section: 'retain',
+                        text: 'Do you measure how satisfied your existing customers are?',
+                        type: 'single',
+                        options: [
+                            { value: '0', label: 'No', score: 0 },
+                            { value: '2', label: 'Informally - we ask sometimes', score: 2 },
+                            { value: '4', label: 'Yes, regular surveys', score: 4 },
+                            { value: '5', label: 'Systematically (e.g. NPS) with follow-up on issues', score: 5 }
+                        ]
+                    },
+                    {
+                        id: 'q_406',
+                        section: 'retain',
+                        text: 'Do you use your satisfied customers for marketing?',
+                        hint: 'Meaning: Case studies, testimonials, references, joint webinars...',
+                        type: 'single',
+                        options: [
+                            { value: 'no', label: 'No, we don\'t do that', score: 0 },
+                            { value: 'rarely', label: 'Rarely, when it comes up', score: 3 },
+                            { value: 'yes', label: 'Yes, actively and systematically', score: 5 }
+                        ]
+                    },
+                    {
+                        id: 'q_407',
+                        section: 'retain',
+                        text: 'Is customer retention marketing a fixed part of your marketing strategy?',
+                        type: 'single',
+                        options: [
+                            { value: '0', label: 'No, focus is on new customers', score: 0 },
+                            { value: '3', label: 'Partially, but not systematic', score: 3 },
+                            { value: '5', label: 'Yes, equal to new customer acquisition', score: 5 }
+                        ]
+                    },
+
+                    // GENERAL SECTION
+                    {
+                        id: 'q_001',
+                        section: 'general',
+                        sectionTitle: 'General – Your Context',
+                        text: 'How many employees does your company have?',
+                        type: 'single',
+                        options: [
+                            { value: '1-10', label: '1-10 employees' },
+                            { value: '11-25', label: '11-25 employees' },
+                            { value: '26-50', label: '26-50 employees' },
+                            { value: '51-100', label: '51-100 employees' },
+                            { value: '101-250', label: '101-250 employees' },
+                            { value: '250+', label: 'Over 250 employees' }
+                        ]
+                    },
+                    {
+                        id: 'q_002',
+                        section: 'general',
+                        text: 'How many qualified leads do you currently generate per month?',
+                        hint: 'By "qualified" we mean: People who are seriously interested in your solution and could potentially buy.',
+                        type: 'single',
+                        options: [
+                            { value: '0-5', label: '0-5 leads' },
+                            { value: '6-15', label: '6-15 leads' },
+                            { value: '16-30', label: '16-30 leads' },
+                            { value: '31-50', label: '31-50 leads' },
+                            { value: '51-100', label: '51-100 leads' },
+                            { value: '100+', label: 'Over 100 leads' },
+                            { value: 'unknown', label: 'Honestly: No idea' }
+                        ]
+                    },
+                    {
+                        id: 'q_003',
+                        section: 'general',
+                        text: 'Who is primarily responsible for marketing?',
+                        type: 'single',
+                        options: [
+                            { value: 'founder', label: 'Leadership does it on the side' },
+                            { value: 'employee_parttime', label: 'An employee who does it alongside other tasks' },
+                            { value: 'employee_fulltime', label: 'A dedicated marketing person' },
+                            { value: 'team', label: 'A small marketing team' },
+                            { value: 'agency', label: 'Mainly an external agency' },
+                            { value: 'nobody', label: 'Honestly? No one really' }
+                        ]
+                    },
+                    {
+                        id: 'q_501',
+                        section: 'general',
+                        sectionTitle: 'Summary',
+                        text: 'What frustrates you most about your current marketing?',
+                        type: 'single',
+                        options: [
+                            { value: 'visibility', label: 'No one knows us / we\'re invisible' },
+                            { value: 'quantity', label: 'Too few leads' },
+                            { value: 'quality', label: 'Wrong leads - don\'t fit us' },
+                            { value: 'conversion', label: 'Leads don\'t buy' },
+                            { value: 'time', label: 'No time for it' },
+                            { value: 'knowhow', label: 'Don\'t know what to do' },
+                            { value: 'chaos', label: 'Everything is unsystematic and chaotic' },
+                            { value: 'measurement', label: 'Can\'t measure what works' }
+                        ]
+                    },
+                    {
+                        id: 'q_502',
+                        section: 'general',
+                        text: 'What do you currently invest monthly in marketing (time AND money)?',
+                        hint: 'We mean: Budget for tools, ads, external help PLUS the value of time you invest.',
+                        type: 'single',
+                        options: [
+                            { value: '0-1000', label: 'Under €1,000' },
+                            { value: '1000-3000', label: '€1,000-3,000' },
+                            { value: '3000-5000', label: '€3,000-5,000' },
+                            { value: '5000-10000', label: '€5,000-10,000' },
+                            { value: '10000-20000', label: '€10,000-20,000' },
+                            { value: '20000+', label: 'Over €20,000' }
+                        ]
+                    },
+                    {
+                        id: 'q_503',
+                        section: 'general',
+                        text: 'What\'s your realistic goal for the next 6 months?',
+                        type: 'single',
+                        options: [
+                            { value: 'double', label: 'Double lead count' },
+                            { value: 'quality', label: 'Massively improve lead quality' },
+                            { value: 'system', label: 'Finally build a system that works' },
+                            { value: 'efficiency', label: 'Need to invest less time' },
+                            { value: 'predictable', label: 'Have predictable, recurring leads' },
+                            { value: 'scale', label: 'Scale from 10 to 100+ leads' }
+                        ]
+                    },
+                    {
+                        id: 'q_504',
+                        section: 'general',
+                        text: 'Hand on heart: How consistently do you execute marketing?',
+                        type: 'single',
+                        options: [
+                            { value: 'reactive', label: 'Only when we have too few orders' },
+                            { value: 'inconsistent', label: 'In phases, not continuously' },
+                            { value: 'trying', label: 'We try, but not consistent enough' },
+                            { value: 'consistent', label: 'Pretty consistently on it' },
+                            { value: 'systematic', label: 'Systematic - runs like clockwork' }
+                        ]
+                    },
+                    {
+                        id: 'q_505',
+                        section: 'general',
+                        text: 'Which marketing measures are you currently actively pursuing?',
+                        type: 'multi',
+                        required: false,
+                        options: [
+                            { value: 'linkedin_ads', label: 'LinkedIn Ads' },
+                            { value: 'google_ads', label: 'Google Ads' },
+                            { value: 'newsletter', label: 'Regular newsletter' },
+                            { value: 'blog', label: 'Blogging / Content hub' },
+                            { value: 'webinar', label: 'Webinars or virtual events' },
+                            { value: 'events', label: 'Trade shows & live events' },
+                            { value: 'seo', label: 'SEO & organic search' },
+                            { value: 'outbound', label: 'Outbound / SDR outreach' }
+                        ]
+                    },
+                    {
+                        id: 'q_506',
+                        section: 'general',
+                        text: 'Which measures are you planning to implement in the next 3-6 months?',
+                        type: 'multi',
+                        required: false,
+                        options: [
+                            { value: 'rebranding', label: 'Rebranding / brand relaunch' },
+                            { value: 'website', label: 'Website relaunch' },
+                            { value: 'marketing_automation', label: 'Marketing automation' },
+                            { value: 'performance_ads', label: 'Performance campaigns (LinkedIn/Google)' },
+                            { value: 'product_launch', label: 'Product or service launch' },
+                            { value: 'sales_enablement', label: 'Sales enablement materials' },
+                            { value: 'thought_leadership', label: 'Thought leadership / content series' }
+                        ]
+                    },
+                    {
+                        id: 'q_507',
+                        section: 'general',
+                        text: 'The most important thing when working with an agency is for me...',
+                        type: 'single',
+                        required: false,
+                        options: [
+                            { value: 'roi', label: 'Measurable results & ROI' },
+                            { value: 'transparency', label: 'Transparent communication & reporting' },
+                            { value: 'speed', label: 'Speed of execution' },
+                            { value: 'sparring', label: 'Strategic sparring partner' },
+                            { value: 'expertise', label: 'Deep B2B expertise' },
+                            { value: 'fullservice', label: 'Complete done-for-you support' }
+                        ]
+                    }
+                ],
+                phaseIntros: {
+                    reach: {
+                        eyebrow: 'Phase 1',
+                        title: 'Reach – Visible to the Right Decision-Makers',
+                        description: 'Systematically become visible to the right audience through strategic content, targeted lead magnets, and amplifying paid campaigns.'
+                    },
+                    relate: {
+                        eyebrow: 'Phase 2',
+                        title: 'Relate – Building Relationships with Warm Prospects',
+                        description: 'Build continuous relationships with warm prospects through newsletters, lead-nurturing sequences, and systematic follow-up.'
+                    },
+                    respond: {
+                        eyebrow: 'Phase 3',
+                        title: 'Respond – Consistently Leverage Buying Signals',
+                        description: 'Recognize buying signals and convert them into deals through optimized marketing-to-sales handoff.'
+                    },
+                    retain: {
+                        eyebrow: 'Phase 4',
+                        title: 'Retain – Existing Customers as Growth Engine',
+                        description: 'Systematically develop existing customers, turn them into references, and use them as your growth engine.'
+                    },
+                    general: {
+                        eyebrow: 'General',
+                        title: 'Context & Goal Sharpening',
+                        description: 'A few final questions help us better understand your starting point and make recommendations precisely tailored.'
+                    }
+                },
+                ui: {
+                    continueButton: 'Continue to Phase',
+                    resultsTitle: 'Your Results',
+                    resultsSubtitle: 'Based on your responses',
+                    ctaEyebrow: 'Next Step',
+                    ctaHeading: 'Schedule a Call with Christoph Sauerborn',
+                    ctaText: 'Together we\'ll translate your results into a clear growth roadmap. In our conversation, you\'ll discover where your biggest leverage lies and how to establish the 10→100 Leads System in your organization.',
+                    successTitle: 'Thank You!',
+                    successText: 'Your results have been saved.',
+                    newAssessment: 'New Assessment'
+                }
+            }
         };
+
+        // Get current translation based on detected language
+        CONFIG.questions = TRANSLATIONS[CURRENT_LANG].questions;
+        const PHASE_INTROS = TRANSLATIONS[CURRENT_LANG].phaseIntros;
+        const UI_TEXT = TRANSLATIONS[CURRENT_LANG].ui;
 
         const SCORING_SECTIONS = ['reach', 'relate', 'respond', 'retain'];
 
@@ -2311,34 +2974,6 @@
                 description: 'Lead-Generierung hängt von Einzelaktionen ab. Zuerst Reichweite aufbauen, dann Prozesse für Nurturing und Sales fixieren.'
             }
         ];
-
-        const PHASE_INTROS = {
-            reach: {
-                eyebrow: 'Phase 1',
-                title: 'Reach – Sichtbar bei den richtigen Entscheider:innen',
-                description: 'Systematisch sichtbar werden bei der richtigen Zielgruppe durch strategischen Content, zielgerichtete Lead-Magneten und verstärkende Paid-Kampagnen.'
-            },
-            relate: {
-                eyebrow: 'Phase 2',
-                title: 'Relate – Beziehungen zu warmen Interessenten aufbauen',
-                description: 'Kontinuierliche Beziehungen zu warmen Interessenten durch Newsletter, Lead-Nurturing-Sequenzen und systematisches Follow-up aufbauen.'
-            },
-            respond: {
-                eyebrow: 'Phase 3',
-                title: 'Respond – Kaufsignale konsequent nutzen',
-                description: 'Kaufsignale erkennen und durch optimierte Marketing-Sales-Übergabe in Abschlüsse verwandeln.'
-            },
-            retain: {
-                eyebrow: 'Phase 4',
-                title: 'Retain – Bestandskunden als Wachstumsmotor',
-                description: 'Bestandskunden systematisch entwickeln, zu Referenzen machen und als Wachstumsmotor nutzen.'
-            },
-            general: {
-                eyebrow: 'Allgemein',
-                title: 'Einordnung & Ziele schärfen',
-                description: 'Ein paar letzte Fragen helfen uns, Ihre Ausgangslage besser zu verstehen und die Empfehlungen passgenau zu machen.'
-            }
-        };
 
         const generateAssessmentId = () => {
             if (typeof crypto !== "undefined" && typeof crypto.randomUUID === "function") {
@@ -2643,7 +3278,7 @@
                     <h3 class="phase-intro-title">${intro.title}</h3>
                     <p class="phase-intro-text">${intro.description}</p>
                     <div class="btn-group">
-                        <button class="btn btn-primary" onclick="continuePhaseIntro()">Weiter zur Phase</button>
+                        <button class="btn btn-primary" onclick="continuePhaseIntro()">${UI_TEXT.continueButton}</button>
                     </div>
                 </section>
             `;
@@ -3018,8 +3653,8 @@
 
             return `
                 <div class="results-header fade-in">
-                    <h1>Ihre Ergebnisse</h1>
-                    <p class="results-subtitle">Basierend auf Ihren Angaben</p>
+                    <h1>${UI_TEXT.resultsTitle}</h1>
+                    <p class="results-subtitle">${UI_TEXT.resultsSubtitle}</p>
                 </div>
                 
                 <section class="results-overview fade-in">
@@ -3066,9 +3701,9 @@
 
                 <section class="cta-section fade-in">
                     <div class="cta-content">
-                        <span class="cta-eyebrow">Nächster Schritt</span>
-                        <h2 class="cta-heading">Termin mit Christoph Sauerborn vereinbaren</h2>
-                        <p class="cta-text">Gemeinsam übersetzen wir Ihre Ergebnisse in eine klare Wachstums-Roadmap. Im Gespräch erfahren Sie, wo Ihr größter Hebel liegt und wie Sie das 10→100 Leads System in Ihrer Organisation etablieren.</p>
+                        <span class="cta-eyebrow">${UI_TEXT.ctaEyebrow}</span>
+                        <h2 class="cta-heading">${UI_TEXT.ctaHeading}</h2>
+                        <p class="cta-text">${UI_TEXT.ctaText}</p>
                         <ul class="cta-list">
                             <li>Individuelle Einordnung Ihrer Assessment-Scores</li>
                             <li>Priorisierte Maßnahmen für schnelle Umsetzung</li>
@@ -3311,10 +3946,10 @@
                             <polyline points="20 6 9 17 4 12"></polyline>
                         </svg>
                     </div>
-                    <h2 class="success-title">Vielen Dank!</h2>
-                    <p class="success-text">Ihre Ergebnisse wurden gespeichert.</p>
+                    <h2 class="success-title">${UI_TEXT.successTitle}</h2>
+                    <p class="success-text">${UI_TEXT.successText}</p>
                     <button class="btn btn-primary" onclick="location.reload()" data-testid="button-new-assessment">
-                        Neues Assessment
+                        ${UI_TEXT.newAssessment}
                     </button>
                 </div>
             `;
