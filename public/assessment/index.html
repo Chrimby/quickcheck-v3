@@ -251,7 +251,7 @@
         }
 
         .welcome-media-quote {
-            font-size: clamp(1.35rem, 2.6vw, 1.85rem);
+            font-size: 28px !important;
             line-height: 1.4;
             font-weight: 600;
             letter-spacing: -0.01em;
@@ -613,54 +613,56 @@
         
         /* Buttons */
         .btn {
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            gap: 0.5rem;
-            padding: 0.9rem 1.9rem;
-            font-size: 1rem;
-            font-weight: 600;
-            font-family: var(--font-base);
-            background: rgba(10, 10, 10, 0.08);
-            color: var(--color-black);
-            border: 1px solid rgba(10, 10, 10, 0.18);
-            border-radius: var(--radius);
-            cursor: pointer;
-            transition: all 0.18s ease;
-            text-decoration: none;
+            display: inline-flex !important;
+            align-items: center !important;
+            justify-content: center !important;
+            gap: 0.5rem !important;
+            padding: 0.9rem 1.9rem !important;
+            font-size: 1rem !important;
+            font-weight: 600 !important;
+            font-family: var(--font-base) !important;
+            background: rgba(10, 10, 10, 0.08) !important;
+            color: var(--color-black) !important;
+            border: 1px solid rgba(10, 10, 10, 0.18) !important;
+            border-radius: var(--radius) !important;
+            cursor: pointer !important;
+            transition: all 0.18s ease !important;
+            text-decoration: none !important;
+            box-sizing: border-box !important;
+            line-height: 1 !important;
         }
 
         .btn-primary {
-            background: var(--color-black);
-            color: var(--color-white);
-            border-color: transparent;
+            background: var(--color-black) !important;
+            color: var(--color-white) !important;
+            border-color: transparent !important;
         }
 
         .btn-primary:hover:not(:disabled) {
-            background: var(--color-gray-800);
-            transform: translateY(-1px);
+            background: var(--color-gray-800) !important;
+            transform: translateY(-1px) !important;
         }
 
         .btn-primary:disabled {
-            opacity: 0.5;
-            cursor: not-allowed;
+            opacity: 0.5 !important;
+            cursor: not-allowed !important;
         }
 
         .btn-secondary {
-            background: rgba(10, 10, 10, 0.12);
-            color: var(--color-black);
-            border: 1px solid rgba(10, 10, 10, 0.24);
+            background: rgba(10, 10, 10, 0.12) !important;
+            color: var(--color-black) !important;
+            border: 1px solid rgba(10, 10, 10, 0.24) !important;
         }
 
         .btn-secondary:hover {
-            background: rgba(10, 10, 10, 0.18);
-            border-color: rgba(10, 10, 10, 0.3);
-            transform: translateY(-1px);
+            background: rgba(10, 10, 10, 0.18) !important;
+            border-color: rgba(10, 10, 10, 0.3) !important;
+            transform: translateY(-1px) !important;
         }
 
         .btn:focus-visible {
-            outline: 2px solid rgba(247, 231, 79, 0.8);
-            outline-offset: 2px;
+            outline: 2px solid rgba(247, 231, 79, 0.8) !important;
+            outline-offset: 2px !important;
         }
         
         .btn-group {
@@ -1316,10 +1318,10 @@
             .btn-group {
                 flex-direction: column;
             }
-            
+
             .btn {
-                width: 100%;
-                padding: 1rem 1.75rem;
+                width: 100% !important;
+                padding: 1rem 1.75rem !important;
             }
             
             .cta-section {
