@@ -21,7 +21,7 @@
             --color-gray-200: #e5e5e5;
             --color-gray-300: #d4d4d4;
             --color-gray-400: #a3a3a3;
-            --color-gray-500: #737373;
+            --color-gray-500: #666666;
             --color-gray-600: #525252;
             --color-gray-700: #404040;
             --color-gray-800: #262626;
@@ -569,7 +569,19 @@
         .option.selected .option-label {
             font-weight: 500;
         }
-        
+
+        /* Focus Indicators for Accessibility */
+        .option:has(input:focus-visible) {
+            outline: 2px solid var(--color-black);
+            outline-offset: 2px;
+            border-color: var(--color-black);
+        }
+
+        .option input[type="radio"]:focus-visible ~ .option-radio,
+        .option input[type="checkbox"]:focus-visible ~ .option-checkbox {
+            box-shadow: 0 0 0 3px rgba(10, 10, 10, 0.1);
+        }
+
         /* Text Input */
         .text-input-wrapper {
             margin-top: 0.5rem;
@@ -1547,7 +1559,30 @@
             object-fit: cover;
             display: block;
         }
-        
+
+        /* Reduced Motion Support */
+        @media (prefers-reduced-motion: reduce) {
+            *,
+            *::before,
+            *::after {
+                animation-duration: 0.01ms !important;
+                animation-iteration-count: 1 !important;
+                transition-duration: 0.01ms !important;
+                scroll-behavior: auto !important;
+            }
+
+            .question-card,
+            .fade-in,
+            .fade-out {
+                animation: none;
+                opacity: 1;
+            }
+
+            .progress-overall-fill {
+                transition: none;
+            }
+        }
+
     </style>
     
     <script>
@@ -2692,16 +2727,16 @@
             const answeredText = total ? `${answeredTotal}/${total} beantwortet` : '';
 
             return `
-                <div class="progress-container">
+                <div class="progress-container" role="region" aria-label="Assessment Fortschritt">
                     <div class="progress-labels">
                         <strong>${currentLabel || 'Assessment'}</strong>
-                        <span>${questionText}</span>
+                        <span aria-live="polite" aria-atomic="true">${questionText}</span>
                     </div>
-                    <div class="progress-overall-track">
+                    <div class="progress-overall-track" role="progressbar" aria-label="Gesamtfortschritt" aria-valuenow="${overallProgress}" aria-valuemin="0" aria-valuemax="100">
                         <div class="progress-overall-fill" style="width: ${overallProgress}%"></div>
                     </div>
                     <div class="progress-labels secondary">
-                        <span>${answeredText}</span>
+                        <span aria-live="polite">${answeredText}</span>
                     </div>
                 </div>
             `;
@@ -3495,20 +3530,30 @@
                 assessmentId: state.assessmentId,
                 timestamp: new Date().toISOString()
             };
-            
+
+            // Validate webhook configuration
+            if (!CONFIG.webhookUrl || CONFIG.webhookUrl === 'YOUR_WEBHOOK_URL_HERE') {
+                console.warn('⚠️ Webhook URL not configured. Results will not be saved remotely. Please configure CONFIG.webhookUrl in production.');
+            }
+
             // Try to send to webhook
             if (CONFIG.webhookUrl && CONFIG.webhookUrl !== 'YOUR_WEBHOOK_URL_HERE') {
                 try {
-                    await fetch(CONFIG.webhookUrl, {
+                    const response = await fetch(CONFIG.webhookUrl, {
                         method: 'POST',
                         headers: { 'Content-Type': 'application/json' },
                         body: JSON.stringify(payload)
                     });
+
+                    if (!response.ok) {
+                        throw new Error(`HTTP error! status: ${response.status}`);
+                    }
                 } catch (error) {
                     console.error('Error sending to webhook:', error);
+                    // Still show success to user, but log the error
                 }
             }
-            
+
             // Show success message
             document.getElementById('app').innerHTML = `
                 <div class="container">
