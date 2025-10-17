@@ -1681,6 +1681,36 @@
             .btn-group {
                 gap: 1rem;
             }
+
+            /* Fix #9: Welcome quote line-height too large on mobile */
+            .welcome-media-quote {
+                line-height: 1.25 !important;
+                font-size: 24px !important;
+            }
+
+            /* Fix #10: Prevent content shift on start - disable question card initial animation */
+            .question-card {
+                opacity: 1 !important;
+                animation: none !important;
+                transform: none !important;
+            }
+
+            /* Fix #11: CTA section should be single column on mobile */
+            .cta-section {
+                grid-template-columns: 1fr !important;
+                gap: 2rem !important;
+                text-align: center !important;
+            }
+
+            .cta-content {
+                align-items: center !important;
+                text-align: center !important;
+            }
+
+            .cta-media {
+                justify-self: center !important;
+                width: clamp(120px, 25vw, 160px) !important;
+            }
         }
 
         /* Mobile Breakpoint: 430px (iPhone 12/13/14 Pro Max) */
@@ -4195,6 +4225,8 @@
                 stage: 'questionnaire'
             });
             render();
+            // Scroll to top immediately to prevent viewport jump
+            window.scrollTo({ top: 0, behavior: 'instant' });
         }
         
         function nextQuestion() {
