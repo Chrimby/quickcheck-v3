@@ -785,7 +785,7 @@ function malta_assess_send_webhook(array $userData, array $scoreData, array $int
                 'score' => $scoreData['percentage'], // 0-100
                 'category' => $interpretation['category'], // explore, fair, moderate, good, excellent
                 'categoryLabel' => $categoryEN, // Englische Übersetzung
-                'recommendation' => malta_assess_translate_interpretation($interpretation['interpretation'], $userData['language']),
+                'recommendation' => $interpretation['interpretation'], // Already in correct language from frontend
                 'submissionLanguage' => strtoupper($userData['language']), // DE, EN, NL
             ],
 
