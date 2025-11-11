@@ -1,0 +1,2447 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Malta Eignungscheck - Dr. Werner & Partner</title>
+    <meta name="description" content="Finden Sie heraus, ob Malta der richtige Standort für Sie ist. 12-14 Fragen für Ihre personalisierte Analyse.">
+
+    <!-- Adobe Fonts (Typekit) - Dr. Werner & Partners Brand Fonts -->
+    <link rel="stylesheet" href="https://use.typekit.net/lsl4kqd.css">
+
+    <style>
+        /* CSS Custom Properties - Dr. Werner & Partners Brand */
+        :root {
+            /* Brand Colors */
+            --color-primary: #1b1b3f;      /* Dark navy blue - brand primary */
+            --color-secondary: #2c2c2c;    /* Dark gray - body text */
+            --color-accent: #70dcc4;       /* Turquoise/mint - highlights */
+
+            --color-white: #ffffff;
+            --color-black: #1b1b3f;        /* Use brand primary as "black" */
+
+            /* Gray Scale */
+            --color-gray-50: #fafafa;
+            --color-gray-100: #f5f5f5;
+            --color-gray-200: #e5e5e5;
+            --color-gray-300: #d4d4d4;
+            --color-gray-400: #a3a3a3;
+            --color-gray-500: #666666;
+            --color-gray-600: #525252;
+            --color-gray-700: #404040;
+            --color-gray-800: #2c2c2c;     /* Brand secondary */
+            --color-gray-900: #1b1b3f;     /* Brand primary */
+
+            /* Semantic Colors */
+            --color-primary-strong: #141433;  /* Darker navy for emphasis */
+            --color-highlight: var(--color-accent);
+            --color-success: #22c55e;
+            --color-warning: #eab308;
+            --color-danger: #ef4444;
+
+            /* Typography - Brand Fonts */
+            --font-heading: "calluna", serif;          /* Serif for headings */
+            --font-body: "calluna-sans", sans-serif;   /* Sans for body */
+            --font-base: var(--font-body);
+
+            /* Design System */
+            --radius: 12px;
+            --border: 1px solid var(--color-gray-200);
+        }
+
+        /* Reset & Base */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: var(--font-base);
+            background: transparent;
+            color: var(--color-black);
+            line-height: 1.6;
+            overflow-x: hidden;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+
+        /* Typography */
+        h1, h2, h3, h4 {
+            font-family: var(--font-heading);
+            font-weight: 600;
+            line-height: 1.2;
+            letter-spacing: -0.025em;
+        }
+
+        h1 {
+            font-size: clamp(2rem, 4vw, 2.5rem);
+        }
+
+        h2 {
+            font-size: clamp(1.5rem, 3vw, 2rem);
+        }
+
+        h3 {
+            font-size: clamp(1.125rem, 2vw, 1.5rem);
+        }
+
+        h4 {
+            font-size: 1.125rem;
+        }
+
+        /* Container */
+        .container {
+            max-width: 760px;
+            margin: 0 auto;
+            padding: 2rem 1.5rem;
+        }
+
+        .container-wide {
+            max-width: 1120px;
+            margin: 0 auto;
+            padding: 2rem 1.5rem;
+        }
+
+        /* Progress Bar */
+        .progress-wrapper {
+            position: sticky;
+            top: 0;
+            z-index: 0;
+            padding: 1.5rem 0 1rem;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(8px);
+            border-bottom: 1px solid rgba(10, 10, 10, 0.06);
+            box-shadow: 0 2px 8px rgba(10, 10, 10, 0.05);
+        }
+
+        .progress-container {
+            max-width: 920px;
+            margin: 0 auto;
+            padding: 0 1.5rem;
+            display: grid;
+            gap: 0.45rem;
+        }
+
+        .progress-overall-track {
+            position: relative;
+            height: 6px;
+            background: rgba(10, 10, 10, 0.08);
+            border-radius: 999px;
+            overflow: hidden;
+        }
+
+        .progress-overall-fill {
+            height: 100%;
+            background: var(--color-highlight);
+            border-radius: inherit;
+            transition: width 0.35s ease;
+            box-shadow: 0 0 0 rgba(112, 220, 196, 0);
+        }
+
+        .progress-labels {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 0.82rem;
+            color: rgba(17, 17, 17, 0.6);
+        }
+
+        .progress-labels strong {
+            font-size: 0.88rem;
+            color: var(--color-primary-strong);
+            font-weight: 600;
+        }
+        /* Results CTA Content (uses same progress-wrapper structure) */
+        .results-cta-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 1.5rem;
+        }
+
+        .results-cta-text {
+            flex: 1;
+        }
+
+        .results-cta-title {
+            font-size: 1rem !important;
+            color: var(--color-primary-strong) !important;
+            font-weight: 600 !important;
+            margin-bottom: 0.25rem !important;
+        }
+
+        .results-cta-subtitle {
+            font-size: 0.875rem !important;
+            color: rgba(17, 17, 17, 0.6) !important;
+        }
+
+        .results-cta-button {
+            display: inline-flex !important;
+            align-items: center !important;
+            gap: 0.5rem !important;
+            padding: 0.625rem 1.5rem !important;
+            font-size: 0.9375rem !important;
+            font-weight: 700 !important;
+            font-family: var(--font-body) !important;
+            background: var(--color-primary) !important;
+            color: white !important;
+            border: 2px solid white !important;
+            border-radius: 99px !important;
+            cursor: pointer !important;
+            transition: all 0.2s ease !important;
+            text-decoration: none !important;
+            box-shadow: 0 2px 8px rgba(10, 10, 10, 0.1) !important;
+            white-space: nowrap !important;
+        }
+
+        .results-cta-button:hover {
+            background: var(--color-primary-strong) !important;
+            transform: translateY(-1px) !important;
+            box-shadow: 0 4px 12px rgba(10, 10, 10, 0.15) !important;
+        }
+
+        @media (max-width: 768px) {
+            .results-cta-content {
+                flex-direction: column;
+                text-align: center;
+                gap: 1rem;
+            }
+
+            .results-cta-button {
+                font-size: 0.875rem;
+                padding: 0.5rem 1.25rem;
+            }
+        }
+
+        /* Desktop: Add margin-top to progress bar */
+        @media (min-width: 1025px) {
+            .progress-wrapper {
+                margin-top: 100px;
+            }
+        }
+
+
+        /* Main Content */
+        .main-content {
+            margin-top: 2rem;
+            min-height: calc(100vh - 200px);
+        }
+
+        /* Welcome Screen */
+        .welcome-shell {
+            padding: 4rem 0 6rem;
+        }
+
+        .welcome-screen {
+            position: relative;
+            display: grid;
+            gap: 2.5rem;
+            padding: 3.25rem;
+            border-radius: calc(var(--radius) * 2.4);
+            background: rgba(255, 255, 255, 0.98);
+            border: 1px solid rgba(17, 17, 17, 0.08);
+            box-shadow: 0 36px 95px rgba(10, 10, 10, 0.14);
+            overflow: hidden;
+        }
+
+        .welcome-content {
+            display: grid;
+            gap: 1.5rem;
+        }
+
+        .welcome-title {
+            font-size: clamp(1.75rem, 3.5vw, 2.5rem);
+            font-weight: 600;
+            color: var(--color-black);
+            line-height: 1.15;
+            margin: 0;
+        }
+
+        .welcome-text {
+            font-size: 1.125rem;
+            color: var(--color-gray-700);
+            line-height: 1.7;
+            max-width: 650px;
+        }
+
+        .welcome-features {
+            display: grid;
+            gap: 0.875rem;
+            list-style: none;
+            padding: 0;
+            margin: 1.5rem 0 0;
+        }
+
+        .welcome-features li {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            font-size: 1rem;
+            color: var(--color-gray-700);
+        }
+
+        .welcome-features li::before {
+            content: "";
+            width: 10px;
+            height: 10px;
+            border-radius: 999px;
+            background: var(--color-black);
+            box-shadow: 0 0 0 4px rgba(112, 220, 196, 0.35);
+            flex-shrink: 0;
+        }
+
+        .btn-primary {
+            position: relative;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.6rem;
+            padding: 1.125rem 2.5rem;
+            font-size: 1.0625rem;
+            font-weight: 500;
+            font-family: var(--font-base);
+            background: var(--color-black);
+            color: var(--color-white);
+            border: none;
+            border-radius: calc(var(--radius) * 1.4);
+            cursor: pointer;
+            transition: transform 0.18s ease, box-shadow 0.18s ease;
+            text-decoration: none;
+            box-shadow: 0 16px 24px rgba(10, 10, 10, 0.25);
+            margin-top: 1rem;
+        }
+
+        .btn-primary:hover {
+            background: #000;
+            transform: translateY(-2px);
+            box-shadow: 0 20px 32px rgba(10, 10, 10, 0.3);
+        }
+
+        .btn-primary:active {
+            transform: translateY(0);
+        }
+
+        /* Question Card */
+        .question-card {
+            background: white;
+            border-radius: calc(var(--radius) * 2);
+            padding: 2.5rem;
+            box-shadow: 0 24px 48px rgba(10, 10, 10, 0.12);
+            border: 1px solid rgba(17, 17, 17, 0.06);
+        }
+
+        /* Animation OUT: fade and slide left */
+        .question-card.animating-out {
+            opacity: 0;
+            transform: translateX(-30px);
+            transition: opacity 0.3s ease-out, transform 0.3s ease-out;
+        }
+
+        /* Animation IN: also fade and slide left (starts slightly right, moves left to center) */
+        .question-card.animating-in {
+            opacity: 0;
+            transform: translateX(20px);
+            transition: none;
+        }
+
+        .question-card.animating-in.show {
+            opacity: 1;
+            transform: translateX(0);
+            transition: opacity 0.3s ease-out, transform 0.3s ease-out;
+        }
+        /* Loading Spinner for Buttons */
+        .btn-loading {
+            position: relative;
+            pointer-events: none;
+            opacity: 0.7;
+        }
+
+        .btn-loading .btn-text {
+            opacity: 0;
+        }
+
+        .btn-spinner {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 20px;
+            height: 20px;
+            border: 3px solid rgba(255, 255, 255, 0.3);
+            border-top-color: white;
+            border-radius: 50%;
+            animation: spin 0.6s linear infinite;
+        }
+
+        @keyframes spin {
+            to { transform: translate(-50%, -50%) rotate(360deg); }
+        }
+
+
+        .question-header {
+            margin-bottom: 2rem;
+        }
+
+        .question-text {
+            font-size: 1.375rem;
+            font-weight: 600;
+            color: var(--color-black);
+            line-height: 1.3;
+            margin-bottom: 0.75rem;
+        }
+
+        .question-helper-text {
+            font-size: 1rem;
+            color: var(--color-gray-600);
+            line-height: 1.6;
+        }
+
+        /* Options */
+        .options {
+            display: grid;
+            gap: 0.875rem;
+        }
+
+        .option {
+            position: relative;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            padding: 1.25rem 1.125rem;
+            border-radius: var(--radius);
+            border: 2px solid var(--color-gray-200);
+            background: white;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .option:hover {
+            border-color: var(--color-gray-400);
+            background: var(--color-gray-50);
+        }
+
+        .option.selected {
+            border-color: var(--color-black);
+            background: var(--color-gray-50);
+        }
+
+        .option-radio {
+            width: 22px;
+            height: 22px;
+            border-radius: 999px;
+            border: 2px solid var(--color-gray-400);
+            background: white;
+            flex-shrink: 0;
+            transition: all 0.2s ease;
+        }
+
+        .option.selected .option-radio {
+            border-color: var(--color-black);
+            border-width: 6px;
+        }
+
+        .option-label {
+            flex: 1;
+            display: grid;
+            gap: 0.25rem;
+        }
+
+        .option-label-title {
+            font-size: 1rem;
+            font-weight: 500;
+            color: var(--color-black);
+            line-height: 1.4;
+        }
+
+        .option-label-text {
+            font-size: 0.875rem;
+            color: var(--color-gray-600);
+            line-height: 1.5;
+        }
+
+        /* Text Input */
+        .form-group {
+            margin-top: 1rem;
+        }
+
+        /* Contact Form */
+        .contact-grid {
+            display: grid;
+            gap: 0.875rem;
+        }
+
+        /* Unified Form Field Styles - All fields look identical */
+        .form-input,
+        .form-textarea,
+        .form-select {
+            width: 100% !important;
+            padding: 1rem 1.25rem !important;
+            border: 1px solid var(--color-gray-300) !important;
+            border-radius: 12px !important;
+            font-size: 1rem !important;
+            font-family: var(--font-base) !important;
+            color: var(--color-black) !important;
+            background: white !important;
+            transition: all 0.2s ease !important;
+            box-sizing: border-box !important;
+        }
+
+        .form-input:hover,
+        .form-textarea:hover,
+        .form-select:hover {
+            border-color: var(--color-gray-400) !important;
+        }
+
+        .form-input:focus,
+        .form-textarea:focus,
+        .form-select:focus {
+            outline: none !important;
+            border-color: var(--color-primary) !important;
+            box-shadow: 0 0 0 3px rgba(27, 27, 63, 0.08) !important;
+        }
+
+        /* Select-specific styles */
+        .form-select {
+            cursor: pointer !important;
+            appearance: none !important;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%23666' d='M6 9L1 4h10z'/%3E%3C/svg%3E") !important;
+            background-repeat: no-repeat !important;
+            background-position: right 1.25rem center !important;
+            padding-right: 3rem !important;
+        }
+
+        /* Textarea-specific styles */
+        .form-textarea {
+            min-height: 120px !important;
+            resize: vertical !important;
+        }
+
+        .checkbox-wrapper {
+            display: flex !important;
+            align-items: flex-start !important;
+            gap: 0.875rem !important;
+            margin-top: 1.5rem !important;
+            padding: 1.125rem !important;
+            border: 1px solid var(--color-gray-300) !important;
+            border-radius: 12px !important;
+            background: white !important;
+            transition: all 0.2s ease !important;
+        }
+
+        .checkbox-wrapper:hover {
+            border-color: var(--color-gray-400) !important;
+        }
+
+        .checkbox-input {
+            width: 20px !important;
+            height: 20px !important;
+            flex-shrink: 0 !important;
+            cursor: pointer !important;
+            margin-top: 2px !important;
+            accent-color: var(--color-primary) !important;
+        }
+
+        .checkbox-label {
+            font-size: 0.9375rem !important;
+            color: var(--color-gray-700) !important;
+            line-height: 1.6 !important;
+            cursor: pointer !important;
+        }
+
+        .checkbox-label a {
+            color: var(--color-primary) !important;
+            text-decoration: underline !important;
+        }
+
+        .checkbox-label a:hover {
+            color: var(--color-primary-strong) !important;
+        }
+
+        /* Navigation Buttons */
+        .btn-group {
+            display: flex;
+            gap: 1rem;
+            margin-top: 2rem;
+        }
+
+        .btn {
+            flex: 1;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+            padding: 1rem 1.75rem;
+            font-size: 1rem;
+            font-weight: 500;
+            font-family: var(--font-base);
+            border-radius: var(--radius);
+            cursor: pointer;
+            transition: all 0.2s ease;
+            border: none;
+        }
+
+        .btn-secondary {
+            position: relative;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.6rem;
+            padding: 1rem 2.625rem;
+            font-size: 1.125rem;
+            font-weight: 700;
+            font-family: var(--font-body);
+            background: white;
+            color: var(--color-primary);
+            border: 2px solid var(--color-primary);
+            border-radius: 99px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            text-decoration: none;
+            box-shadow: 0 2px 8px rgba(10, 10, 10, 0.08);
+        }
+
+        .btn-secondary:hover {
+            background: var(--color-primary);
+            color: white;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 16px rgba(10, 10, 10, 0.15);
+        }
+
+        .btn-secondary:active {
+            transform: translateY(0);
+        }
+
+        .btn-submit {
+            background: var(--color-black);
+            color: white;
+        }
+
+        .btn-submit:hover {
+            background: #000;
+        }
+
+        .btn:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+
+        /* Results Screen */
+        .results-screen {
+            padding: 3rem 0;
+        }
+
+        .results-header {
+            text-align: center;
+            margin-bottom: 3rem;
+            padding: 2rem;
+            background: linear-gradient(to bottom, var(--color-gray-50), transparent);
+            border-radius: var(--radius);
+        }
+
+        .results-score-circle {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 2rem;
+            animation: fadeInScale 0.8s ease-out;
+        }
+
+        @keyframes fadeInScale {
+            from {
+                opacity: 0;
+                transform: scale(0.8);
+            }
+            to {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+
+        .results-title {
+            font-size: clamp(1.75rem, 4vw, 2.5rem);
+            font-weight: 600;
+            margin-bottom: 1.5rem;
+            color: var(--color-primary);
+        }
+
+        .results-category-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.75rem 1.5rem;
+            border-radius: 999px;
+            font-size: 1.125rem;
+            font-weight: 600;
+            margin-bottom: 1.5rem;
+            animation: slideInFromBottom 0.6s ease-out 0.3s both;
+        }
+
+        @keyframes slideInFromBottom {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .badge-icon {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 24px;
+            height: 24px;
+            background: white;
+            border-radius: 50%;
+            font-size: 14px;
+        }
+
+        .results-category-badge.excellent {
+            background: linear-gradient(135deg, #dcfce7 0%, #bbf7d0 100%);
+            color: #166534;
+            box-shadow: 0 4px 12px rgba(22, 101, 52, 0.15);
+        }
+
+        .results-category-badge.good {
+            background: linear-gradient(135deg, #dbeafe 0%, #bfdbfe 100%);
+            color: #1e40af;
+            box-shadow: 0 4px 12px rgba(30, 64, 175, 0.15);
+        }
+
+        .results-category-badge.moderate {
+            background: linear-gradient(135deg, #fef3c7 0%, #fde68a 100%);
+            color: #854d0e;
+            box-shadow: 0 4px 12px rgba(133, 77, 14, 0.15);
+        }
+
+        .results-category-badge.fair {
+            background: linear-gradient(135deg, #fed7aa 0%, #fdba74 100%);
+            color: #9a3412;
+            box-shadow: 0 4px 12px rgba(154, 52, 18, 0.15);
+        }
+
+        .results-category-badge.explore {
+            background: linear-gradient(135deg, #e0e7ff 0%, #c7d2fe 100%);
+            color: #4338ca;
+            box-shadow: 0 4px 12px rgba(67, 56, 202, 0.15);
+        }
+
+        .results-benchmark {
+            font-size: 0.9375rem;
+            color: var(--color-gray-600);
+            line-height: 1.6;
+            max-width: 550px;
+            margin: 1.5rem auto 0;
+            padding: 1rem 1.5rem;
+            background: var(--color-gray-50);
+            border-left: 3px solid var(--color-accent);
+            border-radius: 8px;
+        }
+
+        .results-interpretation {
+            font-size: 1.125rem;
+            color: var(--color-gray-700);
+            line-height: 1.7;
+            max-width: 600px;
+            margin: 2rem auto 0;
+        }
+
+        /* Details Section */
+        .details-section {
+            margin-top: 4rem;
+        }
+
+        .details-category {
+            margin-bottom: 3rem;
+        }
+
+        .details-category-header {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+            padding-bottom: 0.75rem;
+            border-bottom: 2px solid var(--color-gray-200);
+        }
+
+        .details-category-title {
+            font-size: 1.5rem;
+            font-weight: 600;
+        }
+
+        .details-category-badge {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 36px;
+            height: 36px;
+            border-radius: 999px;
+            font-size: 1rem;
+            font-weight: 700;
+        }
+
+        .details-category-badge.positive {
+            background: #dcfce7;
+            color: #166534;
+        }
+
+        .details-category-badge.neutral {
+            background: #fef3c7;
+            color: #854d0e;
+        }
+
+        .details-category-badge.critical {
+            background: #fee2e2;
+            color: #991b1b;
+        }
+
+        .detail-card {
+            background: white;
+            border-radius: var(--radius);
+            padding: 1.5rem;
+            margin-bottom: 1rem;
+            border: 1px solid var(--color-gray-200);
+        }
+
+        .detail-question {
+            font-size: 1.0625rem;
+            font-weight: 600;
+            color: var(--color-black);
+            margin-bottom: 0.75rem;
+        }
+
+        .detail-row {
+            display: grid;
+            gap: 0.5rem;
+            font-size: 0.9375rem;
+            line-height: 1.6;
+        }
+
+        .detail-row strong {
+            color: var(--color-black);
+        }
+
+        .detail-answer {
+            color: var(--color-gray-700);
+        }
+
+        .detail-rationale {
+            color: var(--color-gray-600);
+        }
+
+        .detail-score {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.375rem 0.875rem;
+            border-radius: 999px;
+            background: var(--color-gray-100);
+            font-weight: 600;
+            color: var(--color-black);
+            margin-top: 0.75rem;
+        }
+
+        /* CTA Section */
+        .cta-section {
+            margin-top: 4rem;
+            padding: 3rem;
+            background: var(--color-gray-50);
+            border-radius: calc(var(--radius) * 2);
+            text-align: center;
+        }
+
+        .cta-title {
+            font-size: 1.75rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+        }
+
+        .cta-text {
+            font-size: 1.125rem;
+            color: var(--color-gray-700);
+            line-height: 1.7;
+            margin-bottom: 2rem;
+        }
+
+        /* Hidden Class */
+        .hidden {
+            display: none !important;
+        }
+
+        /* Loading State */
+        .loading {
+            text-align: center;
+            padding: 3rem;
+            color: var(--color-gray-600);
+        }
+
+        /* Mobile Responsive */
+        @media (max-width: 640px) {
+            .welcome-screen,
+            .question-card {
+                padding: 2rem 1.5rem;
+            }
+
+            .question-text {
+                font-size: 1.5rem;
+                line-height: 1.25;
+            }
+
+            .btn-group {
+                flex-direction: column;
+            }
+
+            .results-score-display {
+                width: 150px;
+                height: 150px;
+            }
+
+            .results-score-number {
+                font-size: 3rem;
+            }
+        }
+
+        @media (max-width: 375px) {
+            .welcome-screen,
+            .question-card {
+                padding: 1.5rem 1.25rem;
+            }
+
+            .question-text {
+                font-size: 1.125rem;
+            }
+        }
+
+        /* Trust Bar - Fixed Footer */
+        .trust-bar {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: white;
+            border-top: 1px solid var(--color-gray-200);
+            box-shadow: 0 -2px 8px rgba(10, 10, 10, 0.06);
+            z-index: 100;
+            padding: 0.875rem 0;
+        }
+
+        .trust-bar-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 1.5rem;
+            display: grid;
+            grid-template-columns: auto 1fr auto;
+            align-items: center;
+            gap: 2rem;
+        }
+
+        .trust-bar-logo {
+            display: flex;
+            align-items: center;
+        }
+
+        .trust-bar-logo img {
+            height: 36px;
+            width: auto;
+            object-fit: contain;
+        }
+
+        .trust-bar-signals {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 1.25rem;
+        }
+
+        .trust-signal {
+            display: flex;
+            align-items: center;
+            gap: 0;
+        }
+
+        .trust-signal-icon {
+            display: none;
+        }
+        
+        .trust-signal svg {
+            display: none;
+        }
+
+        .trust-signal-text {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .trust-signal-title {
+            font-size: 0.8125rem;
+            font-weight: 700;
+            color: var(--color-primary);
+            line-height: 1.2;
+        }
+
+        .trust-signal-subtitle {
+            font-size: 0.6875rem;
+            color: var(--color-gray-600);
+            line-height: 1.3;
+            max-width: 180px;
+        }
+
+        .trust-separator {
+            width: 1px;
+            height: 28px;
+            background: var(--color-gray-300);
+            flex-shrink: 0;
+        }
+
+        .trust-bar-team {
+            display: flex;
+            align-items: center;
+            gap: 0.625rem;
+        }
+
+        .trust-team-avatars {
+            display: flex;
+            align-items: center;
+        }
+
+        .trust-team-avatar {
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            border: 2px solid white;
+            overflow: hidden;
+            margin-left: -8px;
+            transition: transform 0.2s;
+            position: relative;
+        }
+
+        .trust-team-avatar:first-child {
+            margin-left: 0;
+        }
+
+        .trust-team-avatar:hover {
+            transform: scale(1.1);
+            z-index: 10;
+        }
+
+        .trust-team-avatar img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .trust-team-label {
+            font-size: 0.6875rem;
+            color: var(--color-gray-600);
+            font-family: var(--font-body);
+            white-space: nowrap;
+        }
+
+        /* Body padding for trust bar */
+        body {
+            padding-bottom: 90px;
+        }
+
+        /* DW&P Button Style - ONLY for navigation buttons */
+        .btn-submit-dwp {
+            position: relative;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.6rem;
+            padding: 1rem 2.625rem;
+            font-size: 1.125rem;
+            font-weight: 700;
+            font-family: var(--font-body);
+            background: var(--color-primary);
+            color: var(--color-white);
+            border: 2px solid white;
+            border-radius: 99px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            text-decoration: none;
+            box-shadow: 0 4px 12px rgba(10, 10, 10, 0.15);
+        }
+
+        .btn-submit-dwp:hover {
+            background: var(--color-primary-strong);
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(10, 10, 10, 0.2);
+        }
+
+        .btn-submit-dwp:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+            transform: none;
+        }
+        /* Green Submit Button - Final action */
+        .btn-submit-green {
+            position: relative;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.6rem;
+            padding: 1rem 2.625rem;
+            font-size: 1.125rem;
+            font-weight: 700;
+            font-family: var(--font-body);
+            background: #10b981;
+            color: white;
+            border: 2px solid white;
+            border-radius: 99px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            text-decoration: none;
+            box-shadow: 0 4px 12px rgba(16, 185, 129, 0.25);
+        }
+
+        .btn-submit-green:hover {
+            background: #059669;
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(16, 185, 129, 0.35);
+        }
+
+        .btn-submit-green:active {
+            transform: translateY(0);
+        }
+
+        .btn-submit-green:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+            transform: none;
+        }
+        /* Static CTA Header - Conversion Optimization */
+        .cta-header {
+            background: linear-gradient(135deg, #1b1b3f 0%, #2a2a5f 100%);
+            border-bottom: 2px solid #70dcc4;
+            padding: 0.875rem 0;
+            margin-bottom: 2rem;
+            position: sticky;
+            top: 0;
+            z-index: 0;
+            box-shadow: 0 2px 12px rgba(10, 10, 10, 0.1);
+        }
+
+        .cta-header-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 1.5rem;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 1.5rem;
+        }
+
+        .cta-header-text {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+        }
+
+        .cta-header-icon {
+            width: 40px;
+            height: 40px;
+            background: rgba(112, 220, 196, 0.15);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+        }
+
+        .cta-header-icon svg {
+            width: 20px;
+            height: 20px;
+            stroke: #70dcc4;
+        }
+
+        .cta-header-message {
+            display: flex;
+            flex-direction: column;
+            gap: 0.125rem;
+        }
+
+        .cta-header-title {
+            font-size: 0.9375rem;
+            font-weight: 700;
+            color: white;
+            font-family: var(--font-body);
+            line-height: 1.2;
+        }
+
+        .cta-header-subtitle {
+            font-size: 0.8125rem;
+            color: rgba(255, 255, 255, 0.75);
+            line-height: 1.3;
+        }
+
+        .cta-header-button {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.625rem 1.5rem;
+            font-size: 0.9375rem;
+            font-weight: 700;
+            font-family: var(--font-body);
+            background: #70dcc4;
+            color: #1b1b3f;
+            border: none;
+            border-radius: 99px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            text-decoration: none;
+            box-shadow: 0 2px 8px rgba(112, 220, 196, 0.3);
+            white-space: nowrap;
+        }
+
+        .cta-header-button:hover {
+            background: #5fc9b3;
+            transform: translateY(-1px);
+            box-shadow: 0 4px 12px rgba(112, 220, 196, 0.4);
+        }
+
+        .cta-header-button svg {
+            width: 16px;
+            height: 16px;
+            stroke: currentColor;
+        }
+
+        /* Mobile optimization for CTA header */
+        @media (max-width: 768px) {
+            .cta-header {
+                padding: 0.75rem 0;
+            }
+
+            .cta-header-content {
+                flex-direction: column;
+                gap: 1rem;
+                text-align: center;
+            }
+
+            .cta-header-text {
+                flex-direction: column;
+                gap: 0.625rem;
+            }
+
+            .cta-header-title {
+                font-size: 0.875rem;
+            }
+
+            .cta-header-subtitle {
+                font-size: 0.75rem;
+            }
+
+            .cta-header-button {
+                font-size: 0.875rem;
+                padding: 0.5rem 1.25rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .cta-header-icon {
+                display: none;
+            }
+        }
+
+
+                /* Responsive Trust Bar */
+        @media (max-width: 1024px) {
+            .trust-separator:nth-child(7),
+            .trust-signal:nth-child(6) {
+                display: none;
+            }
+        }
+
+        @media (max-width: 768px) {
+            /* Hide all facts on tablet/mobile, keep logo + team */
+            .trust-bar-signals {
+                display: none;
+            }
+            .trust-bar-content {
+                justify-content: space-between;
+                gap: 1rem;
+            }
+            .trust-bar-logo img {
+                height: 32px;
+            }
+            .trust-team-avatar {
+                width: 32px;
+                height: 32px;
+            }
+            .trust-team-label {
+                font-size: 0.7rem;
+            }
+        }
+
+        @media (max-width: 640px) {
+            body {
+                padding-bottom: 80px;
+            }
+            .trust-bar {
+                padding: 0.75rem 0;
+            }
+            .trust-bar-logo img {
+                height: 28px;
+            }
+            .trust-team-avatar {
+                width: 28px;
+                height: 28px;
+            }
+        }
+
+
+        /* Advisor Quote Box - Elegant Card Style */
+        .advisor-quote {
+            display: flex;
+            align-items: start;
+            gap: 1.125rem;
+            padding: 1.5rem;
+            background: white;
+            border: 1px solid var(--color-gray-200);
+            border-radius: calc(var(--radius) * 1.2);
+            margin-top: 1.5rem;
+            box-shadow: 0 2px 8px rgba(10, 10, 10, 0.04);
+            transition: all 0.2s ease;
+        }
+
+        .advisor-quote:hover {
+            box-shadow: 0 4px 12px rgba(10, 10, 10, 0.08);
+            border-color: var(--color-accent);
+        }
+
+        .advisor-avatar {
+            flex-shrink: 0;
+            width: 52px;
+            height: 52px;
+            border-radius: 50%;
+            overflow: hidden;
+            border: 2px solid var(--color-gray-200);
+            transition: border-color 0.2s ease;
+            /* Performance: Use background-image instead of <img> tag - loads once, cached for all questions */
+            background-image: url('https://www.drwerner.com/wp-content/uploads/2025/10/Brixon-Borg-70.jpg');
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+        }
+
+        .advisor-quote:hover .advisor-avatar {
+            border-color: var(--color-accent);
+        }
+
+        .advisor-content {
+            flex: 1;
+        }
+
+        .advisor-text {
+            font-size: 0.9375rem;
+            color: var(--color-gray-700);
+            line-height: 1.65;
+            margin-bottom: 0.625rem;
+        }
+
+        .advisor-meta {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .advisor-name {
+            font-size: 0.875rem;
+            font-weight: 600;
+            color: var(--color-primary);
+        }
+
+        .advisor-separator {
+            width: 3px;
+            height: 3px;
+            border-radius: 50%;
+            background: var(--color-gray-400);
+        }
+
+        .advisor-role {
+            font-size: 0.8125rem;
+            color: var(--color-gray-600);
+        }
+
+        @media (max-width: 640px) {
+            .advisor-quote {
+                padding: 1.125rem;
+                gap: 0.875rem;
+            }
+            .advisor-avatar {
+                width: 44px;
+                height: 44px;
+            }
+            .advisor-text {
+                font-size: 0.875rem;
+                line-height: 1.6;
+            }
+            .advisor-meta {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 0.125rem;
+            }
+            .advisor-separator {
+                display: none;
+            }
+        }
+
+    </style>
+</head>
+<body>
+    <!-- Progress Bar -->
+    <div class="progress-wrapper hidden" id="progressWrapper">
+        <div class="progress-container">
+            <div class="progress-overall-track">
+                <div class="progress-overall-fill" id="progressBar" style="width: 0%"></div>
+            </div>
+            <div class="progress-labels">
+                <span id="progressText">Frage 1 von 14</span>
+                <strong id="progressPercent">0%</strong>
+            </div>
+        </div>
+    </div>
+
+    <!-- Results CTA Bar (same structure as progress bar) -->
+    <div class="progress-wrapper hidden" id="resultsCtaWrapper">
+        <div class="progress-container">
+            <div class="results-cta-content">
+                <div class="results-cta-text">
+                    <div class="results-cta-title">Ihre Malta-Analyse ist fertig ✓</div>
+                    <div class="results-cta-subtitle">Sichern Sie sich jetzt Ihre kostenlose Erstberatung</div>
+                </div>
+                <a href="https://www.drwerner.com/kontakt/" target="_blank" class="results-cta-button">
+                    Jetzt Beratung buchen
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Main Content -->
+    <div class="main-content">
+        <div class="container">
+            <!-- Welcome Screen -->
+            <div id="welcomeScreen" class="welcome-shell">
+                <div class="welcome-screen">
+                    <div class="welcome-content">
+                        <h1 class="welcome-title">Malta Eignungscheck</h1>
+                        <p class="welcome-text">
+                            Finden Sie heraus, ob Malta der richtige Standort für Sie und Ihr Unternehmen ist.
+                            Beantworten Sie 14 kurze Fragen und erhalten Sie eine detaillierte Auswertung Ihres Eignungsgrades.
+                        </p>
+                        <ul class="welcome-features">
+                            <li>12-14 Minuten für Ihre personalisierte Analyse</li>
+                            <li>Detaillierte Auswertung mit Eignungsgrad (0-100%)</li>
+                            <li>Konkrete Handlungsempfehlungen</li>
+                            <li>Kostenfrei und unverbindlich</li>
+                        </ul>
+                        <button class="btn-submit-dwp" onclick="startAssessment()">
+                            Jetzt starten →
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Question Screen -->
+            <div id="questionScreen" class="hidden">
+                <div class="question-card" id="questionCard">
+                    <!-- Question content will be injected here -->
+                </div>
+
+                <!-- Navigation Buttons -->
+                <div class="btn-group">
+                    <button class="btn btn-secondary" id="backBtn" onclick="previousQuestion()">
+                        ← Zurück
+                    </button>
+                    <button class="btn btn-submit-dwp" id="nextBtn" onclick="nextQuestion()" disabled>
+                        Weiter →
+                    </button>
+                </div>
+            </div>
+
+            <!-- Results Screen -->
+            <div id="resultsScreen" class="hidden">
+                <div class="results-screen">
+                    <!-- Results will be injected here -->
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // WordPress AJAX Configuration
+        // The nonce is automatically injected by WordPress (see malta-assessment-wordpress.php)
+        const CONFIG = {
+            apiEndpoint: window.maltaAssessment?.ajaxUrl || 'https://www.drwerner.com/wp-admin/admin-ajax.php',
+            nonce: window.maltaAssessment?.nonce || '',
+        };
+
+                // Questions Data
+        const questions = [
+            {
+                id: 'q001',
+                text: 'Was beschreibt Ihre geschäftliche Situation am besten?',
+                helper: 'Wählen Sie die Option, die am besten auf Sie zutrifft.',
+                type: 'single_choice',
+                required: true,
+                weight: 2.0,
+                options: [
+                    { value: '1', label: 'Ich plane, in Malta ein komplett neues Business zu starten', score: 8 },
+                    { value: '2', label: 'Ich habe ein bestehendes Business (unter 500k EUR Umsatz)', score: 6 },
+                    { value: '3', label: 'Ich habe ein etabliertes Business (500k - 2 Mio. EUR)', score: 8 },
+                    { value: '4', label: 'Ich habe ein größeres Business (über 2 Mio. EUR)', score: 10 },
+                    { value: '5', label: 'Ich möchte mich erstmal informieren / keine Angabe', score: 7 }
+                ]
+            },
+            {
+                id: 'q002',
+                text: 'Wie international ist Ihr Business ausgerichtet (oder soll es sein)?',
+                helper: '',
+                type: 'single_choice',
+                required: true,
+                weight: 1.5,
+                options: [
+                    { value: '1', label: 'Neues Business - plane internationale Ausrichtung', score: 8 },
+                    { value: '2', label: 'Hauptsächlich lokal, aber offen für internationale Expansion', score: 6 },
+                    { value: '3', label: 'Mix aus lokalen und internationalen Kunden', score: 8 },
+                    { value: '4', label: 'Vollständig international / digitales Business', score: 10 },
+                    { value: '5', label: 'Noch in Planung / keine Angabe', score: 7 }
+                ]
+            },
+            {
+                id: 'q003',
+                text: 'Sind Sie bereit, nach Malta umzuziehen und dort mindestens 183 Tage pro Jahr zu verbringen?',
+                helper: '',
+                type: 'single_choice',
+                required: true,
+                weight: 2.0,
+                options: [
+                    { value: '1', label: 'Nein, auf keinen Fall', score: 3 },
+                    { value: '2', label: 'Ungern, nur wenn unbedingt nötig', score: 6 },
+                    { value: '3', label: 'Ja, aber nur vorübergehend (2-3 Jahre)', score: 8 },
+                    { value: '4', label: 'Ja, langfristig bereit', score: 10 }
+                ]
+            },
+            {
+                id: 'q004',
+                text: 'Welches Geschäftsmodell beschreibt Ihr Unternehmen am besten?',
+                helper: '',
+                type: 'single_choice',
+                required: true,
+                weight: 1.5,
+                options: [
+                    { value: '1', label: 'Lokale Dienstleistung mit persönlichem Kundenkontakt', score: 4 },
+                    { value: '2', label: 'E-Commerce / Handel', score: 7 },
+                    { value: '3', label: 'SaaS / Digitale Produkte', score: 9 },
+                    { value: '4', label: 'Holding / Beteiligungsgesellschaft', score: 10 },
+                    { value: '5', label: 'Beratung / Professional Services (ortsunabhängig)', score: 8 }
+                ]
+            },
+            {
+                id: 'q005',
+                text: 'Können Sie echte wirtschaftliche Substanz in Malta aufbauen (Büro, Mitarbeiter, Management)?',
+                helper: '',
+                type: 'single_choice',
+                required: true,
+                weight: 2.0,
+                options: [
+                    { value: '1', label: 'Nein, nur Briefkastenfirma ohne Aktivität', score: 3 },
+                    { value: '2', label: 'Minimale Substanz (Virtual Office, keine Mitarbeiter)', score: 5 },
+                    { value: '3', label: 'Moderate Substanz (kleines Büro, 1-2 lokale Teilzeitmitarbeiter)', score: 8 },
+                    { value: '4', label: 'Volle Substanz (eigenes Büro, mehrere Vollzeitmitarbeiter, Management vor Ort)', score: 10 }
+                ]
+            },
+            {
+                id: 'q006',
+                text: 'Sind Sie bereit, höhere Compliance-Anforderungen auf sich zu nehmen?',
+                helper: 'Malta unterliegt strengeren EU-Vorschriften als viele andere Standorte. Wenn Sie unsicher sind, wählen Sie "Unsicher".',
+                type: 'single_choice',
+                required: true,
+                weight: 1.5,
+                options: [
+                    { value: '1', label: 'Nein, ich bevorzuge minimale Compliance', score: 4 },
+                    { value: '2', label: 'Unsicher / möchte mehr erfahren', score: 6 },
+                    { value: '3', label: 'Ja, bei angemessenem Nutzen', score: 8 },
+                    { value: '4', label: 'Ja, volle Compliance ist mir wichtig', score: 10 }
+                ]
+            },
+            {
+                id: 'q007',
+                text: 'Haben Sie bereits Niederlassungen in anderen Ländern oder planen Sie diese?',
+                helper: 'Gemeint sind physische Standorte (Büros, Filialen, Tochtergesellschaften) – nicht nur internationale Kunden.',
+                type: 'single_choice',
+                required: true,
+                weight: 1.5,
+                options: [
+                    { value: '1', label: 'Nein, und nicht geplant', score: 6 },
+                    { value: '2', label: 'Noch nicht, aber für die Zukunft geplant', score: 7 },
+                    { value: '3', label: 'Ja, eine Niederlassung in einem weiteren Land', score: 8 },
+                    { value: '4', label: 'Ja, mehrere Niederlassungen / Tochtergesellschaften', score: 10 },
+                    { value: '5', label: 'Unsicher / keine Angabe', score: 6 }
+                ]
+            },
+            {
+                id: 'q008',
+                text: 'Wie würden Sie Ihre Profitabilität einschätzen?',
+                helper: '',
+                type: 'single_choice',
+                required: true,
+                weight: 1.5,
+                options: [
+                    { value: '1', label: 'Neugründung - noch keine Einnahmen', score: 7 },
+                    { value: '2', label: 'Moderate Margen (10-25%)', score: 7 },
+                    { value: '3', label: 'Hohe Margen (25-50%)', score: 9 },
+                    { value: '4', label: 'Sehr hohe Margen (über 50%)', score: 10 },
+                    { value: '5', label: 'Möchte ich nicht angeben / weiß noch nicht', score: 7 }
+                ]
+            },
+            {
+                id: 'q009',
+                text: 'Wo wird die tatsächliche Geschäftsführung und strategische Entscheidungsfindung stattfinden?',
+                helper: '',
+                type: 'single_choice',
+                required: true,
+                weight: 2.0,
+                options: [
+                    { value: '1', label: 'Vollständig in meinem aktuellen Heimatland', score: 4 },
+                    { value: '2', label: 'Überwiegend im Heimatland, teilweise Malta', score: 6 },
+                    { value: '3', label: 'Ausgeglichen zwischen Malta und anderen Ländern', score: 8 },
+                    { value: '4', label: 'Vollständig in Malta (Board Meetings, strategische Entscheidungen)', score: 10 }
+                ]
+            },
+            {
+                id: 'q010',
+                text: 'Planen Sie, über Ihre Malta-Gesellschaft Beteiligungen zu halten oder zu erwerben?',
+                helper: '',
+                type: 'single_choice',
+                required: true,
+                weight: 1.5,
+                options: [
+                    { value: '1', label: 'Nein, keine Beteiligungen geplant', score: 5 },
+                    { value: '2', label: 'Möglicherweise in der Zukunft', score: 7 },
+                    { value: '3', label: 'Ja, 1-2 Beteiligungen', score: 9 },
+                    { value: '4', label: 'Ja, mehrere Beteiligungen / komplexe Holding-Struktur', score: 10 }
+                ]
+            },
+            {
+                id: 'q011',
+                text: 'Wie wichtig ist Ihnen der Zugang zum EU-Binnenmarkt und EU-rechtliche Anerkennung?',
+                helper: '',
+                type: 'single_choice',
+                required: true,
+                weight: 1.5,
+                options: [
+                    { value: '1', label: 'Unwichtig, habe keine EU-Kunden', score: 4 },
+                    { value: '2', label: 'Etwas wichtig, einige EU-Geschäfte', score: 7 },
+                    { value: '3', label: 'Sehr wichtig, hauptsächlich EU-Geschäft', score: 10 },
+                    { value: '4', label: 'Kritisch, benötige EU-Passporting (z.B. FinTech)', score: 10 }
+                ]
+            },
+            {
+                id: 'q012',
+                text: 'Wie ist Ihre familiäre Situation in Bezug auf einen Malta-Umzug?',
+                helper: '',
+                type: 'single_choice',
+                required: true,
+                weight: 1.5,
+                options: [
+                    { value: '1', label: 'Familie ist strikt gegen Umzug / unmöglich', score: 4 },
+                    { value: '2', label: 'Familie skeptisch, könnte aber überzeugt werden', score: 7 },
+                    { value: '3', label: 'Familie neutral / flexibel', score: 8 },
+                    { value: '4', label: 'Familie unterstützt Umzug / Single ohne Verpflichtungen', score: 10 }
+                ]
+            },
+            {
+                id: 'q015_contact',
+                text: 'Der letzte Schritt',
+                helper: 'Geben Sie Ihre Kontaktdaten an, damit wir Ihnen den Zugang zu Ihrem Ergebnis zusenden können.',
+                type: 'contact',
+                required: true
+            }
+        ];
+
+        // State
+        let currentQuestionIndex = 0;
+        let answers = {};
+        let userContact = {};
+
+        // Initialize
+        function startAssessment() {
+            document.getElementById('welcomeScreen').classList.add('hidden');
+            document.getElementById('questionScreen').classList.remove('hidden');
+            document.getElementById('progressWrapper').classList.remove('hidden');
+            renderQuestion();
+        }
+
+        // Render Question
+        function renderQuestion() {
+            const question = questions[currentQuestionIndex];
+            const card = document.getElementById('questionCard');
+
+            updateProgress();
+            updateNavigationButtons();
+
+            // Advisor quotes for better context
+            const advisorQuotes = {
+                'q001': 'Mit dieser Frage können wir einschätzen, wie groß der Aufwand wäre, Ihr Unternehmen in Malta weiterzuführen oder neu aufzubauen.',
+                'q002': 'Die internationale Ausrichtung ist entscheidend – Malta bietet besondere Vorteile für grenzüberschreitende Geschäftsmodelle.',
+                'q003': 'Der Wohnsitz ist ein kritischer Faktor. Für optimale steuerliche Vorteile sollten Sie mindestens 183 Tage in Malta verbringen.',
+                'q004': 'Verschiedene Geschäftsmodelle profitieren unterschiedlich stark von Malta. Digitale und Holdings sind besonders geeignet.',
+                'q005': 'Echte wirtschaftliche Substanz ist nicht nur gesetzlich erforderlich, sondern auch der Schlüssel zu steuerlicher Anerkennung.',
+                'q006': 'Compliance-Bereitschaft ist entscheidend. Malta folgt EU-Standards – das bedeutet höhere Anforderungen, aber auch Rechtssicherheit und Reputation.',
+                'q007': 'Bei mehreren physischen Niederlassungen bietet Malta als EU-Standort strategische Vorteile für Holding-Strukturen und Koordination.',
+                'q008': 'Bei hohen Margen lohnt sich Malta besonders. Die effektive Steuerbelastung kann deutlich reduziert werden.',
+                'q009': 'Die tatsächliche Geschäftsführung muss in Malta stattfinden – das ist die Grundlage für steuerliche Anerkennung.',
+                'q010': 'Malta bietet hervorragende Bedingungen für Holding-Strukturen mit steuerfreien Dividenden aus Beteiligungen.',
+                'q011': 'Als EU-Mitglied bietet Malta vollen Zugang zum Binnenmarkt – ein entscheidender Vorteil gegenüber Nicht-EU-Ländern.',
+                'q012': 'Die familiäre Situation ist oft ein unterschätzter Faktor. Malta bietet hohe Lebensqualität für Familien.'
+            };
+
+            const advisorQuote = advisorQuotes[question.id];
+
+            let html = `
+                <div class="question-header">
+                    <h3 class="question-text">${question.text}</h3>
+                    ${question.helper ? `<p class="question-helper-text">${question.helper}</p>` : ''}
+                    ${advisorQuote ? `
+                        <div class="advisor-quote">
+                            <div class="advisor-avatar" role="img" aria-label="Horst Wickinghoff"></div>
+                            <div class="advisor-content">
+                                <p class="advisor-text">"${advisorQuote}"</p>
+                                <div class="advisor-meta">
+                                    <div class="advisor-name">Horst Wickinghoff</div>
+                                    <div class="advisor-separator"></div>
+                                    <div class="advisor-role">Senior New Business Manager</div>
+                                </div>
+                            </div>
+                        </div>
+                    ` : ''}
+                </div>
+            `;
+
+            if (question.type === 'single_choice') {
+                html += '<div class="options">';
+                question.options.forEach(option => {
+                    const isSelected = answers[question.id] === option.value;
+                    html += `
+                        <div class="option ${isSelected ? 'selected' : ''}" onclick="selectOption('${question.id}', '${option.value}')">
+                            <div class="option-radio"></div>
+                            <div class="option-label">
+                                <div class="option-label-title">${option.label}</div>
+                                ${option.description ? `<div class="option-label-text">${option.description}</div>` : ''}
+                            </div>
+                        </div>
+                    `;
+                });
+                html += '</div>';
+            } else if (question.type === 'text') {
+                html += `
+                    <div class="form-group">
+                        <input type="text" class="form-input" id="input_${question.id}"
+                            placeholder="Ihre Antwort..."
+                            value="${answers[question.id] || ''}"
+                            onchange="updateTextAnswer('${question.id}', this.value)">
+                    </div>
+                `;
+            } else if (question.type === 'textarea') {
+                html += `
+                    <div class="form-group">
+                        <textarea class="form-textarea" id="input_${question.id}"
+                            placeholder="Optionale Angaben..."
+                            onchange="updateTextAnswer('${question.id}', this.value)">${answers[question.id] || ''}</textarea>
+                    </div>
+                `;
+            } else if (question.type === 'contact') {
+                html += `
+                    <div class="contact-grid">
+                        <div class="form-group">
+                            <select class="form-select" id="geschlecht" required>
+                                <option value="">Bitte wählen Sie</option>
+                                <option value="Frau" ${userContact.geschlecht === 'Frau' ? 'selected' : ''}>Frau</option>
+                                <option value="Herr" ${userContact.geschlecht === 'Herr' ? 'selected' : ''}>Herr</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <input type="text" class="form-input" id="vorname"
+                                placeholder="Ihr Vorname" value="${userContact.vorname || ''}" required>
+                        </div>
+                        <div class="form-group">
+                            <input type="text" class="form-input" id="nachname"
+                                placeholder="Ihr Nachname" value="${userContact.nachname || ''}" required>
+                        </div>
+                        <div class="form-group">
+                            <input type="email" class="form-input" id="email"
+                                placeholder="Ihre Email-Adresse" value="${userContact.email || ''}" required>
+                        </div>
+                        <div class="checkbox-wrapper">
+                            <input type="checkbox" class="checkbox-input" id="terms" ${userContact.terms ? 'checked' : ''}>
+                            <label class="checkbox-label" for="terms">
+                                Ich stimme der <a href="https://www.drwerner.com/de/other/privacy-policy/" target="_blank">Datenschutzerklärung</a> zu.
+                                Ich stimme außerdem zu, E-Mails im Zusammenhang mit dem Malta Eignungscheck zu erhalten.
+                            </label>
+                        </div>
+                    </div>
+
+                    <!-- Submit Button below Contact Form -->
+                    <div style="margin-top: 2rem; margin-bottom: 2rem;">
+                        <button class="btn btn-submit-green" id="submitContactBtn" style="width: 100%; font-size: 1.125rem; padding: 1rem 2rem;" disabled>
+                            Jetzt Eignungsgrad erfahren
+                        </button>
+                    </div>
+
+                    <!-- Trust Elements -->
+                    <div class="trust-elements" style="margin-top: 2rem; padding: 1.5rem; background: var(--color-gray-50); border-radius: var(--radius); border: 1px solid var(--color-gray-200);">
+                        <div style="display: grid; gap: 1rem;">
+                            <div style="display: flex; align-items: start; gap: 0.875rem;">
+                                <svg style="flex-shrink: 0; width: 24px; height: 24px; margin-top: 2px;" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="#10b981" stroke-width="2">
+                                    <path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75m-3-7.036A11.959 11.959 0 013.598 6 11.99 11.99 0 003 9.749c0 5.592 3.824 10.29 9 11.623 5.176-1.332 9-6.03 9-11.622 0-1.31-.21-2.571-.598-3.751h-.152c-3.196 0-6.1-1.248-8.25-3.285z" />
+                                </svg>
+                                <div>
+                                    <div style="font-weight: 600; color: var(--color-primary); font-size: 0.9375rem; margin-bottom: 0.25rem;">100% GDPR Compliant</div>
+                                    <div style="font-size: 0.875rem; color: var(--color-gray-600); line-height: 1.5;">Ihre Daten werden nach DSGVO-Standards verarbeitet und gesichert.</div>
+                                </div>
+                            </div>
+
+                            <div style="display: flex; align-items: start; gap: 0.875rem;">
+                                <svg style="flex-shrink: 0; width: 24px; height: 24px; margin-top: 2px;" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="#10b981" stroke-width="2">
+                                    <path stroke-linecap="round" stroke-linejoin="round" d="M12 6v6h4.5m4.5 0a9 9 0 11-18 0 9 9 0 0118 0z" />
+                                </svg>
+                                <div>
+                                    <div style="font-weight: 600; color: var(--color-primary); font-size: 0.9375rem; margin-bottom: 0.25rem;">Automatische Löschung nach 7 Tagen</div>
+                                    <div style="font-size: 0.875rem; color: var(--color-gray-600); line-height: 1.5;">Ihre Ergebnisse werden nach einer Woche automatisch aus unserem System gelöscht.</div>
+                                </div>
+                            </div>
+
+                            <div style="display: flex; align-items: start; gap: 0.875rem;">
+                                <svg style="flex-shrink: 0; width: 24px; height: 24px; margin-top: 2px;" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="#10b981" stroke-width="2">
+                                    <path stroke-linecap="round" stroke-linejoin="round" d="M16.5 10.5V6.75a4.5 4.5 0 10-9 0v3.75m-.75 11.25h10.5a2.25 2.25 0 002.25-2.25v-6.75a2.25 2.25 0 00-2.25-2.25H6.75a2.25 2.25 0 00-2.25 2.25v6.75a2.25 2.25 0 002.25 2.25z" />
+                                </svg>
+                                <div>
+                                    <div style="font-weight: 600; color: var(--color-primary); font-size: 0.9375rem; margin-bottom: 0.25rem;">SSL-Verschlüsselte Übertragung</div>
+                                    <div style="font-size: 0.875rem; color: var(--color-gray-600); line-height: 1.5;">Alle Daten werden verschlüsselt übertragen und sicher gespeichert.</div>
+                                </div>
+                            </div>
+
+                            <div style="display: flex; align-items: start; gap: 0.875rem;">
+                                <svg style="flex-shrink: 0; width: 24px; height: 24px; margin-top: 2px;" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="#10b981" stroke-width="2">
+                                    <path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12c0 1.268-.63 2.39-1.593 3.068a3.745 3.745 0 01-1.043 3.296 3.745 3.745 0 01-3.296 1.043A3.745 3.745 0 0112 21c-1.268 0-2.39-.63-3.068-1.593a3.746 3.746 0 01-3.296-1.043 3.745 3.745 0 01-1.043-3.296A3.745 3.745 0 013 12c0-1.268.63-2.39 1.593-3.068a3.745 3.745 0 011.043-3.296 3.746 3.746 0 013.296-1.043A3.746 3.746 0 0112 3c1.268 0 2.39.63 3.068 1.593a3.746 3.746 0 013.296 1.043 3.746 3.746 0 011.043 3.296A3.745 3.745 0 0121 12z" />
+                                </svg>
+                                <div>
+                                    <div style="font-weight: 600; color: var(--color-primary); font-size: 0.9375rem; margin-bottom: 0.25rem;">Keine Weitergabe an Dritte</div>
+                                    <div style="font-size: 0.875rem; color: var(--color-gray-600); line-height: 1.5;">Ihre Informationen bleiben vertraulich und werden nicht an Dritte weitergegeben.</div>
+                                </div>
+                            </div>
+
+                            <div style="display: flex; align-items: start; gap: 0.875rem;">
+                                <svg style="flex-shrink: 0; width: 24px; height: 24px; margin-top: 2px;" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="#10b981" stroke-width="2">
+                                    <path stroke-linecap="round" stroke-linejoin="round" d="M21.75 6.75v10.5a2.25 2.25 0 01-2.25 2.25h-15a2.25 2.25 0 01-2.25-2.25V6.75m19.5 0A2.25 2.25 0 0019.5 4.5h-15a2.25 2.25 0 00-2.25 2.25m19.5 0v.243a2.25 2.25 0 01-1.07 1.916l-7.5 4.615a2.25 2.25 0 01-2.36 0L3.32 8.91a2.25 2.25 0 01-1.07-1.916V6.75" />
+                                </svg>
+                                <div>
+                                    <div style="font-weight: 600; color: var(--color-primary); font-size: 0.9375rem; margin-bottom: 0.25rem;">Opt-Out jederzeit möglich</div>
+                                    <div style="font-size: 0.875rem; color: var(--color-gray-600); line-height: 1.5;">Sie können sich jederzeit von E-Mails abmelden. Kein Spam, nur relevante Informationen.</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                `;
+            }
+
+            card.innerHTML = html;
+        }
+
+        // Select Option
+        function selectOption(questionId, value) {
+            answers[questionId] = value;
+            renderQuestion();
+
+            // Auto-advance after selection on ALL devices (desktop, tablet, mobile)
+            const question = questions[currentQuestionIndex];
+            if (question.type === 'single_choice' && question.required) {
+                setTimeout(() => {
+                    nextQuestion();
+                }, 400);
+            }
+        }
+
+        // Update Text Answer
+        function updateTextAnswer(questionId, value) {
+            answers[questionId] = value;
+            updateNavigationButtons();
+        }
+
+        // Update Progress
+        function updateProgress() {
+            const totalQuestions = questions.length;
+            const progress = ((currentQuestionIndex + 1) / totalQuestions) * 100;
+
+            document.getElementById('progressBar').style.width = `${progress}%`;
+            document.getElementById('progressText').textContent = `Frage ${currentQuestionIndex + 1} von ${totalQuestions}`;
+            document.getElementById('progressPercent').textContent = `${Math.round(progress)}%`;
+        }
+
+        // Update Navigation Buttons
+        function updateNavigationButtons() {
+            const question = questions[currentQuestionIndex];
+            const nextBtn = document.getElementById('nextBtn');
+            const backBtn = document.getElementById('backBtn');
+            const submitContactBtn = document.getElementById('submitContactBtn');
+
+            // Back button
+            backBtn.style.display = currentQuestionIndex === 0 ? 'none' : 'flex';
+
+            // Next button
+            let isValid = false;
+
+            if (question.type === 'contact') {
+                const geschlecht = document.getElementById('geschlecht')?.value;
+                const vorname = document.getElementById('vorname')?.value;
+                const nachname = document.getElementById('nachname')?.value;
+                const email = document.getElementById('email')?.value;
+                const terms = document.getElementById('terms')?.checked;
+
+                isValid = geschlecht && vorname && nachname && email && terms;
+
+                // Hide bottom navigation buttons on contact form (we have button at top now)
+                nextBtn.style.display = 'none';
+                backBtn.style.display = 'none';
+
+                // Enable/disable the submit button at top of contact form
+                if (submitContactBtn) {
+                    submitContactBtn.disabled = !isValid;
+                    submitContactBtn.onclick = isValid ? nextQuestion : null;
+                }
+            } else {
+                // Show normal navigation buttons for non-contact questions
+                nextBtn.style.display = 'flex';
+                backBtn.style.display = currentQuestionIndex === 0 ? 'none' : 'flex';
+
+                // Reset to normal blue button
+                nextBtn.classList.remove('btn-submit-green');
+                nextBtn.classList.add('btn-submit-dwp');
+                nextBtn.textContent = 'Weiter →';
+
+                if (question.required) {
+                    isValid = !!answers[question.id];
+                } else {
+                    isValid = true;
+                }
+            }
+
+            nextBtn.disabled = !isValid;
+        }
+
+        // Previous Question
+        function previousQuestion() {
+            if (currentQuestionIndex > 0) {
+                const card = document.getElementById('questionCard');
+
+                // Fade OUT to right (opposite of forward)
+                card.style.transition = 'opacity 0.3s ease-out, transform 0.3s ease-out';
+                card.style.opacity = '0';
+                card.style.transform = 'translateX(30px)';
+
+                setTimeout(() => {
+                    currentQuestionIndex--;
+
+                    // Fade IN from left
+                    card.style.transform = 'translateX(-30px)';
+                    renderQuestion();
+
+                    // Fade in animation
+                    requestAnimationFrame(() => {
+                        card.style.opacity = '1';
+                        card.style.transform = 'translateX(0)';
+                    });
+                }, 300);
+            }
+        }
+
+        // Next Question
+        function nextQuestion() {
+            const question = questions[currentQuestionIndex];
+            const card = document.getElementById('questionCard');
+            const nextBtn = document.getElementById('nextBtn');
+
+            // Save contact info if on contact page
+            if (question.type === 'contact') {
+                userContact = {
+                    geschlecht: document.getElementById('geschlecht').value,
+                    vorname: document.getElementById('vorname').value,
+                    nachname: document.getElementById('nachname').value,
+                    email: document.getElementById('email').value,
+                    terms: document.getElementById('terms').checked
+                };
+            }
+
+            // If last question, show spinner and calculate results
+            if (currentQuestionIndex === questions.length - 1) {
+                // Show loading spinner on button
+                nextBtn.classList.add('btn-loading');
+                const originalHTML = nextBtn.innerHTML;
+                nextBtn.innerHTML = '<span class="btn-text">' + originalHTML + '</span><div class="btn-spinner"></div>';
+
+                // Wait for visual feedback, then show results
+                setTimeout(() => {
+                    calculateAndShowResults();
+                }, 800);
+            } else {
+                // Animate OUT to left
+                card.classList.add('animating-out');
+
+                setTimeout(() => {
+                    currentQuestionIndex++;
+
+                    // Remove out animation
+                    card.classList.remove('animating-out');
+
+                    // Prepare for IN animation (start from right)
+                    card.classList.add('animating-in');
+
+                    renderQuestion();
+
+                    // Trigger IN animation (slide left to center)
+                    requestAnimationFrame(() => {
+                        requestAnimationFrame(() => {
+                            card.classList.add('show');
+
+                            // Clean up after animation
+                            setTimeout(() => {
+                                card.classList.remove('animating-in', 'show');
+                            }, 300);
+                        });
+                    });
+                }, 300);
+            }
+        }
+
+        // Calculate Score - Server-Side (WordPress AJAX)
+        async function calculateScore() {
+            try {
+                // Debug: Check nonce availability
+                console.log('CONFIG:', CONFIG);
+                console.log('window.maltaAssessment:', window.maltaAssessment);
+
+                if (!CONFIG.nonce) {
+                    console.error('⚠️ Nonce is missing! WordPress integration may not be loaded correctly.');
+                }
+
+                // Prepare FormData for WordPress AJAX
+                const formData = new FormData();
+                formData.append('action', 'malta_assess_submit');
+                formData.append('nonce', CONFIG.nonce);
+                formData.append('data', JSON.stringify({
+                    answers: answers,
+                    email: userContact.email || '',
+                    firstName: userContact.vorname || '',
+                    lastName: userContact.nachname || '',
+                    phone: userContact.telefon || '',
+                    company: userContact.firma || '',
+                    language: 'de'
+                }));
+
+                console.log('Sending to:', CONFIG.apiEndpoint);
+                console.log('FormData:', {
+                    action: 'malta_assess_submit',
+                    nonce: CONFIG.nonce,
+                    hasData: !!formData.get('data')
+                });
+
+                const response = await fetch(CONFIG.apiEndpoint, {
+                    method: 'POST',
+                    body: formData
+                });
+
+                console.log('Response status:', response.status);
+
+                if (!response.ok) {
+                    const errorText = await response.text();
+                    console.error('Server error response:', errorText);
+                    throw new Error(`Server responded with ${response.status}: ${errorText}`);
+                }
+
+                const result = await response.json();
+                console.log('Server result:', result);
+
+                if (!result.success) {
+                    console.error('Server returned error:', result);
+                    throw new Error(result.data?.message || result.message || 'Evaluation failed');
+                }
+
+                // Return server-calculated data
+                return {
+                    percentage: result.data.percentage,
+                    weightedScore: result.data.weightedScore,
+                    totalPossibleWeightedScore: result.data.totalPossibleWeightedScore,
+                    detailedResults: result.data.detailedResults,
+                    category: result.data.category,
+                    categoryLabel: result.data.categoryLabel,
+                    interpretation: result.data.interpretation
+                };
+
+            } catch (error) {
+                console.error('Score calculation error:', error);
+                throw error;
+            }
+        }
+
+        // Calculate and Show Results - Server-Side Version
+        async function calculateAndShowResults() {
+            try {
+                // Server calculates everything (score, interpretation, webhook)
+                const scoreData = await calculateScore();
+
+                const percentage = scoreData.percentage;
+                const category = scoreData.category;
+                const categoryLabel = scoreData.categoryLabel;
+                const interpretation = scoreData.interpretation;
+
+                // Categorize detailed results
+                const positiveDetails = scoreData.detailedResults.filter(r => r.category === 'positive');
+                const neutralDetails = scoreData.detailedResults.filter(r => r.category === 'neutral');
+                const criticalDetails = scoreData.detailedResults.filter(r => r.category === 'critical');
+
+                // Render results
+                // Note: Webhook is already sent by the server!
+                renderResults(percentage, category, categoryLabel, interpretation, positiveDetails, neutralDetails, criticalDetails);
+
+            } catch (error) {
+                console.error('Error calculating results:', error);
+                alert('Es ist ein Fehler aufgetreten. Bitte versuchen Sie es erneut.');
+            }
+        }
+
+        // Get Category-Specific CTA Content
+        function getCategorySpecificCTA(category, firstName) {
+            const teamMembers = [
+                {
+                    name: 'Berater 1',
+                    role: 'Malta Experte',
+                    image: 'https://www.drwerner.com/wp-content/uploads/2025/10/Brixon-Borg-12.jpg'
+                },
+                {
+                    name: 'Berater 2',
+                    role: 'Steuerberater',
+                    image: 'https://www.drwerner.com/wp-content/uploads/2025/10/Brixon-Borg-70.jpg'
+                },
+                {
+                    name: 'Berater 3',
+                    role: 'Senior Consultant',
+                    image: 'https://www.drwerner.com/wp-content/uploads/2025/10/Brixon-Borg-1.jpg'
+                }
+            ];
+
+            // Category-specific messaging
+            const categoryMessages = {
+                excellent: {
+                    badge: '🌟 Hervorragendes Ergebnis',
+                    title: `Malta ist perfekt für Sie!`,
+                    subtitle: 'Ihre Situation ist ideal für eine Malta-Struktur. Lassen Sie uns die Details besprechen und Ihre Relocation planen.',
+                    cta: 'Jetzt Strategiegespräch vereinbaren',
+                    benefits: [
+                        'Steueroptimierung durch Malta-Struktur (eff. 5% möglich)',
+                        'EU-Marktzugang mit minimalen Hürden',
+                        'Expatriate-Begleitung von Anfang an',
+                        'Individueller Relocation-Fahrplan'
+                    ]
+                },
+                good: {
+                    badge: '✅ Sehr gutes Ergebnis',
+                    title: `Malta bietet große Chancen für Sie!`,
+                    subtitle: 'Mit der richtigen Planung können Sie alle Vorteile Maltas nutzen. Unsere Experten zeigen Ihnen den Weg.',
+                    cta: 'Kostenlose Erstberatung buchen',
+                    benefits: [
+                        'Analyse Ihrer individuellen Optimierungspotenziale',
+                        'Konkrete Malta-Struktur für Ihr Business',
+                        'Compliance & Substanz-Anforderungen klar erklärt',
+                        'Transparente Kosten & Timeline'
+                    ]
+                },
+                moderate: {
+                    badge: '💡 Gutes Potenzial',
+                    title: `Malta ist erreichbar!`,
+                    subtitle: 'Mit einigen Anpassungen können Sie von Maltas Vorteilen profitieren. Wir zeigen Ihnen, welche Schritte nötig sind.',
+                    cta: 'Jetzt Möglichkeiten besprechen',
+                    benefits: [
+                        'Welche Voraussetzungen Sie noch erfüllen müssen',
+                        'Alternative Strukturen & Optionen',
+                        'Realistische Einschätzung der Machbarkeit',
+                        'Schritt-für-Schritt Umsetzungsplan'
+                    ]
+                },
+                fair: {
+                    badge: '🤝 Beratung empfohlen',
+                    title: `Wir finden eine Lösung für Sie!`,
+                    subtitle: 'Malta ist möglich – lassen Sie uns gemeinsam herausfinden, wie wir Ihre Situation optimal gestalten.',
+                    cta: 'Individuelle Beratung vereinbaren',
+                    benefits: [
+                        'Detaillierte Machbarkeitsanalyse für Ihren Fall',
+                        'Anpassungen & Optimierungen für Malta-Eignung',
+                        'Alternative Standorte & Strukturen falls nötig',
+                        'Ehrliche Einschätzung ohne Verkaufsdruck'
+                    ]
+                },
+                explore: {
+                    badge: '📞 Persönliches Gespräch',
+                    title: `Lassen Sie uns sprechen`,
+                    subtitle: 'Ihre Situation ist komplex und erfordert eine individuelle Beratung. Gemeinsam finden wir die beste Lösung für Sie.',
+                    cta: 'Beratungstermin vereinbaren',
+                    benefits: [
+                        'Vollständige Analyse Ihrer Ausgangssituation',
+                        'Malta vs. andere Standorte: Was passt zu Ihnen?',
+                        'Kreative Lösungen für komplexe Fälle',
+                        'Langfristige Steuer- & Standortstrategie'
+                    ]
+                }
+            };
+
+            const msg = categoryMessages[category] || categoryMessages.explore;
+
+            return `
+                <div class="results-cta-section" style="background: white; border-radius: calc(var(--radius) * 1.5); margin-top: 3rem; overflow: hidden; box-shadow: 0 8px 32px rgba(10, 10, 10, 0.12); border: 1px solid var(--color-gray-200);">
+                    <!-- Header with badge -->
+                    <div style="background: linear-gradient(135deg, #1b1b3f 0%, #2a2a5f 100%); padding: 2rem; text-align: center;">
+                        <div style="display: inline-block; background: rgba(112, 220, 196, 0.2); padding: 0.5rem 1.5rem; border-radius: 50px; margin-bottom: 1rem; border: 1px solid rgba(112, 220, 196, 0.3);">
+                            <span style="color: #70dcc4; font-weight: 600; font-size: 0.8125rem; text-transform: uppercase; letter-spacing: 0.05em;">${msg.badge}</span>
+                        </div>
+                        <h3 style="font-size: clamp(1.5rem, 3vw, 1.875rem); margin-bottom: 0.75rem; font-family: var(--font-heading); color: white; line-height: 1.3;">${msg.title}</h3>
+                        <p style="font-size: 1rem; color: rgba(255, 255, 255, 0.85); max-width: 560px; margin: 0 auto; line-height: 1.6;">${msg.subtitle}</p>
+                    </div>
+
+                    <!-- Team Section -->
+                    <div style="padding: 2rem; background: var(--color-gray-50);">
+                        <div style="text-align: center; margin-bottom: 1.5rem;">
+                            <p style="font-size: 0.875rem; color: var(--color-gray-600); font-weight: 600; text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 1rem;">Ihre Malta-Experten</p>
+                            <div style="display: flex; justify-content: center; align-items: center; gap: -0.75rem; margin-bottom: 1rem;">
+                                ${teamMembers.map(member => `
+                                    <div style="position: relative; width: 64px; height: 64px; border-radius: 50%; overflow: hidden; border: 3px solid white; box-shadow: 0 2px 8px rgba(10, 10, 10, 0.15);">
+                                        <img src="${member.image}" alt="${member.name}" style="width: 100%; height: 100%; object-fit: cover;" title="${member.name} - ${member.role}">
+                                    </div>
+                                `).join('')}
+                            </div>
+                            <p style="font-size: 0.8125rem; color: var(--color-gray-500); margin: 0;">Jahrelange Erfahrung mit Malta-Strukturen</p>
+                        </div>
+
+                        <!-- CTA Button -->
+                        <div style="text-align: center; margin-bottom: 1.5rem;">
+                            <button onclick="window.open('https://www.drwerner.com/kontakt/', '_blank')"
+                                style="display: inline-flex; align-items: center; justify-content: center; gap: 0.6rem; padding: 1rem 2.625rem; font-size: 1.125rem; font-weight: 700; font-family: var(--font-body); background: #10b981; color: white; border: 2px solid white; border-radius: 99px; cursor: pointer; transition: all 0.2s ease; box-shadow: 0 4px 16px rgba(16, 185, 129, 0.3); text-decoration: none; border: none;"
+                                onmouseover="this.style.transform='translateY(-2px)'; this.style.boxShadow='0 6px 20px rgba(16, 185, 129, 0.4)'; this.style.background='#059669'"
+                                onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='0 4px 16px rgba(16, 185, 129, 0.3)'; this.style.background='#10b981'">
+                                ${msg.cta}
+                                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5">
+                                    <path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3" />
+                                </svg>
+                            </button>
+                        </div>
+
+                        <div style="text-align: center;">
+                            <p style="font-size: 0.8125rem; color: var(--color-gray-500); margin: 0;">
+                                ✓ Kostenlos & unverbindlich &nbsp;·&nbsp; ✓ 30 Min. Erstberatung &nbsp;·&nbsp; ✓ Keine Verpflichtung
+                            </p>
+                        </div>
+                    </div>
+
+                    <!-- Benefits -->
+                    <div style="padding: 2rem; background: white; border-top: 1px solid var(--color-gray-200);">
+                        <h4 style="font-family: var(--font-heading); font-size: 1.125rem; margin-bottom: 1.25rem; color: var(--color-primary); text-align: center;">Das erwartet Sie im Gespräch:</h4>
+                        <ul style="list-style: none; padding: 0; margin: 0; display: grid; gap: 0.875rem; max-width: 520px; margin: 0 auto;">
+                            ${msg.benefits.map(benefit => `
+                                <li style="display: flex; align-items: start; gap: 0.75rem;">
+                                    <svg style="flex-shrink: 0; width: 20px; height: 20px; margin-top: 2px;" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="#10b981" stroke-width="2.5">
+                                        <path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                                    </svg>
+                                    <span style="color: var(--color-gray-700); font-size: 0.9375rem; line-height: 1.5;">${benefit}</span>
+                                </li>
+                            `).join('')}
+                        </ul>
+                    </div>
+                </div>
+            `;
+        }
+
+        // Render Results
+        function renderResults(percentage, category, categoryLabel, interpretation, positiveDetails, neutralDetails, criticalDetails) {
+            document.getElementById('questionScreen').classList.add('hidden');
+            document.getElementById('progressWrapper').classList.add('hidden');
+            document.getElementById('resultsCtaWrapper').classList.remove('hidden');
+            document.getElementById('resultsScreen').classList.remove('hidden');
+
+            const resultsContainer = document.querySelector('.results-screen');
+
+            let html = `
+                <div class="results-header">
+                    <div class="results-score-circle">
+                        <svg width="180" height="180" viewBox="0 0 180 180">
+                            <circle cx="90" cy="90" r="75" fill="none" stroke="var(--color-gray-200)" stroke-width="12"/>
+                            <circle cx="90" cy="90" r="75" fill="none" stroke="var(--color-accent)" stroke-width="12"
+                                stroke-dasharray="${(percentage / 100) * 471} 471"
+                                stroke-linecap="round"
+                                transform="rotate(-90 90 90)"
+                                style="transition: stroke-dasharray 1s ease-out"/>
+                            <text x="90" y="85" text-anchor="middle" font-size="48" font-weight="600" fill="var(--color-primary)" font-family="var(--font-heading)">${percentage}</text>
+                            <text x="90" y="110" text-anchor="middle" font-size="20" fill="var(--color-gray-500)" font-family="var(--font-body)">Punkte</text>
+                        </svg>
+                    </div>
+                    <h2 class="results-title">Herzlichen Glückwunsch, ${userContact.geschlecht === 'Frau' ? 'Frau' : 'Herr'} ${userContact.nachname}!</h2>
+                    <div class="results-category-badge ${category}">
+                        <span class="badge-icon">✓</span>
+                        <span class="badge-text">${categoryLabel}</span>
+                    </div>
+                    <p class="results-benchmark">
+                        <strong>Einordnung:</strong> Unsere Bewertung erfolgt nach strengen Kriterien, die langfristigen Erfolg in Malta sicherstellen.
+                        Das durchschnittliche Ergebnis unserer Mandanten liegt bei 58 Punkten – Ihr Resultat zeigt, wie gut Ihre individuelle Situation zu Malta passt.
+                    </p>
+                    <p class="results-interpretation">${interpretation}</p>
+                </div>
+
+                ${positiveDetails.length > 0 ? `
+                <div class="details-section">
+                    <div class="details-category">
+                        <div class="details-category-header">
+                            <h3 class="details-category-title">Positive Faktoren</h3>
+                            <span class="details-category-badge positive">${positiveDetails.length}</span>
+                        </div>
+                        ${positiveDetails.map((detail, index) => `
+                            <div class="detail-card">
+                                <h4 class="detail-question">Frage ${questions.findIndex(q => q.id === detail.questionId) + 1}: ${detail.questionText}</h4>
+                                <div class="detail-row">
+                                    <div><strong>Ihre Antwort:</strong> ${detail.answer}</div>
+                                    ${detail.answerDescription ? `<div class="detail-rationale">${detail.answerDescription}</div>` : ''}
+                                    <div class="detail-score">Bewertung: ${detail.score * 10}%</div>
+                                </div>
+                            </div>
+                        `).join('')}
+                    </div>
+                </div>
+                ` : ''}
+
+                ${neutralDetails.length > 0 ? `
+                <div class="details-section">
+                    <div class="details-category">
+                        <div class="details-category-header">
+                            <h3 class="details-category-title">Neutrale Faktoren</h3>
+                            <span class="details-category-badge neutral">${neutralDetails.length}</span>
+                        </div>
+                        ${neutralDetails.map((detail, index) => `
+                            <div class="detail-card">
+                                <h4 class="detail-question">Frage ${questions.findIndex(q => q.id === detail.questionId) + 1}: ${detail.questionText}</h4>
+                                <div class="detail-row">
+                                    <div><strong>Ihre Antwort:</strong> ${detail.answer}</div>
+                                    ${detail.answerDescription ? `<div class="detail-rationale">${detail.answerDescription}</div>` : ''}
+                                    <div class="detail-score">Bewertung: ${detail.score * 10}%</div>
+                                </div>
+                            </div>
+                        `).join('')}
+                    </div>
+                </div>
+                ` : ''}
+
+                ${criticalDetails.length > 0 ? `
+                <div class="details-section">
+                    <div class="details-category">
+                        <div class="details-category-header">
+                            <h3 class="details-category-title">Kritische Faktoren</h3>
+                            <span class="details-category-badge critical">${criticalDetails.length}</span>
+                        </div>
+                        ${criticalDetails.map((detail, index) => `
+                            <div class="detail-card">
+                                <h4 class="detail-question">Frage ${questions.findIndex(q => q.id === detail.questionId) + 1}: ${detail.questionText}</h4>
+                                <div class="detail-row">
+                                    <div><strong>Ihre Antwort:</strong> ${detail.answer}</div>
+                                    ${detail.answerDescription ? `<div class="detail-rationale">${detail.answerDescription}</div>` : ''}
+                                    <div class="detail-score">Bewertung: ${detail.score * 10}%</div>
+                                </div>
+                            </div>
+                        `).join('')}
+                    </div>
+                </div>
+                ` : ''}
+
+                ${getCategorySpecificCTA(category, userContact.vorname)}
+            `;
+
+            resultsContainer.innerHTML = html;
+        }
+
+        // Note: Webhook is now sent by the server (malta-assessment-wordpress.php)
+        // No need for client-side webhook sending anymore
+
+        // Add event listeners for contact form inputs
+        document.addEventListener('input', (e) => {
+            if (['geschlecht', 'vorname', 'nachname', 'email', 'terms'].includes(e.target.id)) {
+                updateNavigationButtons();
+            }
+        });
+
+        document.addEventListener('change', (e) => {
+            if (['geschlecht', 'vorname', 'nachname', 'email', 'terms'].includes(e.target.id)) {
+                updateNavigationButtons();
+            }
+        });
+    </script>
+
+    <!-- Trust Bar -->
+    <div class="trust-bar">
+        <div class="trust-bar-content">
+            <!-- Logo -->
+            <div class="trust-bar-logo">
+                <img src="https://www.drwerner.com/wp-content/uploads/2023/01/cropped-logo_dwandp.png" 
+                     alt="Dr. Werner & Partner">
+            </div>
+
+            <!-- Trust Signals -->
+            <div class="trust-bar-signals">
+                <!-- CSP License -->
+                <div class="trust-signal">
+                    <div class="trust-signal-text">
+                        <div class="trust-signal-title">CSP-Lizenz</div>
+                        <div class="trust-signal-subtitle">Reguliert durch Malta Financial Services Authority</div>
+                    </div>
+                </div>
+
+                <div class="trust-separator"></div>
+
+                <!-- Success -->
+                <div class="trust-signal">
+                    <div class="trust-signal-text">
+                        <div class="trust-signal-title">3.000+</div>
+                        <div class="trust-signal-subtitle">Erfolgreiche Firmengründungen seit 2013</div>
+                    </div>
+                </div>
+
+
+
+                <div class="trust-separator"></div>
+
+                <!-- Retention -->
+                <div class="trust-signal">
+                    <div class="trust-signal-text">
+                        <div class="trust-signal-title">97%</div>
+                        <div class="trust-signal-subtitle">Unserer Mandanten bleiben auch nach Gründung</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Team Avatars -->
+            <div class="trust-bar-team">
+                <div class="trust-team-avatars">
+                    <div class="trust-team-avatar">
+                        <img src="https://www.drwerner.com/wp-content/uploads/2025/10/Brixon-Borg-12.jpg" alt="Berater 1">
+                    </div>
+                    <div class="trust-team-avatar">
+                        <img src="https://www.drwerner.com/wp-content/uploads/2025/10/Brixon-Borg-70.jpg" alt="Berater 2">
+                    </div>
+                    <div class="trust-team-avatar">
+                        <img src="https://www.drwerner.com/wp-content/uploads/2025/10/Brixon-Borg-1.jpg" alt="Berater 3">
+                    </div>
+                </div>
+                <div class="trust-team-label">Ihr Beratungsteam</div>
+            </div>
+        </div>
+    </div>
+
+</body>
+</html>

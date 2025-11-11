@@ -1,117 +1,113 @@
 <?php
 /**
- * Malta Assessment Evaluator - Server-Side Scoring Engine
+ * Malta Assessment - functions.php Integration
  *
- * This script provides a secure, server-side evaluation endpoint for the Malta Assessment questionnaire.
- * It's designed to be WordPress-compatible but can run standalone on any PHP server.
+ * INSTALLATION:
+ * Kopiere diesen gesamten Code-Block ans ENDE deiner functions.php
+ * Pfad: /wp-content/themes/DEIN-THEME/functions.php
  *
- * Security Features:
- * - Rate limiting (max 10 requests per IP per hour)
- * - Input sanitization and validation
- * - CORS protection (configurable allowed origins)
- * - Request method validation (POST only)
- * - JSON-only responses
- *
- * WordPress Deployment:
- * 1. Place this file in: /wp-content/themes/your-theme/malta-assessment-evaluator.php
- * 2. Or create a custom endpoint in functions.php using WordPress REST API
- *
- * Standalone Deployment:
- * 1. Upload to your server (e.g., /api/malta-evaluator.php)
- * 2. Ensure PHP 7.4+ is installed
- * 3. Configure ALLOWED_ORIGINS below
- *
- * @version 2.0
- * @author Dr. Werner & Partner
- * @license Proprietary
+ * Das war's! Keine Plugin-Installation nötig.
  */
 
 // =============================================================================
 // CONFIGURATION
 // =============================================================================
 
-// Allowed origins (domains that can call this endpoint)
-// Add your domain(s) here
-const ALLOWED_ORIGINS = [
-    'https://www.drwerner.com',
-    'https://drwerner.com',
-    'http://localhost:8881', // Local development
-    'http://localhost:3000', // Vite dev server
-];
-
-// Webhook URL for sending results (hidden from client)
-// This keeps your webhook URL secure and not visible in JavaScript
-const WEBHOOK_URL = 'https://brixon.app.n8n.cloud/webhook/malta-eignungscheck';
-
-// Enable webhook sending (set to false to disable)
-const WEBHOOK_ENABLED = true;
-
-// Rate limiting configuration
-const RATE_LIMIT_MAX_REQUESTS = 10; // Max requests per time window
-const RATE_LIMIT_TIME_WINDOW = 3600; // Time window in seconds (3600 = 1 hour)
-
-// Enable debug mode (set to false in production!)
-const DEBUG_MODE = false;
-
-// =============================================================================
-// INITIALIZATION
-// =============================================================================
-
-// Start session for rate limiting
-if (session_status() === PHP_SESSION_NONE) {
-    session_start();
+if (!defined('MALTA_WEBHOOK_URL')) {
+    define('MALTA_WEBHOOK_URL', 'https://brixon.app.n8n.cloud/webhook/dwp-quickcheck');
 }
 
-// Set headers
-header('Content-Type: application/json; charset=utf-8');
-header('X-Content-Type-Options: nosniff');
-header('X-Frame-Options: DENY');
-header('X-XSS-Protection: 1; mode=block');
-
-// Handle CORS
-handleCORS();
-
-// Only allow POST requests
-if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
-    sendError('Only POST requests are allowed', 405);
+if (!defined('MALTA_WEBHOOK_ENABLED')) {
+    define('MALTA_WEBHOOK_ENABLED', true);
 }
 
-// Check rate limiting
-if (!checkRateLimit()) {
-    sendError('Rate limit exceeded. Please try again later.', 429);
+if (!defined('MALTA_DEBUG_MODE')) {
+    define('MALTA_DEBUG_MODE', true); // Auf false setzen für Production
+}
+
+if (!defined('MALTA_RATE_LIMIT_MAX')) {
+    define('MALTA_RATE_LIMIT_MAX', 10);
+}
+
+if (!defined('MALTA_RATE_LIMIT_WINDOW')) {
+    define('MALTA_RATE_LIMIT_WINDOW', 3600);
 }
 
 // =============================================================================
-// MAIN LOGIC
+// AJAX ENDPOINTS
 // =============================================================================
 
-try {
-    // Get and validate input
-    $rawInput = file_get_contents('php://input');
-    $input = json_decode($rawInput, true);
+add_action('wp_ajax_malta_assess_submit', 'malta_assess_handle_submission');
+add_action('wp_ajax_nopriv_malta_assess_submit', 'malta_assess_handle_submission');
 
+// Inject nonce via wp_head (funktioniert auf allen Seiten)
+add_action('wp_head', 'malta_assess_inject_nonce');
+
+function malta_assess_inject_nonce() {
+    ?>
+    <script>
+        window.maltaAssessment = {
+            ajaxUrl: "<?php echo admin_url('admin-ajax.php'); ?>",
+            nonce: "<?php echo wp_create_nonce('malta_assess_nonce'); ?>"
+        };
+    </script>
+    <?php
+}
+
+// =============================================================================
+// AJAX HANDLER
+// =============================================================================
+
+function malta_assess_handle_submission() {
+    // Security check
+    if (!isset($_POST['nonce']) || !wp_verify_nonce($_POST['nonce'], 'malta_assess_nonce')) {
+        wp_send_json_error(['message' => 'Security check failed'], 403);
+    }
+
+    // Rate limiting
+    if (!malta_assess_check_rate_limit()) {
+        wp_send_json_error(['message' => 'Rate limit exceeded'], 429);
+    }
+
+    // Get data
+    $raw_data = isset($_POST['data']) ? $_POST['data'] : null;
+    if (empty($raw_data)) {
+        wp_send_json_error(['message' => 'No data received'], 400);
+    }
+
+    $data = json_decode(stripslashes($raw_data), true);
     if (json_last_error() !== JSON_ERROR_NONE) {
-        sendError('Invalid JSON input', 400);
+        wp_send_json_error(['message' => 'Invalid JSON'], 400);
     }
 
-    // Validate required fields
-    if (!isset($input['answers']) || !is_array($input['answers'])) {
-        sendError('Missing or invalid "answers" field', 400);
+    if (!isset($data['answers']) || !is_array($data['answers'])) {
+        wp_send_json_error(['message' => 'Missing answers'], 400);
     }
 
-    // Sanitize answers
-    $answers = sanitizeAnswers($input['answers']);
+    // Sanitize
+    $sanitized = [
+        'answers' => malta_assess_sanitize_answers($data['answers']),
+        'email' => isset($data['email']) ? sanitize_email($data['email']) : '',
+        'firstName' => isset($data['firstName']) ? sanitize_text_field($data['firstName']) : '',
+        'lastName' => isset($data['lastName']) ? sanitize_text_field($data['lastName']) : '',
+        'phone' => isset($data['phone']) ? sanitize_text_field($data['phone']) : '',
+        'company' => isset($data['company']) ? sanitize_text_field($data['company']) : '',
+        'language' => isset($data['language']) ? sanitize_text_field($data['language']) : 'de',
+    ];
 
-    // Calculate score
-    $scoreData = calculateScore($answers);
+    try {
+        $scoreData = malta_assess_calculate_score($sanitized['answers']);
+        $interpretation = malta_assess_get_interpretation($scoreData['percentage']);
 
-    // Get interpretation
-    $interpretation = getInterpretation($scoreData['percentage']);
+        if (MALTA_WEBHOOK_ENABLED) {
+            malta_assess_send_webhook($sanitized, $scoreData, $interpretation);
+        }
 
-    // Build response
-    $response = [
-        'success' => true,
-        'data' => [
+        if (MALTA_DEBUG_MODE) {
+            error_log('[Malta] Score: ' . $scoreData['percentage'] . '% for ' . $sanitized['email']);
+        }
+
+        wp_send_json_success([
             'percentage' => $scoreData['percentage'],
             'weightedScore' => $scoreData['weightedScore'],
             'totalPossibleWeightedScore' => $scoreData['totalPossibleWeightedScore'],
@@ -119,45 +115,24 @@ try {
             'categoryLabel' => $interpretation['categoryLabel'],
             'interpretation' => $interpretation['interpretation'],
             'detailedResults' => $scoreData['detailedResults'],
-        ],
-        'timestamp' => date('c'),
-    ];
+        ]);
 
-    // Send to webhook (if enabled)
-    if (WEBHOOK_ENABLED) {
-        $userContact = isset($input['userContact']) ? $input['userContact'] : [];
-        sendWebhook($answers, $userContact, $scoreData, $interpretation);
-    }
-
-    // Log for debugging (only in debug mode)
-    if (DEBUG_MODE) {
-        error_log('[Malta Assessment] Score calculated: ' . $scoreData['percentage'] . '% for IP: ' . getClientIP());
-    }
-
-    sendSuccess($response['data']);
-
-} catch (Exception $e) {
-    if (DEBUG_MODE) {
-        sendError('Internal error: ' . $e->getMessage(), 500);
-    } else {
-        sendError('Internal server error', 500);
+    } catch (Exception $e) {
+        if (MALTA_DEBUG_MODE) {
+            error_log('[Malta] Error: ' . $e->getMessage());
+            wp_send_json_error(['message' => $e->getMessage()], 500);
+        } else {
+            wp_send_json_error(['message' => 'Error occurred'], 500);
+        }
     }
 }
 
 // =============================================================================
-// CORE FUNCTIONS
+// SCORING LOGIC
 // =============================================================================
 
-/**
- * Calculate the weighted score based on answers
- *
- * @param array $answers User's answers (questionId => optionValue)
- * @return array Score data including percentage, weighted score, and detailed results
- */
-function calculateScore(array $answers): array
-{
-    $questions = getQuestions();
-
+function malta_assess_calculate_score(array $answers): array {
+    $questions = malta_assess_get_questions();
     $weightedScore = 0;
     $totalPossibleWeightedScore = 0;
     $detailedResults = [];
@@ -169,20 +144,16 @@ function calculateScore(array $answers): array
 
         $questionId = $question['id'];
         $weight = $question['weight'] ?? 1.0;
-
-        // Find max score for this question
         $maxOptionScore = max(array_column($question['options'], 'score'));
         $totalPossibleWeightedScore += $maxOptionScore * $weight;
 
-        // Check if user answered this question
         if (!isset($answers[$questionId])) {
             continue;
         }
 
         $selectedValue = $answers[$questionId];
-
-        // Find selected option
         $selectedOption = null;
+
         foreach ($question['options'] as $option) {
             if ($option['value'] === $selectedValue) {
                 $selectedOption = $option;
@@ -194,12 +165,10 @@ function calculateScore(array $answers): array
             continue;
         }
 
-        // Calculate weighted score for this question
         $score = $selectedOption['score'];
         $questionWeightedScore = $score * $weight;
         $weightedScore += $questionWeightedScore;
 
-        // Categorize based on score
         $category = 'neutral';
         if ($score >= 8) {
             $category = 'positive';
@@ -217,7 +186,6 @@ function calculateScore(array $answers): array
         ];
     }
 
-    // Convert to percentage (0-100)
     $percentage = $totalPossibleWeightedScore > 0
         ? round(($weightedScore / $totalPossibleWeightedScore) * 100)
         : 0;
@@ -230,14 +198,7 @@ function calculateScore(array $answers): array
     ];
 }
 
-/**
- * Get interpretation based on percentage score
- *
- * @param int $percentage Score percentage (0-100)
- * @return array Category, label, and interpretation text
- */
-function getInterpretation(int $percentage): array
-{
+function malta_assess_get_interpretation(int $percentage): array {
     if ($percentage < 20) {
         return [
             'category' => 'explore',
@@ -271,14 +232,7 @@ function getInterpretation(int $percentage): array
     }
 }
 
-/**
- * Get questions configuration
- * This mirrors the client-side questions structure
- *
- * @return array Questions with options and scores
- */
-function getQuestions(): array
-{
+function malta_assess_get_questions(): array {
     return [
         [
             'id' => 'q001',
@@ -433,79 +387,47 @@ function getQuestions(): array
 }
 
 // =============================================================================
-// SECURITY & UTILITY FUNCTIONS
+// UTILITIES
 // =============================================================================
 
-/**
- * Handle CORS (Cross-Origin Resource Sharing)
- */
-function handleCORS(): void
-{
-    $origin = $_SERVER['HTTP_ORIGIN'] ?? '';
-
-    if (in_array($origin, ALLOWED_ORIGINS, true)) {
-        header("Access-Control-Allow-Origin: $origin");
-        header('Access-Control-Allow-Methods: POST, OPTIONS');
-        header('Access-Control-Allow-Headers: Content-Type, Accept');
-        header('Access-Control-Max-Age: 86400'); // 24 hours
+function malta_assess_sanitize_answers(array $answers): array {
+    $sanitized = [];
+    foreach ($answers as $questionId => $value) {
+        if (!preg_match('/^q[0-9]{3}$/', $questionId)) {
+            continue;
+        }
+        if (!is_string($value) && !is_numeric($value)) {
+            continue;
+        }
+        $sanitized[$questionId] = (string)$value;
     }
-
-    // Handle preflight OPTIONS request
-    if ($_SERVER['REQUEST_METHOD'] === 'OPTIONS') {
-        http_response_code(204);
-        exit;
-    }
+    return $sanitized;
 }
 
-/**
- * Check rate limiting
- *
- * @return bool True if request is allowed, false if rate limit exceeded
- */
-function checkRateLimit(): bool
-{
-    $ip = getClientIP();
-    $key = 'rate_limit_' . md5($ip);
-
-    // Get current request count from session
-    $requests = $_SESSION[$key] ?? [];
-
-    // Remove old requests outside the time window
-    $currentTime = time();
-    $requests = array_filter($requests, function ($timestamp) use ($currentTime) {
-        return ($currentTime - $timestamp) < RATE_LIMIT_TIME_WINDOW;
+function malta_assess_check_rate_limit(): bool {
+    $ip = malta_assess_get_client_ip();
+    $transient_key = 'malta_rate_' . md5($ip);
+    $requests = get_transient($transient_key);
+    if (!$requests) {
+        $requests = [];
+    }
+    $current_time = time();
+    $requests = array_filter($requests, function($timestamp) use ($current_time) {
+        return ($current_time - $timestamp) < MALTA_RATE_LIMIT_WINDOW;
     });
-
-    // Check if limit exceeded
-    if (count($requests) >= RATE_LIMIT_MAX_REQUESTS) {
+    if (count($requests) >= MALTA_RATE_LIMIT_MAX) {
         return false;
     }
-
-    // Add current request
-    $requests[] = $currentTime;
-    $_SESSION[$key] = $requests;
-
+    $requests[] = $current_time;
+    set_transient($transient_key, $requests, MALTA_RATE_LIMIT_WINDOW);
     return true;
 }
 
-/**
- * Get client IP address (handles proxies and load balancers)
- *
- * @return string Client IP address
- */
-function getClientIP(): string
-{
-    $ipKeys = [
-        'HTTP_CF_CONNECTING_IP', // Cloudflare
-        'HTTP_X_FORWARDED_FOR',
-        'HTTP_X_REAL_IP',
-        'REMOTE_ADDR',
-    ];
-
-    foreach ($ipKeys as $key) {
+function malta_assess_get_client_ip(): string {
+    $ip_keys = ['HTTP_CF_CONNECTING_IP', 'HTTP_X_FORWARDED_FOR', 'HTTP_X_REAL_IP', 'REMOTE_ADDR'];
+    foreach ($ip_keys as $key) {
         if (isset($_SERVER[$key])) {
             $ip = $_SERVER[$key];
-            // Get first IP if comma-separated list
             if (strpos($ip, ',') !== false) {
                 $ip = trim(explode(',', $ip)[0]);
             }
@@ -514,140 +436,66 @@ function getClientIP(): string
             }
         }
     }
-
     return '0.0.0.0';
 }
 
-/**
- * Sanitize answers array
- *
- * @param array $answers Raw answers from user input
- * @return array Sanitized answers
- */
-function sanitizeAnswers(array $answers): array
-{
-    $sanitized = [];
-
-    foreach ($answers as $questionId => $value) {
-        // Only allow alphanumeric question IDs
-        if (!preg_match('/^q[0-9]{3}$/', $questionId)) {
-            continue;
-        }
-
-        // Only allow simple alphanumeric values
-        if (!is_string($value) || !preg_match('/^[a-zA-Z0-9_-]+$/', $value)) {
-            continue;
-        }
-
-        $sanitized[$questionId] = $value;
-    }
-
-    return $sanitized;
-}
-
-/**
- * Send success response
- *
- * @param array $data Response data
- */
-function sendSuccess(array $data): void
-{
-    http_response_code(200);
-    echo json_encode([
-        'success' => true,
-        'data' => $data,
-    ], JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES);
-    exit;
-}
-
-/**
- * Send error response
- *
- * @param string $message Error message
- * @param int $statusCode HTTP status code
- */
-function sendError(string $message, int $statusCode = 400): void
-{
-    http_response_code($statusCode);
-    echo json_encode([
-        'success' => false,
-        'error' => $message,
-    ], JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES);
-    exit;
-}
-
-/**
- * Send data to webhook
- * This keeps the webhook URL hidden from the client
- *
- * @param array $answers User's answers
- * @param array $userContact User contact information
- * @param array $scoreData Score calculation results
- * @param array $interpretation Interpretation data
- * @return bool True if successful, false otherwise
- */
-function sendWebhook(array $answers, array $userContact, array $scoreData, array $interpretation): bool
-{
-    if (!WEBHOOK_ENABLED || empty(WEBHOOK_URL)) {
+function malta_assess_send_webhook(array $userData, array $scoreData, array $interpretation): bool {
+    if (!MALTA_WEBHOOK_ENABLED || empty(MALTA_WEBHOOK_URL)) {
         return false;
     }
-
     try {
-        // Build webhook payload
         $payload = [
-            'timestamp' => date('c'),
-            'contact' => $userContact,
-            'answers' => $answers,
+            'timestamp' => current_time('mysql'),
+            'contact' => [
+                'email' => $userData['email'],
+                'firstName' => $userData['firstName'],
+                'lastName' => $userData['lastName'],
+                'phone' => $userData['phone'],
+                'company' => $userData['company'],
+                'language' => $userData['language'],
+            ],
             'score' => [
                 'percentage' => $scoreData['percentage'],
                 'weightedScore' => $scoreData['weightedScore'],
                 'totalPossibleWeightedScore' => $scoreData['totalPossibleWeightedScore'],
                 'category' => $interpretation['category'],
+                'categoryLabel' => $interpretation['categoryLabel'],
             ],
             'interpretation' => $interpretation['interpretation'],
+            'answers' => $userData['answers'],
             'detailedResults' => $scoreData['detailedResults'],
             'metadata' => [
-                'ip' => getClientIP(),
+                'ip' => malta_assess_get_client_ip(),
                 'userAgent' => $_SERVER['HTTP_USER_AGENT'] ?? 'Unknown',
-                'serverTime' => date('Y-m-d H:i:s'),
+                'referrer' => $_SERVER['HTTP_REFERER'] ?? '',
             ],
         ];
-
-        // Send to webhook using cURL
-        $ch = curl_init(WEBHOOK_URL);
-        curl_setopt_array($ch, [
-            CURLOPT_POST => true,
-            CURLOPT_POSTFIELDS => json_encode($payload),
-            CURLOPT_HTTPHEADER => [
-                'Content-Type: application/json',
-                'Accept: application/json',
-            ],
-            CURLOPT_RETURNTRANSFER => true,
-            CURLOPT_TIMEOUT => 10, // 10 second timeout
-            CURLOPT_FOLLOWLOCATION => true,
+        $response = wp_remote_post(MALTA_WEBHOOK_URL, [
+            'headers' => ['Content-Type' => 'application/json'],
+            'body' => json_encode($payload),
+            'timeout' => 10,
         ]);
-
-        $response = curl_exec($ch);
-        $httpCode = curl_getinfo($ch, CURLINFO_HTTP_CODE);
-        $error = curl_error($ch);
-        curl_close($ch);
-
-        // Check if webhook was successful
-        if ($httpCode >= 200 && $httpCode < 300) {
-            if (DEBUG_MODE) {
-                error_log('[Malta Assessment] Webhook sent successfully: ' . WEBHOOK_URL);
-            }
-            return true;
-        } else {
-            if (DEBUG_MODE) {
-                error_log('[Malta Assessment] Webhook failed: HTTP ' . $httpCode . ' - ' . $error);
+        if (is_wp_error($response)) {
+            if (MALTA_DEBUG_MODE) {
+                error_log('[Malta] Webhook error: ' . $response->get_error_message());
             }
             return false;
         }
-
+        $status_code = wp_remote_retrieve_response_code($response);
+        if ($status_code >= 200 && $status_code < 300) {
+            if (MALTA_DEBUG_MODE) {
+                error_log('[Malta] Webhook sent successfully');
+            }
+            return true;
+        } else {
+            if (MALTA_DEBUG_MODE) {
+                error_log('[Malta] Webhook failed: HTTP ' . $status_code);
+            }
+            return false;
+        }
     } catch (Exception $e) {
-        if (DEBUG_MODE) {
-            error_log('[Malta Assessment] Webhook exception: ' . $e->getMessage());
+        if (MALTA_DEBUG_MODE) {
+            error_log('[Malta] Webhook exception: ' . $e->getMessage());
         }
         return false;
     }
