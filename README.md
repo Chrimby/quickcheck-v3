@@ -8,9 +8,16 @@ Interaktiver Eignungscheck für Malta-Interessenten mit WordPress-Integration un
 qc-malta-server/
 ├── public/
 │   └── malta-assessment-v2/
-│       └── update.html              # Haupt-QuickCheck Datei (produktiv)
+│       ├── update-de.html           # QuickCheck Deutsch
+│       ├── update-en.html           # QuickCheck English
+│       ├── update-nl.html           # QuickCheck Nederlands
+│       └── translations/
+│           ├── de.json              # Deutsche Übersetzungen
+│           ├── en.json              # English Translations
+│           └── nl.json              # Nederlandse vertalingen
 ├── functions-php-integration.php    # WordPress Integration Code
 ├── INSTALLATION-OHNE-PLUGIN.md      # Installationsanleitung
+├── CLAUDE.md                        # Development Guidelines
 └── README.md                        # Diese Datei
 ```
 
@@ -20,12 +27,26 @@ qc-malta-server/
 
 **Option A: HTML direkt einbinden (Elementor/Custom HTML)**
 ```html
-<!-- Kopiere den Inhalt von public/malta-assessment-v2/update.html -->
+<!-- Deutsch -->
+<!-- Kopiere den Inhalt von public/malta-assessment-v2/update-de.html -->
+
+<!-- English -->
+<!-- Kopiere den Inhalt von public/malta-assessment-v2/update-en.html -->
+
+<!-- Nederlands -->
+<!-- Kopiere den Inhalt von public/malta-assessment-v2/update-nl.html -->
 ```
 
 **Option B: Via iframe**
 ```html
-<iframe src="/malta-assessment-v2/update.html" width="100%" height="800"></iframe>
+<!-- Deutsch -->
+<iframe src="/malta-assessment-v2/update-de.html" width="100%" height="800"></iframe>
+
+<!-- English -->
+<iframe src="/malta-assessment-v2/update-en.html" width="100%" height="800"></iframe>
+
+<!-- Nederlands -->
+<iframe src="/malta-assessment-v2/update-nl.html" width="100%" height="800"></iframe>
 ```
 
 ### 2. WordPress Integration aktivieren
@@ -43,6 +64,8 @@ define('MALTA_WEBHOOK_URL', 'https://brixon.app.n8n.cloud/webhook/dwp-quickcheck
 ## ✨ Features
 
 - **12 Fragen** für präzise Eignung
+- **3 Sprachen**: Deutsch, English, Nederlands
+- **Dynamische Übersetzungen** via JSON (Backend + Frontend)
 - **Echtzeit-Berechnung** via WordPress AJAX
 - **Webhook-Integration** zu n8n
 - **Responsive Design** (Mobile-First)
@@ -125,7 +148,41 @@ tail -f /wp-content/debug.log
 **Webhook kommt nicht an**
 → Prüfe Debug Log, teste Webhook-URL manuell mit curl
 
+## 🌍 Multi-Language Support
+
+Das System unterstützt vollständig **Deutsch**, **English** und **Nederlands**:
+
+### Backend (PHP)
+- `malta_assess_load_translations($language)` - Lädt Übersetzungen aus JSON
+- `malta_assess_get_interpretation($percentage, $language)` - Gibt sprachspezifische Kategorien zurück
+- Automatische Spracherkennung via `$_POST['language']` Parameter
+
+### Frontend (HTML/JS)
+- 3 separate HTML-Dateien (`update-de.html`, `update-en.html`, `update-nl.html`)
+- JSON-basierte Übersetzungen in `/translations/` Ordner
+- Dynamische UI-Übersetzung für alle Elemente (Buttons, Ergebnisse, CTAs)
+
+### CTA Links (sprachspezifisch)
+- **DE**: `/de/weiteres/terminvereinbarung/`
+- **EN**: `/en/other/book-an-appointment/`
+- **NL**: `/nl/overige/een-afspraak-maken/`
+
+### Privacy Policy (alle Sprachen gleich)
+- **Alle**: `/en/other/datenschutzerklaerung/`
+
+Siehe `CLAUDE.md` für detaillierte Dokumentation zur Multi-Language-Implementierung.
+
+---
+
 ## 📋 Changelog
+
+### v2.1 (2025-11-11) - Multi-Language Update
+- ✅ Vollständige Multi-Language-Unterstützung (DE, EN, NL)
+- ✅ Backend Translation Loader in PHP
+- ✅ JSON-basierte Übersetzungsdateien
+- ✅ Dynamische UI-Übersetzungen (Frontend)
+- ✅ Sprachspezifische CTA-Links
+- ✅ Ergebnisseite vollständig übersetzt (Kategorien, Details, CTAs)
 
 ### v2.0 (2025-11-11)
 - ✅ Formular-Felder vereinheitlicht (gleiche Größe, Border-Radius)
@@ -152,6 +209,7 @@ Bei Problemen:
 
 ---
 
-**Version:** 2.0
+**Version:** 2.1 (Multi-Language)
 **Last Updated:** 2025-11-11
 **Author:** Dr. Werner & Partner
+**Repository:** https://github.com/Chrimby/quickcheck-v3

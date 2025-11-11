@@ -473,5 +473,81 @@ Wenn du in einem Git Worktree/Branch gearbeitet hast, dokumentiere die Arbeit:
 
 ---
 
-**Version:** 2.0 (Compact)
-**Last Updated:** 2025-10-13
+---
+
+## Multi-Language Implementation
+
+### Architecture
+
+The Malta Assessment supports **3 languages** (German, English, Dutch) with a complete translation system:
+
+**Backend (PHP)**
+- `malta_assess_load_translations($language)` - Loads JSON translations from `/public/malta-assessment-v2/translations/{lang}.json`
+- `malta_assess_get_interpretation($percentage, $language)` - Returns language-specific category labels and interpretations
+- Translations are loaded server-side and passed to frontend via AJAX response
+
+**Frontend (HTML/JavaScript)**
+- Three language-specific files: `update-de.html`, `update-en.html`, `update-nl.html`
+- Each file loads its respective translation JSON on page load
+- `applyTranslations()` function applies translations to static UI elements
+- `renderResults()` function uses translations for dynamic results rendering
+- `getCategorySpecificCTA()` function uses translations for category-specific CTAs
+
+**Translation Files Structure**
+```
+/public/malta-assessment-v2/translations/
+├── de.json  # German translations
+├── en.json  # English translations
+└── nl.json  # Dutch translations
+```
+
+Each JSON contains:
+- `meta`: Page metadata (title, description, lang)
+- `ui`: UI elements (buttons, progress, error messages, results CTA bar)
+- `questions`: All assessment questions with options
+- `advisor`: Advisor quotes per question
+- `contact`: Contact form labels and privacy text
+- `results`: Result page texts
+  - `header`: Score labels, congratulations, benchmark
+  - `categories`: Category-specific texts (excellent, good, moderate, fair, explore)
+    - `badge`, `title`, `subtitle`, `cta`, `benefits`
+  - `details`: Detail section labels
+  - `cta`: Global CTA texts (experts label, benefits title, footer)
+- `trust`: Trust bar signals
+
+### Language-Specific URLs
+
+**CTA Button Links (Results Page)**
+- DE: `https://www.drwerner.com/de/weiteres/terminvereinbarung/`
+- EN: `https://www.drwerner.com/en/other/book-an-appointment/`
+- NL: `https://www.drwerner.com/nl/overige/een-afspraak-maken/`
+
+**Privacy Policy** (Same for all languages)
+- All: `https://www.drwerner.com/en/other/datenschutzerklaerung/`
+
+### Adding New Languages
+
+1. Create new translation JSON file in `/public/malta-assessment-v2/translations/{lang}.json`
+2. Copy structure from existing language file (e.g., `de.json`)
+3. Translate all strings
+4. Create new HTML file `update-{lang}.html` (copy from existing)
+5. Update `CONFIG.language` in HTML file
+6. Backend automatically supports new language (no PHP changes needed)
+
+### Translation Maintenance
+
+**When adding new UI text:**
+1. Add to all 3 JSON files (de.json, en.json, nl.json)
+2. Use consistent JSON path structure
+3. Provide fallback values in JavaScript (for graceful degradation)
+
+**Best Practices:**
+- Keep translation keys semantic (e.g., `ui.buttons.submit_contact`)
+- Use templates for dynamic content (e.g., `{gender}`, `{lastname}`)
+- Test all 3 languages after changes
+- Ensure fallback values in code match German version
+
+---
+
+**Version:** 2.1 (Multi-Language Update)
+**Last Updated:** 2025-11-11
